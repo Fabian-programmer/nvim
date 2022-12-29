@@ -70,7 +70,7 @@ local leader = {
     s = { "<cmd>Telescope git_status<cr>", "Status" },
     o = { "<cmd>DiffviewOpen<cr>", "DiffView open" },
     d = { "<cmd>DiffviewFileHistory<cr>", "DiffView files" },
-    f = { "<cmd>DiffviewFileHistory %<cr>", "DiffView current files" },
+    f = { "<cmd>DiffviewFileHistory %<cr>", "DiffView current file" },
     h = { name = "+hunk" },
   },
   ["h"] = {

@@ -17,7 +17,7 @@ return {
   -- git stuff
   {
     "lewis6991/gitsigns.nvim",
-    ft = "gitcommit",
+    event = "BufReadPre",
     config = true,
   },
 
@@ -28,7 +28,7 @@ return {
 
   {
     "sindrets/diffview.nvim",
-    cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewToggleFiles", "DiffviewFocusFiles" },
+    cmd = { "DiffviewOpen", "DiffviewFileHistory" },
     config = true,
   },
 

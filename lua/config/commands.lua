@@ -29,7 +29,7 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "DiffviewFiles" },
+  pattern = { "DiffviewFiles", "DiffviewFileHistory" },
   callback = function(event)
     vim.keymap.set("n", universal_closer, "<cmd>DiffviewClose<cr>", { buffer = event.buf, silent = true })
   end,
