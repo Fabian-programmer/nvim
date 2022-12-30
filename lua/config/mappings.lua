@@ -25,7 +25,7 @@ vim.keymap.set("n", "<S-Right>", "<cmd>vertical resize +2<CR>")
 vim.keymap.set({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>")
 
 -- save in insert mode
-vim.keymap.set({"i", "n"}, "<C-s>", "<cmd>:w<cr><esc>")
+vim.keymap.set({ "i", "n" }, "<C-s>", "<cmd>:w<cr><esc>")
 
 -- better indenting
 vim.keymap.set("v", "<", "<gv")
@@ -42,7 +42,7 @@ vim.keymap.set("n", "<S-Tab>", "<cmd>:bprev<cr>")
 vim.keymap.set("t", "<Esc>", "<C-\\><C-N>")
 
 -- Open Terminal
-vim.keymap.set({"i", "n"}, "<A-t>", "<cmd>tab term<cr>")
+vim.keymap.set({ "i", "n" }, "<A-t>", "<cmd>tab term<cr>")
 
 local leader = {
   ["/"] = {
@@ -71,7 +71,36 @@ local leader = {
     o = { "<cmd>DiffviewOpen<cr>", "DiffView open" },
     d = { "<cmd>DiffviewFileHistory<cr>", "DiffView files" },
     f = { "<cmd>DiffviewFileHistory %<cr>", "DiffView current file" },
-    h = { name = "+hunk" },
+    h = { name = "+hunk",
+      s = { require("gitsigns").stage_hunk, "Stage" },
+      u = { require("gitsigns").undo_stage_hunk, "Undo" },
+      p = { require("gitsigns").preview_hunk, "Preview" },
+      r = { require("gitsigns").reset_hunk, "Reset" },
+      n = { function()
+        if vim.wo.diff then
+          return "]c"
+        end
+        vim.schedule(function()
+          require("gitsigns").next_hunk()
+        end)
+        return "<Ignore>"
+      end,
+        "Jump to prev hunk",
+        opts = { expr = true },
+      },
+      N = { function()
+        if vim.wo.diff then
+          return "[c"
+        end
+        vim.schedule(function()
+          require("gitsigns").prev_hunk()
+        end)
+        return "<Ignore>"
+      end,
+        "Jump to prev hunk",
+        opts = { expr = true },
+      }
+    },
   },
   ["h"] = {
     name = "+help",
