@@ -15,12 +15,12 @@ vim.api.nvim_create_autocmd("TermOpen", {
 vim.api.nvim_create_autocmd("FileType", {
   pattern = {
     "asm",
-    "fugitive",
+    "fugitive*",
     "help",
     "man",
     "notify",
     "qf",
-    "Trouble",
+    "Trouble*",
   },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
@@ -29,7 +29,7 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "DiffviewFiles", "DiffviewFileHistory" },
+  pattern = { "Diffview*" },
   callback = function(event)
     vim.keymap.set("n", universal_closer, "<cmd>DiffviewClose<cr>", { buffer = event.buf, silent = true })
   end,
