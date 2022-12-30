@@ -56,6 +56,7 @@ return {
   -- unit-tests
   {
     "vim-test/vim-test",
+    cmd = { "TestFile", "TestNearest", "TestSuite", "TestLast", "TestVisit" },
     config = { vim.cmd('let g:test#basic#start_normal = 1') },
   },
 }
