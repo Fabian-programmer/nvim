@@ -12,9 +12,10 @@ function M.setup(options)
       nls.builtins.formatting.prettierd.with({ filetypes = { "markdown" } }),
       nls.builtins.formatting.black,
       nls.builtins.formatting.clang_format,
+      nls.builtins.formatting.cmake_format,
     },
     on_attach = options.on_attach,
-    root_dir = require("null-ls.utils").root_pattern(".null-ls-root", ".neoconf.json", ".git"),
+    root_dir = require("null-ls.utils").root_pattern(".git"),
   })
 end
 
