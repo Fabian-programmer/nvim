@@ -36,11 +36,6 @@ return {
   },
 
   {
-    "tpope/vim-fugitive",
-    cmd = { "G", "Git" }
-  },
-
-  {
     "sindrets/diffview.nvim",
     cmd = { "DiffviewOpen", "DiffviewFileHistory" },
     config = true,
@@ -51,12 +46,5 @@ return {
     "Fabian-programmer/compiler-explorer.nvim",
     cmd = { "CECompile" },
     config = true,
-  },
-
-  -- unit-tests
-  {
-    "vim-test/vim-test",
-    cmd = { "TestFile", "TestNearest", "TestSuite", "TestLast", "TestVisit" },
-    config = { vim.cmd('let g:test#basic#start_normal = 1') },
   },
 }

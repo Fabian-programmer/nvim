@@ -21,6 +21,7 @@ vim.api.nvim_create_autocmd("FileType", {
     "notify",
     "qf",
     "Trouble*",
+    "Neogit*",
   },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
