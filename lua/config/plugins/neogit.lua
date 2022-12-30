@@ -3,7 +3,6 @@ return {
   cmd = "Neogit",
   config = {
     disable_commit_confirmation = true,
-    kind = "split",
     signs = {
       -- { CLOSED, OPENED }
       section = { "", "" },
