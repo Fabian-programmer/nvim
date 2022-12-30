@@ -1,6 +1,6 @@
 local M = {
   "akinsho/nvim-bufferline.lua",
-  dependencies = {"tiagovla/scope.nvim", config = true},
+  dependencies = { "tiagovla/scope.nvim", config = true },
   event = "BufAdd",
 }
 
@@ -8,18 +8,21 @@ function M.config()
 
   require("bufferline").setup({
     options = {
-      show_close_icon = true,
-      always_show_bufferline = true,
-      offsets = {
+      show_close_icon        = false,
+      buffer_close_icon      = "",
+      close_command          = "",
+      right_mouse_command    = "",
+      show_tab_indicators    = true,
+      offsets                = {
         {
           filetype = "NvimTree",
-          text = "NvimTree",
-          highlight = "Directory",
+          text = "File Explorer",
           text_align = "center",
+          seperator = true,
         },
       },
-      show_tab_indicators = true,
     },
   })
 end
+
 return M
