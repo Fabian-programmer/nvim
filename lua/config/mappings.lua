@@ -146,18 +146,23 @@ local leader = {
   },
   ["t"] = {
     name = "+test",
-    n = { "<cmd>TestNearest<cr>", "Nearest" },
-    f = { "<cmd>TestFile<cr>", "File" },
-    s = { "<cmd>TestSuite<cr>", "Suite" },
-    l = { "<cmd>TestLast<cr>", "Last" },
-    v = { "<cmd>TestVisit<cr>", "Visit" },
+    n = { require("neotest").run.run, "Nearest" },
+    f = {
+      function()
+        require("neotest").run.run(vim.fn.expand("%"))
+      end, "File"
+    },
+    d = {
+      function()
+        require("neotest").run.run({ strategy = "dap" })
+      end, "Debug Nearest"
+    },
   },
+  ["x"] = {
+    name = "+diagnostics",
+    x = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "Trouble" },
+  }
 }
 
-for i = 0, 10 do
-  leader[tostring(i)] = "which_key_ignore"
-end
-
 wk.register(leader, { prefix = "<leader>" })
-
 wk.register({ g = { name = "+goto" } })

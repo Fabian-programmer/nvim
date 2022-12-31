@@ -1,11 +1,21 @@
-
-  -- unit-tests
-  return {
+-- unit-tests
+local M = {
+  "nvim-neotest/neotest",
+  lazy = false,
+  dependencies = {
+    "nvim-neotest/neotest-python",
+    "nvim-neotest/neotest-vim-test",
     "vim-test/vim-test",
-    cmd = { "TestFile", "TestNearest", "TestSuite", "TestLast", "TestVisit" },
-    init = function ()
-      vim.cmd('let g:test#strategy = "neovim"')
-      vim.cmd('let g:test#neovim#start_normal = 1')
-      vim.cmd('let g:test#preserve_screen = 1')
-    end,
-  }
+  },
+}
+
+function M.config()
+  require("neotest").setup({
+    adapters = {
+      require("neotest-python"),
+      require("neotest-vim-test")({ ignore_file_types = { "python" } }),
+    },
+  })
+end
+
+return M
