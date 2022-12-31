@@ -44,18 +44,7 @@ function M.setup(client, buffer)
     },
     ["<C-k>"] = { "<cmd>lua vim.lsp.buf.signature_help()<CR>", "Signature Help", mode = { "n", "i" } },
     ["K"] = { "<cmd>lua vim.lsp.buf.hover()<CR>", "Hover" },
-    ["[d"] = { "<cmd>lua vim.diagnostic.goto_prev()<CR>", "Next Diagnostic" },
-    ["]d"] = { "<cmd>lua vim.diagnostic.goto_next()<CR>", "Prev Diagnostic" },
-    ["[e"] = { "<cmd>lua vim.diagnostic.goto_prev({severity = vim.diagnostic.severity.ERROR})<CR>", "Next Error" },
-    ["]e"] = { "<cmd>lua vim.diagnostic.goto_next({severity = vim.diagnostic.severity.ERROR})<CR>", "Prev Error" },
-    ["[w"] = {
-      "<cmd>lua vim.diagnostic.goto_prev({severity = vim.diagnostic.severity.WARNING})<CR>",
-      "Next Warning",
-    },
-    ["]w"] = {
-      "<cmd>lua vim.diagnostic.goto_next({severity = vim.diagnostic.severity.WARNING})<CR>",
-      "Prev Warning",
-    },
+    ["<F4>"] = { "<cmd>ClangdSwitchSourceHeader<CR>", "Toggle Header" },
   }
 
   wk.register(keymap)
