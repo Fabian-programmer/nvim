@@ -15,7 +15,6 @@ return {
           -- "comment", -- comments are slowing down TS bigtime, so disable for now
           "cpp",
           "diff",
-          "gitignore",
           "help",
           "lua",
           "markdown",
