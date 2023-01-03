@@ -1,5 +1,17 @@
+local function open_entry_in_diffview()
+  -- Open in diffview
+  local selected_entry = require('telescope.actions.state').get_selected_entry()
+  local value = selected_entry.value
+  -- close Telescope window properly prior to switching windows
+  vim.api.nvim_win_close(0, true)
+  vim.cmd("stopinsert")
+  vim.schedule(function()
+    vim.cmd(("DiffviewOpen %s^!"):format(value))
+  end)
+end
+
 return {
- "nvim-telescope/telescope.nvim",
+  "nvim-telescope/telescope.nvim",
   cmd = { "Telescope" },
 
   dependencies = {
@@ -7,8 +19,6 @@ return {
     { "nvim-telescope/telescope-project.nvim" },
   },
   config = function()
-    -- local actions = require("telescope.actions")
-
     local telescope = require("telescope")
     local borderless = true
     telescope.setup({
@@ -34,6 +44,22 @@ return {
         prompt_prefix = " ",
         selection_caret = " ",
         winblend = borderless and 0 or 10,
+      },
+      pickers = {
+        git_commits = {
+          mappings = {
+            i = {
+              ["<F2>"] = open_entry_in_diffview,
+            }
+          }
+        },
+        git_branches = {
+          mappings = {
+            i = {
+              ["<F2>"] = open_entry_in_diffview,
+            }
+          }
+        },
       },
     })
     telescope.load_extension("fzf")
