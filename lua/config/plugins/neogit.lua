@@ -37,5 +37,15 @@ return {
   },
   keys = {
     { "<leader>gg", "<cmd>Neogit<cr>", desc = "Neogit" },
+    { "<leader>gl", function()
+      require("neogit.popups.log").create()
+      vim.cmd('normal l')
+      vim.cmd(':wincmd p| wincmd T')
+    end, desc = "Log current" },
+    { "<leader>gL", function()
+      require("neogit.popups.log").create()
+      vim.cmd('normal b')
+      vim.cmd(':wincmd p| wincmd T')
+    end, desc = "Log" },
   },
 }
