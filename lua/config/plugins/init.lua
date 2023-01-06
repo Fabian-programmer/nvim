@@ -30,7 +30,8 @@ return {
 
   -- git stuff
   {
-    "lewis6991/gitsigns.nvim",
+    --dir = "~/gitsigns.nvim",
+    "Fabian-programmer/gitsigns.nvim",
     event = "BufReadPre",
     config = {
     current_line_blame_opts = { delay = 100 }
@@ -45,6 +46,7 @@ return {
 
   -- compiler explorer
   {
+    -- dir = "~/compiler-explorer.nvim/",
     "Fabian-programmer/compiler-explorer.nvim",
     cmd = { "CECompile" },
     config = true,

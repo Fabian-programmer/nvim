@@ -1,4 +1,4 @@
-local function open_entry_in_diffview()
+local function open_entry_in_diffview(cmd)
   -- Open in diffview
   local selected_entry = require('telescope.actions.state').get_selected_entry()
   local value = selected_entry.value
@@ -6,7 +6,7 @@ local function open_entry_in_diffview()
   vim.api.nvim_win_close(0, true)
   vim.cmd("stopinsert")
   vim.schedule(function()
-    vim.cmd(("DiffviewOpen %s^!"):format(value))
+    vim.cmd(("DiffviewOpen %s" .. cmd):format(value))
   end)
 end
 
@@ -49,14 +49,21 @@ return {
         git_commits = {
           mappings = {
             i = {
-              ["<F2>"] = open_entry_in_diffview,
+              ["<F2>"] = function()
+                open_entry_in_diffview("")
+              end,
+              ["<F3>"] = function()
+                open_entry_in_diffview("^!")
+              end,
             }
           }
         },
         git_branches = {
           mappings = {
             i = {
-              ["<F2>"] = open_entry_in_diffview,
+              ["<F2>"] = function()
+                open_entry_in_diffview("")
+              end,
             }
           }
         },
