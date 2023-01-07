@@ -1,11 +1,14 @@
 local M = {
-    "nvim-tree/nvim-tree.lua",
-    cmd = { "NvimTreeToggle", "NvimTreeFocus" },
-    dependencies = {"nvim-tree/nvim-web-devicons", config = { default = true}}
+  "nvim-tree/nvim-tree.lua",
+  keys = {
+    { "<C-n>", "<cmd>:NvimTreeToggle<cr>", desc = "NvimTree" },
+  },
+
+  dependencies = { "nvim-tree/nvim-web-devicons", config = { default = true } }
 }
 
 M.config = {
- filters = {
+  filters = {
     dotfiles = false,
     custom = { "^\\.git" },
   },

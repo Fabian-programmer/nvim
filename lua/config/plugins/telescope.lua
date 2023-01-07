@@ -14,6 +14,44 @@ return {
   "nvim-telescope/telescope.nvim",
   cmd = { "Telescope" },
 
+  keys = {
+    { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find File" },
+    { "<leader>fo", "<cmd>Telescope oldfiles<cr>", desc = "Open Recent File" },
+    { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Grep" },
+    { "<leader>fb", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Buffer" },
+    { "<leader>fh", "<cmd>Telescope command_history<cr>", desc = "Command History" },
+    { "<leader>fp", "<cmd>Telescope project<cr>", desc = "Project" },
+    { "<leader>fs",
+      function()
+        require("telescope.builtin").lsp_document_symbols({
+          symbols = {
+            "Class",
+            "Function",
+            "Method",
+            "Constructor",
+            "Interface",
+            "Module",
+            "Struct",
+            "Trait",
+            "Field",
+            "Property",
+          },
+        })
+      end, desc = "Goto Symbol" },
+    { "<leader>fm", "<cmd>Telescope marks<cr>", desc = "Jump to Mark" },
+
+    { "<leader>ht", "<cmd>Telescope builtin<cr>", desc = "Telescope" },
+    { "<leader>hc", "<cmd>Telescope commands<cr>", desc = "Commands" },
+    { "<leader>hh", "<cmd>Telescope help_tags<cr>", desc = "Help Pages" },
+    { "<leader>hm", "<cmd>Telescope man_pages<cr>", desc = "Man Pages" },
+    { "<leader>hk", "<cmd>Telescope keymaps<cr>", desc = "Key Maps" },
+    { "<leader>hs", "<cmd>Telescope highlights<cr>", desc = "Search Highlight Groups" },
+
+    { "<leader>gc", "<cmd>Telescope git_commits<cr>", desc = "Commits" },
+    { "<leader>gb", "<cmd>Telescope git_branches<cr>", desc = "Branches" },
+    { "<leader>gs", "<cmd>Telescope git_status<cr>", desc = "Status" },
+  },
+
   dependencies = {
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     { "nvim-telescope/telescope-project.nvim" },
