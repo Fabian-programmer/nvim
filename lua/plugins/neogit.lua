@@ -23,13 +23,13 @@ vim.api.nvim_create_autocmd("FileType", {
 
 
 return {
-  -- "TimUntersberger/neogit",
-  dir = "~/neogit",
-  -- cmd = "Neogit",
+  "TimUntersberger/neogit",
+  -- dir = "~/neogit",
+  cmd = "Neogit",
   lazy = false,
   config = {
     disable_commit_confirmation = true,
-    disable_insert_on_commit=false,
+    disable_insert_on_commit = false,
     signs = {
       -- { CLOSED, OPENED }
       section = { "", "" },
