@@ -1,4 +1,4 @@
-vim.api.nvim_command('autocmd TermOpen,TermEnter * startinsert')
+vim.api.nvim_command('autocmd TermOpen,TermEnter term://* startinsert')
 
 -- Close buffer
 local universal_closer = "<A-q>"
