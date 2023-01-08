@@ -9,10 +9,10 @@ local M = {
 
 function M.config()
   require("mason")
-  require("config.plugins.lsp.diagnostics").setup()
+  require("plugins.lsp.diagnostics").setup()
 
   local function on_attach(client, bufnr)
-    require("config.plugins.lsp.keys").setup(client, bufnr)
+    require("plugins.lsp.keys").setup(client, bufnr)
   end
 
   local servers = {
@@ -60,7 +60,7 @@ function M.config()
       require("lspconfig")[server].setup(opts)
   end
 
-  require("config.plugins.null-ls").setup(options)
+  require("plugins.null-ls").setup(options)
 end
 
 return M

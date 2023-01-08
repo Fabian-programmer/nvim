@@ -54,8 +54,8 @@ function M.config()
   local dap = require("dap")
   local dapui = require("dapui")
 
-  require("config.plugins.dap.cpp")
-  require("config.plugins.dap.python")
+  require("plugins.dap.cpp")
+  require("plugins.dap.python")
 
   dap.listeners.after.event_initialized["dapui_config"] = function()
     dapui.open()
