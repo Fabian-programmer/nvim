@@ -37,6 +37,14 @@ return {
     },
   },
 
+  -- search/replace in multiple files
+  {
+    "windwp/nvim-spectre",
+    keys = {
+      { "<leader>fr", function() require("spectre").open() end, desc = "Replace in files (Spectre)" },
+    },
+  },
+
   -- diagnostics
   {
     "folke/trouble.nvim",
