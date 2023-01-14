@@ -13,7 +13,6 @@ end
 return {
   "nvim-telescope/telescope.nvim",
   cmd = { "Telescope" },
-
   keys = {
     { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find File" },
     { "<leader>fo", "<cmd>Telescope oldfiles<cr>", desc = "Open Recent File" },
@@ -55,6 +54,7 @@ return {
   dependencies = {
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     { "nvim-telescope/telescope-project.nvim" },
+    { "nvim-telescope/telescope-dap.nvim" },
   },
   config = function()
     local telescope = require("telescope")
@@ -109,5 +109,6 @@ return {
     })
     telescope.load_extension("fzf")
     telescope.load_extension("project")
+    telescope.load_extension("dap")
   end,
 }

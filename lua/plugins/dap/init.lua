@@ -1,3 +1,12 @@
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "dap-float" },
+  callback = function(event)
+    vim.keymap.set("n", "<Tab>", "", { buffer = event.buf, silent = true })
+    vim.keymap.set("n", "<S-Tab>", "", { buffer = event.buf, silent = true })
+  end,
+})
+
 local M = {
   "mfussenegger/nvim-dap",
 
@@ -5,7 +14,31 @@ local M = {
     {
       "rcarriga/nvim-dap-ui",
       config = function()
-        require("dapui").setup()
+        require("dapui").setup({
+          layouts = {
+            {
+              elements = {
+                -- Elements can be strings or table with id and size keys.
+                { id = "scopes", size = 0.4 },
+                "breakpoints",
+                "stacks",
+                "watches",
+              },
+              size = 50, -- 40 columns
+              position = "left",
+            },
+            {
+              elements = {
+                "console",
+              },
+              size = 0.3,
+              position = "bottom",
+            },
+          },
+          controls = {
+            enabled = false,
+          },
+        })
       end,
     },
     { "theHamsta/nvim-dap-virtual-text", config = true },
@@ -17,7 +50,7 @@ function M.init()
     require("dap").continue()
   end, { desc = "Continue Debug" })
 
-  vim.keymap.set("n", "<F6>", function()
+  vim.keymap.set("n", "<leader>dt", function()
     require("dap").terminate()
   end, { desc = "Terminate Debug" })
 
@@ -33,21 +66,31 @@ function M.init()
     require("dap").step_out()
   end, { desc = "Step Out" })
 
-  vim.keymap.set("n", "<F10>", function()
+  vim.keymap.set("n", "<leader>db", function()
     require("dap").toggle_breakpoint()
   end, { desc = "Toggle Breakpoint" })
 
-  vim.keymap.set("n", "<F11>", function()
+  vim.keymap.set("n", "<leader>dB", function()
     require("dap").set_breakpoint(vim.fn.input('Breakpoint condition: '))
   end, { desc = "Set Breakpoint" })
 
   vim.keymap.set("n", "<leader>dr", function()
-    require("dap").repl.open()
+    require("dap").repl.toggle()
   end, { desc = "Repl" })
 
   vim.keymap.set("n", "<leader>du", function()
     require("dapui").toggle({})
-  end, { desc = "Dap UI" })
+  end, { desc = "UI" })
+
+  vim.keymap.set("n", "<leader>ds", function()
+  local widgets = require('dap.ui.widgets')
+  widgets.centered_float(widgets.scopes)
+  end, { desc = "Scope" })
+
+  vim.keymap.set("n", "<leader>dh", function()
+  local widgets = require('dap.ui.widgets')
+  widgets.hover()
+  end, { desc = "Hover" })
 end
 
 function M.config()

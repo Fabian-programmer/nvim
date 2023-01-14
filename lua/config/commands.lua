@@ -42,6 +42,7 @@ vim.api.nvim_create_autocmd("FileType", {
     "qf",
     "Trouble*",
     "Neogit*",
+    "dap-float",
   },
   callback = function(event)
     vim.bo[event.buf].buflisted = false

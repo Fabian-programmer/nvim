@@ -16,6 +16,9 @@ vim.keymap.set({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "No highligh
 -- save in insert mode
 vim.keymap.set({ "i", "n" }, "<C-s>", "<cmd>:w<cr><esc>", { desc = "Save Buffer"})
 
+-- change cwd to current file
+vim.keymap.set("n", "<leader>C", "<cmd>:cd %:p:h<cr>", { desc = "Cd to current file"})
+
 -- better indenting
 vim.keymap.set("v", "<", "<gv", { desc = "Intend left"})
 vim.keymap.set("v", ">", ">gv", { desc = "Intend right"})
