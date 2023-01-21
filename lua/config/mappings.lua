@@ -1,3 +1,15 @@
+-- better up/down
+vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+
+-- Move Lines
+vim.keymap.set("n", "<A-j>", ":m .+1<cr>==", { desc = "Move down" })
+vim.keymap.set("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move down" })
+vim.keymap.set("i", "<A-j>", "<Esc>:m .+1<cr>==gi", { desc = "Move down" })
+vim.keymap.set("n", "<A-k>", ":m .-2<cr>==", { desc = "Move up" })
+vim.keymap.set("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move up" })
+vim.keymap.set("i", "<A-k>", "<Esc>:m .-2<cr>==gi", { desc = "Move up" })
+
 -- Move to window using the <ctrl> movement keys
 vim.keymap.set("n", "<C-Left>", "<C-w>h", { desc = "Move to left Window" })
 vim.keymap.set("n", "<C-Down>", "<C-w>j", { desc = "Move to bottom Window" })
@@ -32,3 +44,15 @@ vim.keymap.set("t", "<Esc>", "<C-\\><C-N>", { desc = "Normal mode"})
 
 -- Open Terminal
 vim.keymap.set({ "i", "n" }, "<A-t>", "<cmd>tab term<cr>", { desc = "Open Terminal"})
+
+-- windows
+vim.keymap.set("n", "<leader>wo", "<C-W>o", { desc = "Only visible" })
+vim.keymap.set("n", "<leader>wd", "<C-W>c", { desc = "Delete" })
+vim.keymap.set("n", "<leader>w-", "<C-W>s", { desc = "Split below" })
+vim.keymap.set("n", "<leader>w|", "<C-W>v", { desc = "Split right" })
+
+-- tabs
+vim.keymap.set("n", "<leader><tab>o", "<cmd>tabnew<cr>", { desc = "New Tab" })
+vim.keymap.set("n", "<leader><tab>n", "<cmd>tabnext<cr>", { desc = "Next Tab" })
+vim.keymap.set("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
+vim.keymap.set("n", "<leader><tab>N", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })

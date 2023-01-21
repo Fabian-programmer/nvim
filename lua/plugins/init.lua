@@ -22,6 +22,8 @@ return {
         ["<leader>g"] = { name = "+git" },
         ["<leader>gh"] = { name = "+hunk" },
         ["<leader>t"] = { name = "+test" },
+        ["<leader><tab>"] = { name = "+tab" },
+        ["<leader>w"] = { name = "+window" },
         ["<leader>x"] = { name = "+diagnostics/quickfix" },
       })
     end,
