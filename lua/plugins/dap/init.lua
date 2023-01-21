@@ -9,6 +9,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 local M = {
   "mfussenegger/nvim-dap",
+  branch = "master",
 
   dependencies = {
     {
@@ -46,41 +47,17 @@ local M = {
 }
 
 function M.init()
-  vim.keymap.set("n", "<F5>", function()
-    require("dap").continue()
-  end, { desc = "Continue Debug" })
-
-  vim.keymap.set("n", "<leader>dt", function()
-    require("dap").terminate()
-  end, { desc = "Terminate Debug" })
-
-  vim.keymap.set("n", "<F7>", function()
-    require("dap").step_into()
-  end, { desc = "Step Into" })
-
-  vim.keymap.set("n", "<F8>", function()
-    require("dap").step_over()
-  end, { desc = "Step Over" })
-
-  vim.keymap.set("n", "<F9>", function()
-    require("dap").step_out()
-  end, { desc = "Step Out" })
-
-  vim.keymap.set("n", "<leader>db", function()
-    require("dap").toggle_breakpoint()
-  end, { desc = "Toggle Breakpoint" })
-
-  vim.keymap.set("n", "<leader>dB", function()
-    require("dap").set_breakpoint(vim.fn.input('Breakpoint condition: '))
-  end, { desc = "Set Breakpoint" })
-
-  vim.keymap.set("n", "<leader>dr", function()
-    require("dap").repl.toggle()
-  end, { desc = "Repl" })
-
-  vim.keymap.set("n", "<leader>du", function()
-    require("dapui").toggle({})
-  end, { desc = "UI" })
+  vim.keymap.set("n", "<F5>", function() require("dap").continue() end, { desc = "Continue Debug" })
+  vim.keymap.set("n", "<F7>", function() require("dap").step_into() end, { desc = "Step Into" })
+  vim.keymap.set("n", "<F8>", function() require("dap").step_over() end, { desc = "Step Over" })
+  vim.keymap.set("n", "<F9>", function() require("dap").step_out() end, { desc = "Step Out" })
+  vim.keymap.set("n", "<F10>", function() require("dap").run_to_cursor() end, { desc = "Run to cursor" })
+  vim.keymap.set("n", "<leader>dt", function() require("dap").terminate() end, { desc = "Terminate Debug" })
+  vim.keymap.set("n", "<leader>dl", function() require("dap").run_last() end, { desc = "Run Last" })
+  vim.keymap.set("n", "<leader>db", function() require("dap").toggle_breakpoint() end, { desc = "Toggle Breakpoint" })
+  vim.keymap.set("n", "<leader>dB", function() require("dap").set_breakpoint(vim.fn.input('Breakpoint condition: '))  end, { desc = "Set Breakpoint" })
+  vim.keymap.set("n", "<leader>dr", function() require("dap").repl.toggle() end, { desc = "Repl" })
+  vim.keymap.set("n", "<leader>du", function() require("dapui").toggle({}) end, { desc = "UI" })
 
   vim.keymap.set("n", "<leader>ds", function()
   local widgets = require('dap.ui.widgets')
