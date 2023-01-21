@@ -62,6 +62,19 @@ local cpp_attach = setmetatable(
   end,
 })
 
+local last_config = {}
+
+local cpp_last_config = setmetatable(
+  {
+    name = 'Last Config',
+    type = 'cppdbg',
+    request = 'launch',
+  }, {
+  __call = function()
+    return last_config
+  end,
+})
+
 local cpptools = mason_registry.get_package("cpptools")
 
 dap.adapters.cppdbg = {
@@ -71,5 +84,9 @@ dap.adapters.cppdbg = {
 }
 
 dap.configurations.cpp = {
-  cpp_launch, cpp_attach
+  cpp_launch, cpp_attach, cpp_last_config
 }
+
+dap.listeners.after.event_initialized["last_config"] = function()
+  last_config = require("dap").session()["config"]
+end
