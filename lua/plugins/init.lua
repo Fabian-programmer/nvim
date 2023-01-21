@@ -18,6 +18,7 @@ return {
         ["<leader>c"] = { name = "+code" },
         ["<leader>d"] = { name = "+debug" },
         ["<leader>f"] = { name = "+find" },
+        ["<leader>fr"] = { name = "+replace" },
         ["<leader>h"] = { name = "+help" },
         ["<leader>g"] = { name = "+git" },
         ["<leader>gh"] = { name = "+hunk" },
@@ -43,7 +44,12 @@ return {
   {
     "windwp/nvim-spectre",
     keys = {
-      { "<leader>fr", function() require("spectre").open() end, desc = "Replace in files (Spectre)" },
+      { "<leader>frr", function() require("spectre").open() end, desc = "Replace all in cwd" },
+      { "<leader>frf", function() require("spectre").open_file_search() end, desc = "Replace in file" },
+      { "<leader>frw", function() require("spectre").open_visual({ select_word = true }) end,
+        desc = "Replace word under cursor" },
+
+      { "<leader>fr", "<esc>:lua require('spectre').open_visual()<CR>", desc = "Replace word", mode = "v" },
     },
   },
 

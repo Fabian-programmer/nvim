@@ -43,6 +43,7 @@ vim.api.nvim_create_autocmd("FileType", {
     "Trouble*",
     "Neogit*",
     "dap-float",
+    "spectre_panel",
   },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
