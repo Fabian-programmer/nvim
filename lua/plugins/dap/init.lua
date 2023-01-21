@@ -94,6 +94,14 @@ function M.init()
     local widgets = require('dap.ui.widgets')
     widgets.hover()
   end, { desc = "Hover" })
+
+  vim.api.nvim_set_hl(0, "dap_red", { fg = "#ff0000" })
+  vim.api.nvim_set_hl(0, "dap_yellow", { fg = "#ffff00" })
+
+  vim.fn.sign_define('DapBreakpoint', {text='', texthl='dap_red', linehl='', numhl=''})
+  vim.fn.sign_define('DapBreakpointCondition', {text='', texthl='dap_red', linehl='', numhl=''})
+  vim.fn.sign_define('DapLogPoint', {text='', texthl='dap_yellow', linehl='', numhl=''})
+
 end
 
 function M.config()
