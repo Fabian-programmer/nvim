@@ -10,6 +10,40 @@ local function open_entry_in_diffview(cmd)
   end)
 end
 
+local function debug_file_with_dap()
+  local selected_entry = require('telescope.actions.state').get_selected_entry()
+  local value = selected_entry.value
+  -- close Telescope window properly prior to switching windows
+  vim.api.nvim_win_close(0, true)
+  vim.cmd("stopinsert")
+
+  local config = {
+    type = 'cppdbg',
+    request = 'launch',
+    program = value,
+    args = function()
+      local args = {}
+      local args_string = vim.fn.input('Args: ')
+      for word in args_string:gmatch("%S+") do
+        table.insert(args, word)
+      end
+      return args
+    end,
+    cwd = '${workspaceFolder}',
+    stopAtEntry = true,
+    setupCommands = {
+      {
+        text = '-enable-pretty-printing',
+        description = 'enable pretty printing',
+        ignoreFailures = false
+      },
+    },
+  }
+  vim.schedule(function()
+    require("dap").run(config)
+  end)
+end
+
 return {
   "nvim-telescope/telescope.nvim",
   cmd = { "Telescope" },
@@ -84,6 +118,15 @@ return {
         winblend = borderless and 0 or 10,
       },
       pickers = {
+        find_files = {
+          mappings = {
+            i = {
+              ["<F5>"] = function()
+                debug_file_with_dap()
+              end,
+            }
+          }
+        },
         git_commits = {
           mappings = {
             i = {

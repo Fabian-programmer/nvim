@@ -17,7 +17,7 @@ local cpp_launch = {
     return args
   end,
   cwd = '${workspaceFolder}',
-  stopAtEntry = true,
+  stopAtEntry = false,
   setupCommands = {
     {
       text = '-enable-pretty-printing',
@@ -84,7 +84,7 @@ dap.adapters.cppdbg = {
 }
 
 dap.configurations.cpp = {
-  cpp_launch, cpp_attach, cpp_last_config
+  cpp_launch,  cpp_attach, cpp_last_config
 }
 
 dap.listeners.after.event_initialized["last_config"] = function()
