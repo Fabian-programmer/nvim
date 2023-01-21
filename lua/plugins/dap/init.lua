@@ -1,4 +1,3 @@
-
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "dap-float" },
   callback = function(event)
@@ -51,22 +50,49 @@ function M.init()
   vim.keymap.set("n", "<F7>", function() require("dap").step_into() end, { desc = "Step Into" })
   vim.keymap.set("n", "<F8>", function() require("dap").step_over() end, { desc = "Step Over" })
   vim.keymap.set("n", "<F9>", function() require("dap").step_out() end, { desc = "Step Out" })
-  vim.keymap.set("n", "<F10>", function() require("dap").run_to_cursor() end, { desc = "Run to cursor" })
+  vim.keymap.set("n", "<F10>", function() require("dap").run_to_cursor() end, { desc = "Run to Cursor" })
   vim.keymap.set("n", "<leader>dt", function() require("dap").terminate() end, { desc = "Terminate Debug" })
   vim.keymap.set("n", "<leader>dl", function() require("dap").run_last() end, { desc = "Run Last" })
   vim.keymap.set("n", "<leader>db", function() require("dap").toggle_breakpoint() end, { desc = "Toggle Breakpoint" })
-  vim.keymap.set("n", "<leader>dB", function() require("dap").set_breakpoint(vim.fn.input('Breakpoint condition: '))  end, { desc = "Set Breakpoint" })
+  vim.keymap.set("n", "<leader>dB", function() require("dap").set_breakpoint(vim.fn.input('Breakpoint condition: ')) end
+    , { desc = "Set Breakpoint" })
   vim.keymap.set("n", "<leader>dr", function() require("dap").repl.toggle() end, { desc = "Repl" })
   vim.keymap.set("n", "<leader>du", function() require("dapui").toggle({}) end, { desc = "UI" })
 
+
+  vim.keymap.set("n", "<leader>do", function()
+    local session = require("dap").session()
+    local command = "-exec source /opt/OpenImageDebugger/oid.py"
+    session:evaluate(command, function(err)
+      if err then
+        require("dap.repl").append(err.message)
+        return
+      end
+    end)
+    require("dap.repl").append(command)
+    -- scroll dap repl to bottom
+    local repl_buf = vim.tbl_filter(function(b)
+      if vim.bo[b].filetype == "dap-repl" then
+        return true
+      end
+      return false
+    end, vim.api.nvim_list_bufs())[1]
+    -- deferring since otherwise too early
+    vim.defer_fn(function()
+      vim.api.nvim_buf_call(repl_buf, function()
+        vim.cmd [[normal! G]]
+      end)
+    end, 50)
+  end, { desc = "OpenImageDebugger" })
+
   vim.keymap.set("n", "<leader>ds", function()
-  local widgets = require('dap.ui.widgets')
-  widgets.centered_float(widgets.scopes)
+    local widgets = require('dap.ui.widgets')
+    widgets.centered_float(widgets.scopes)
   end, { desc = "Scope" })
 
   vim.keymap.set("n", "<leader>dh", function()
-  local widgets = require('dap.ui.widgets')
-  widgets.hover()
+    local widgets = require('dap.ui.widgets')
+    widgets.hover()
   end, { desc = "Hover" })
 end
 
