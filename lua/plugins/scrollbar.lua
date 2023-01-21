@@ -21,6 +21,7 @@ function M.config()
       "TelescopePrompt",
       "noice",
       "notify",
+      "dap-float",
     },
     marks = {
       Search = { color = colors.orange },
