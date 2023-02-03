@@ -70,19 +70,7 @@ function M.init()
       end
     end)
     require("dap.repl").append(command)
-    -- scroll dap repl to bottom
-    local repl_buf = vim.tbl_filter(function(b)
-      if vim.bo[b].filetype == "dap-repl" then
-        return true
-      end
-      return false
-    end, vim.api.nvim_list_bufs())[1]
-    -- deferring since otherwise too early
-    vim.defer_fn(function()
-      vim.api.nvim_buf_call(repl_buf, function()
-        vim.cmd [[normal! G]]
-      end)
-    end, 50)
+    session:evaluate("print", function() end)
   end, { desc = "OpenImageDebugger" })
 
   vim.keymap.set("n", "<leader>ds", function()
