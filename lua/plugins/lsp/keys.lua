@@ -28,6 +28,7 @@ function M.setup(client, buffer)
           },
         },
         d = { vim.diagnostic.open_float, "Line Diagnostics" },
+       r = { M.rename, expr = true, "Rename" },
       },
       x = {
         d = { "<cmd>Telescope diagnostics<cr>", "Search Diagnostics" },
@@ -48,6 +49,14 @@ function M.setup(client, buffer)
   }
 
   wk.register(keymap)
+end
+
+function M.rename()
+  if pcall(require, "inc_rename") then
+    return ":IncRename " .. vim.fn.expand("<cword>")
+  else
+    vim.lsp.buf.rename()
+  end
 end
 
 return M
