@@ -56,7 +56,7 @@ function M.init()
   vim.keymap.set("n", "<leader>db", function() require("dap").toggle_breakpoint() end, { desc = "Toggle Breakpoint" })
   vim.keymap.set("n", "<leader>dB", function() require("dap").set_breakpoint(vim.fn.input('Breakpoint condition: ')) end
     , { desc = "Set Breakpoint" })
-  vim.keymap.set("n", "<leader>dr", function() require("dap").repl.toggle() end, { desc = "Repl" })
+  vim.keymap.set("n", "<leader>dr", function() require("dap").repl.toggle({}, "tabnew") end, { desc = "Repl" })
   vim.keymap.set("n", "<leader>du", function() require("dapui").toggle({}) end, { desc = "UI" })
 
 
@@ -70,7 +70,6 @@ function M.init()
       end
     end)
     require("dap.repl").append(command)
-    session:evaluate("print", function() end)
   end, { desc = "OpenImageDebugger" })
 
   vim.keymap.set("n", "<leader>ds", function()
@@ -86,9 +85,9 @@ function M.init()
   vim.api.nvim_set_hl(0, "dap_red", { fg = "#ff0000" })
   vim.api.nvim_set_hl(0, "dap_yellow", { fg = "#ffff00" })
 
-  vim.fn.sign_define('DapBreakpoint', {text='', texthl='dap_red', linehl='', numhl=''})
-  vim.fn.sign_define('DapBreakpointCondition', {text='', texthl='dap_red', linehl='', numhl=''})
-  vim.fn.sign_define('DapLogPoint', {text='', texthl='dap_yellow', linehl='', numhl=''})
+  vim.fn.sign_define('DapBreakpoint', { text = '', texthl = 'dap_red', linehl = '', numhl = '' })
+  vim.fn.sign_define('DapBreakpointCondition', { text = '', texthl = 'dap_red', linehl = '', numhl = '' })
+  vim.fn.sign_define('DapLogPoint', { text = '', texthl = 'dap_yellow', linehl = '', numhl = '' })
 
 end
 
