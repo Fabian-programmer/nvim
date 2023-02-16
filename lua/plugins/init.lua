@@ -44,6 +44,10 @@ return {
     end,
   },
 
+  {
+    "echasnovski/mini.trailspace",
+    event = "BufReadPre",
+  },
 
   {
     "numToStr/Comment.nvim",
