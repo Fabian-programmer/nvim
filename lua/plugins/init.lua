@@ -93,6 +93,8 @@ return {
     cmd = { "TroubleToggle", "Trouble" },
     keys = {
       { "<leader>xx", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Trouble" },
+      { "<leader>xL", "<cmd>TroubleToggle loclist<cr>", desc = "Location List (Trouble)" },
+      { "<leader>xQ", "<cmd>TroubleToggle quickfix<cr>", desc = "Quickfix List (Trouble)" },
     },
     config = {
       auto_open = false,
@@ -116,9 +118,8 @@ return {
 
   -- git stuff
   {
-    --dir = "~/gitsigns.nvim",
-    "Fabian-programmer/gitsigns.nvim",
-    event = "BufReadPre",
+    "lewis6991/gitsigns.nvim",
+    event = { "BufReadPre", "BufNewFile" },
     config = {
       current_line_blame_opts = { delay = 100 }
     },
