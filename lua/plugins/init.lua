@@ -46,6 +46,7 @@ return {
       leap.add_default_mappings(true)
       vim.keymap.del({ "x", "o" }, "x")
       vim.keymap.del({ "x", "o" }, "X")
+      vim.keymap.del({ "n" }, "cc")
     end,
   },
 
