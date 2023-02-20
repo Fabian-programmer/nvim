@@ -1,6 +1,3 @@
--- Load bclose.vim
-vim.cmd('source ~/.config/nvim/lua/config/bclose.vim')
-
 -- Buffer
 vim.opt.relativenumber = true
 vim.cmd('set noswapfile')

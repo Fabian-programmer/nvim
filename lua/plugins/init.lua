@@ -31,7 +31,7 @@ return {
   },
 
   -- easily jump to any location and enhanced f/t motions for Leap
-    {
+  {
     "ggandor/leap.nvim",
     keys = {
       { "s", mode = { "n", "x", "o" }, desc = "Leap forward to" },
@@ -47,6 +47,16 @@ return {
       vim.keymap.del({ "x", "o" }, "x")
       vim.keymap.del({ "x", "o" }, "X")
     end,
+  },
+
+  -- buffer remove
+  {
+    "echasnovski/mini.bufremove",
+    event = "BufReadPre",
+    keys = {
+      { "<A-q>", function() require("mini.bufremove").delete(0, false) end, desc = "Delete Buffer" },
+      { "<A-Q>", function() require("mini.bufremove").delete(0, true) end, desc = "Delete Buffer (Force)" },
+    },
   },
 
   {

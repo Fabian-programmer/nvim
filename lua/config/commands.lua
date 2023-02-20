@@ -1,18 +1,6 @@
 vim.api.nvim_command('autocmd TermOpen,TermEnter term://* startinsert')
 
--- Close buffer
-local universal_closer = "<A-q>"
-vim.keymap.set("n", universal_closer, "<cmd>:Bclose<cr>")
-
--- bang the terminal
-vim.api.nvim_create_autocmd("TermOpen", {
-  callback = function(event)
-    vim.keymap.set({ "n", "t" }, universal_closer, "<cmd>Bclose!<cr>", { buffer = event.buf, silent = true })
-  end,
-})
-
 -- Highlight on yank
-
 vim.api.nvim_create_autocmd("TextYankPost", {
   callback = function()
     vim.highlight.on_yank()
@@ -30,6 +18,17 @@ vim.api.nvim_create_autocmd('BufReadPost', {
   end,
 })
 
+
+-- Close buffer
+local universal_closer = "<A-q>"
+
+-- bang the terminal
+vim.api.nvim_create_autocmd("TermOpen", {
+  callback = function(event)
+    vim.keymap.set({ "n", "t" }, universal_closer, function() require("mini.bufremove").delete(0, true) end,
+      { buffer = event.buf, silent = true })
+  end,
+})
 
 -- hide buffer
 vim.api.nvim_create_autocmd("FileType", {
