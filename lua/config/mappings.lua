@@ -48,11 +48,14 @@ vim.keymap.set({ "i", "n" }, "<A-t>", "<cmd>tab term<cr>", { desc = "Open Termin
 -- windows
 vim.keymap.set("n", "<leader>wo", "<C-W>o", { desc = "Only visible" })
 vim.keymap.set("n", "<leader>wd", "<C-W>c", { desc = "Delete" })
-vim.keymap.set("n", "<leader>w-", "<C-W>s", { desc = "Split below" })
-vim.keymap.set("n", "<leader>w|", "<C-W>v", { desc = "Split right" })
+vim.keymap.set("n", "<leader>-", "<C-W>s", { desc = "Split below" })
+vim.keymap.set("n", "<leader>|", "<C-W>v", { desc = "Split right" })
 
 -- tabs
 vim.keymap.set("n", "<leader><tab>o", "<cmd>tabnew<cr>", { desc = "New Tab" })
 vim.keymap.set("n", "<leader><tab>n", "<cmd>tabnext<cr>", { desc = "Next Tab" })
 vim.keymap.set("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
 vim.keymap.set("n", "<leader><tab>N", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
+
+-- avp
+-- vim.keymap.set("n", "<leader>as", "<C-W>s", { desc = "Simulation tab" })
