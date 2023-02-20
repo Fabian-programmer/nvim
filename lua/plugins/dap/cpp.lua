@@ -27,6 +27,76 @@ local cpp_launch = {
   },
 }
 
+local function extract_up_to_third_underscore(str)
+  local first, last = string.find(str, "^[^_]+_[^_]+_[^_]+_")
+  if first ~= nil and last ~= nil then
+    return string.sub(str, 1, last - 1)
+  else
+    return str
+  end
+end
+
+local cpp_test_launch = {
+  name = 'Launch Current Test File (Catch2)',
+  type = 'cppdbg',
+  request = 'launch',
+  program = function()
+    local current_file = vim.fn.expand('%:t:r')
+    local test_executable = extract_up_to_third_underscore(current_file)
+    return vim.fn.getcwd() .. '/bin/' .. test_executable
+  end,
+  cwd = '${workspaceFolder}',
+  stopAtEntry = false,
+  setupCommands = {
+    {
+      text = '-enable-pretty-printing',
+      description = 'enable pretty printing',
+      ignoreFailures = false
+    },
+  },
+}
+
+local function get_scenario_line()
+  local current_line = vim.api.nvim_win_get_cursor(0)[1]
+  local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+  for i = current_line, 1, -1 do
+    if string.match(lines[i], "SCENARIO") then
+      local content = string.match(lines[i], "%((.-)%)")
+      local catch2_command = '"Scenario: ' .. content:sub(2)
+      return catch2_command
+    end
+  end
+  return ""
+end
+
+local cpp_test_tag_launch = {
+  name = 'Launch Current Test File (Catch2, Tag)',
+  type = 'cppdbg',
+  request = 'launch',
+  program = function()
+    local current_file = vim.fn.expand('%:t:r')
+    local test_executable = extract_up_to_third_underscore(current_file)
+    return vim.fn.getcwd() .. '/bin/' .. test_executable
+  end,
+  args = function()
+    local args = {}
+    local args_string = get_scenario_line()
+    for word in args_string:gmatch("%S+") do
+      table.insert(args, word)
+    end
+    return args
+  end,
+  cwd = '${workspaceFolder}',
+  stopAtEntry = false,
+  setupCommands = {
+    {
+      text = '-enable-pretty-printing',
+      description = 'enable pretty printing',
+      ignoreFailures = false
+    },
+  },
+}
+
 local function capture(cmd)
   local handle = assert(io.popen(cmd, 'r'))
   local output = assert(handle:read('*a'))
@@ -84,7 +154,7 @@ dap.adapters.cppdbg = {
 }
 
 dap.configurations.cpp = {
-  cpp_launch,  cpp_attach, cpp_last_config
+  cpp_launch, cpp_attach, cpp_last_config, cpp_test_launch, cpp_test_tag_launch
 }
 
 dap.listeners.after.event_initialized["last_config"] = function()
