@@ -21,6 +21,7 @@
   "mini.bufremove": { "branch": "main", "commit": "351d18d596f7eac4589b67b4b87ed1708c545dd3" },
   "mini.indentscope": { "branch": "main", "commit": "ff1e68b5c01426f9dfff3278dd1b10c9b5f000a1" },
   "mini.trailspace": { "branch": "main", "commit": "8566ae0cf1524b263e489b6771d339025773189e" },
+  "neogit": { "branch": "master", "commit": "0ad78240b5658c65d0c7d5bd08c1bd1099b79dd3" },
   "neotest": { "branch": "master", "commit": "0d17889ce740c83c18577487498a1a8fea144b0b" },
   "neotest-python": { "branch": "master", "commit": "6c06041cfb45f45e276068020baa06c06fe20d5c" },
   "neotest-vim-test": { "branch": "master", "commit": "07f25ab7ba4e7646b38c84e10002b195a53b0096" },
