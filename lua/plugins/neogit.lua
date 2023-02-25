@@ -37,7 +37,9 @@ return {
     integrations = { diffview = true },
   },
   keys = {
-    { "<leader>gg", "<cmd>Neogit<cr>", desc = "Neogit" },
+    { "<leader>gg", function()
+      require("neogit").open({cwd = get_root()})
+    end, desc = "Neogit" },
     { "<leader>gl", function()
       require("neogit.popups.log").create()
       vim.cmd('normal l')
