@@ -1,13 +1,14 @@
 local M = {
   "akinsho/nvim-bufferline.lua",
   dependencies = { "tiagovla/scope.nvim", config = true },
-  event = "BufAdd",
+  event = "VeryLazy",
 }
 
 function M.config()
 
   require("bufferline").setup({
     options = {
+      always_show_bufferline = true,
       show_close_icon     = false,
       buffer_close_icon   = "",
       close_command       = "",
