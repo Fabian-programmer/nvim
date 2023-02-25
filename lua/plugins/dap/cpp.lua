@@ -43,7 +43,7 @@ local cpp_test_launch = {
   program = function()
     local current_file = vim.fn.expand('%:t:r')
     local test_executable = extract_up_to_third_underscore(current_file)
-    return vim.fn.getcwd() .. '/bin/' .. test_executable
+    return get_root() .. '/bin/' .. test_executable
   end,
   cwd = '${workspaceFolder}',
   stopAtEntry = false,
@@ -76,7 +76,7 @@ local cpp_test_tag_launch = {
   program = function()
     local current_file = vim.fn.expand('%:t:r')
     local test_executable = extract_up_to_third_underscore(current_file)
-    return vim.fn.getcwd() .. '/bin/' .. test_executable
+    return get_root() .. '/bin/' .. test_executable
   end,
   args = function()
     local args = {}
