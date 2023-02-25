@@ -1,14 +1,16 @@
 -- better up/down
-vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+vim.keymap.set("n", "<Up>", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+vim.keymap.set("n", "<Down>", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- Move Lines
-vim.keymap.set("n", "<A-j>", ":m .+1<cr>==", { desc = "Move down" })
-vim.keymap.set("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move down" })
-vim.keymap.set("i", "<A-j>", "<Esc>:m .+1<cr>==gi", { desc = "Move down" })
-vim.keymap.set("n", "<A-k>", ":m .-2<cr>==", { desc = "Move up" })
-vim.keymap.set("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move up" })
-vim.keymap.set("i", "<A-k>", "<Esc>:m .-2<cr>==gi", { desc = "Move up" })
+vim.keymap.set("n", "<A-Up>", ":m .-2<cr>==", { desc = "Move up" })
+vim.keymap.set("v", "<A-Up>", ":m '<-2<cr>gv=gv", { desc = "Move up" })
+vim.keymap.set("i", "<A-Up>", "<Esc>:m .-2<cr>==gi", { desc = "Move up" })
+vim.keymap.set("n", "<A-Down>", ":m .+1<cr>==", { desc = "Move down" })
+vim.keymap.set("v", "<A-Down>", ":m '>+1<cr>gv=gv", { desc = "Move down" })
+vim.keymap.set("i", "<A-Down>", "<Esc>:m .+1<cr>==gi", { desc = "Move down" })
 
 -- Move to window using the <ctrl> movement keys
 vim.keymap.set("n", "<C-Left>", "<C-w>h", { desc = "Move to left Window" })
@@ -29,7 +31,8 @@ vim.keymap.set({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "No highligh
 vim.keymap.set({ "i", "n" }, "<C-s>", "<cmd>:w<cr><esc>", { desc = "Save Buffer" })
 
 -- change cwd to current file
-vim.keymap.set("n", "<leader>C", "<cmd>:cd %:p:h<cr>", { desc = "Cd to current file" })
+vim.keymap.set("n", "<leader>c", function () vim.cmd(":cd " .. get_root()) end, { desc = "cd to current file (root dir)" })
+vim.keymap.set("n", "<leader>C", function () vim.cmd(":cd " .. get_root()) end, { desc = "cd to current file" })
 
 -- better indenting
 vim.keymap.set("v", "<", "<gv", { desc = "Intend left" })

@@ -15,6 +15,7 @@ return {
       wk.register({
         mode = { "n", "v" },
         ["g"] = { name = "+goto" },
+        ["<leader>b"] = { name = "+buffer" },
         ["<leader>c"] = { name = "+code" },
         ["<leader>d"] = { name = "+debug" },
         ["<leader>f"] = { name = "+find" },
