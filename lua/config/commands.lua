@@ -40,13 +40,19 @@ vim.api.nvim_create_autocmd("FileType", {
     "notify",
     "qf",
     "Trouble*",
-    "Neogit*",
     "dap-float",
     "spectre_panel",
   },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
     vim.keymap.set("n", universal_closer, "<cmd>close<cr>", { buffer = event.buf, silent = true })
+  end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "Neogit*" },
+  callback = function(event)
+    vim.keymap.set("n", universal_closer, function () require("neogit").close() end, { buffer = event.buf, silent = true })
   end,
 })
 

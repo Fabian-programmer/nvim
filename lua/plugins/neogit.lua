@@ -23,7 +23,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 
 return {
-  "TimUntersberger/neogit",
+  "Fabian-programmer/neogit",
   cmd = "Neogit",
   config = {
     disable_commit_confirmation = true,
