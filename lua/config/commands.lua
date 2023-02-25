@@ -63,15 +63,6 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "NvimTree" },
-  callback = function(event)
-    vim.bo[event.buf].buflisted = false
-    vim.keymap.set("n", universal_closer, "<cmd>NvimTreeClose<cr>", { buffer = event.buf, silent = true })
-  end,
-})
-
-
 
 local root_patterns = { ".git", "lua" }
 

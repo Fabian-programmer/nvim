@@ -65,7 +65,7 @@ return {
         },
         offsets                = {
           {
-            filetype = "NvimTree",
+            filetype = "neo-tree",
             text = "File Explorer",
             text_align = "center",
             seperator = true,
@@ -151,7 +151,7 @@ return {
     },
     config = function(_, opts)
       vim.api.nvim_create_autocmd("FileType", {
-        pattern = { "help", "alpha", "dashboard", "NvimTree", "Trouble", "lazy", "mason" },
+        pattern = { "help", "alpha", "dashboard", "neo-tree", "Trouble", "lazy", "mason" },
         callback = function()
           vim.b.miniindentscope_disable = true
         end,
