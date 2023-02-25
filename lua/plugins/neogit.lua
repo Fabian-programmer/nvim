@@ -26,8 +26,9 @@ return {
   "Fabian-programmer/neogit",
   cmd = "Neogit",
   config = {
-    disable_commit_confirmation = true,
+    disable_commit_confirmation = false,
     disable_insert_on_commit = false,
+    disable_builtin_notifications = true,
     signs = {
       -- { CLOSED, OPENED }
       section = { "", "" },
