@@ -11,6 +11,9 @@ return {
       wk.setup({
         plugins = { spelling = true },
         key_labels = { ["<leader>"] = "SPC" },
+        icons = {
+          separator = "→", -- symbol used between a key and it's label
+        },
       })
       wk.register({
         mode = { "n", "v" },

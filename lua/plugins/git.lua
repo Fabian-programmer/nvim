@@ -45,17 +45,17 @@ return {
     opts = {
       keymaps = {
         disable_defaults = false, -- Disable the default keymaps
-        view = {
-          { "n", "nx", require("diffview.actions").prev_conflict,
-            { desc = "In the merge-tool: jump to the previous conflict" } },
-          { "n", "Nx", require("diffview.actions").next_conflict,
-            { desc = "In the merge-tool: jump to the next conflict" } },
-        },
-        file_panel = {
-          { "n", "s", require("diffview.actions").toggle_stage_entry, { desc = "Stage / unstage the selected entry." } },
-          { "n", "x", require("diffview.actions").restore_entry,
-            { desc = "Restore entry to the state on the left side." } },
-        },
+        -- view = {
+        --   { "n", "nx", require("diffview.actions").prev_conflict,
+        --     { desc = "In the merge-tool: jump to the previous conflict" } },
+        --   { "n", "Nx", require("diffview.actions").next_conflict,
+        --     { desc = "In the merge-tool: jump to the next conflict" } },
+        -- },
+        -- file_panel = {
+        --   { "n", "s", require("diffview.actions").toggle_stage_entry, { desc = "Stage / unstage the selected entry." } },
+        --   { "n", "x", require("diffview.actions").restore_entry,
+        --     { desc = "Restore entry to the state on the left side." } },
+        -- },
       },
     },
   },
