@@ -108,7 +108,6 @@ return {
 
   -- compiler explorer
   {
-    -- dir = "~/compiler-explorer.nvim/",
     "Fabian-programmer/compiler-explorer.nvim",
     cmd = { "CECompile" },
     config = true,
