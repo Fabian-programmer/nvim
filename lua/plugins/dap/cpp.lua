@@ -27,10 +27,10 @@ local cpp_launch = {
   },
 }
 
-local function extract_up_to_third_underscore(str)
-  local first, last = string.find(str, "^[^_]+_[^_]+_[^_]+_")
-  if first ~= nil and last ~= nil then
-    return string.sub(str, 1, last - 1)
+local function extract_exectuable_from_file(str)
+  local lastUnderscoreIndex = string.find(str, "_[^_]*$")
+  if lastUnderscoreIndex then
+    return string.sub(str, 1, lastUnderscoreIndex - 1)
   else
     return str
   end
@@ -42,7 +42,7 @@ local cpp_test_launch = {
   request = 'launch',
   program = function()
     local current_file = vim.fn.expand('%:t:r')
-    local test_executable = extract_up_to_third_underscore(current_file)
+    local test_executable = extract_exectuable_from_file(current_file)
     return get_root() .. '/bin/' .. test_executable
   end,
   cwd = '${workspaceFolder}',
@@ -53,6 +53,11 @@ local cpp_test_launch = {
       description = 'enable pretty printing',
       ignoreFailures = false
     },
+  },
+  logging = {
+    enableLogging = true,
+    trace = true,
+    traceResponse = true,
   },
 }
 
@@ -75,7 +80,7 @@ local cpp_test_tag_launch = {
   request = 'launch',
   program = function()
     local current_file = vim.fn.expand('%:t:r')
-    local test_executable = extract_up_to_third_underscore(current_file)
+    local test_executable = extract_exectuable_from_file(current_file)
     return get_root() .. '/bin/' .. test_executable
   end,
   args = function()
@@ -94,6 +99,11 @@ local cpp_test_tag_launch = {
       description = 'enable pretty printing',
       ignoreFailures = false
     },
+  },
+  logging = {
+    enableLogging = true,
+    trace = true,
+    traceResponse = true,
   },
 }
 
@@ -117,20 +127,20 @@ local cpp_attach = setmetatable(
       },
     },
   }, {
-  __call = function(config)
-    local result = vim.deepcopy(config)
+    __call = function(config)
+      local result = vim.deepcopy(config)
 
-    local option = require('dap.utils').pick_process()
-    local co = coroutine.running()
-    vim.schedule(function()
-      coroutine.resume(option, co)
-    end)
-    local pid = coroutine.yield()
-    result.processId = pid
-    result.program = capture('readlink -f /proc/' .. tostring(pid) .. '/exe'):sub(1, -2)
-    return result
-  end,
-})
+      local option = require('dap.utils').pick_process()
+      local co = coroutine.running()
+      vim.schedule(function()
+        coroutine.resume(option, co)
+      end)
+      local pid = coroutine.yield()
+      result.processId = pid
+      result.program = capture('readlink -f /proc/' .. tostring(pid) .. '/exe'):sub(1, -2)
+      return result
+    end,
+  })
 
 local last_config = {}
 
@@ -140,10 +150,10 @@ local cpp_last_config = setmetatable(
     type = 'cppdbg',
     request = 'launch',
   }, {
-  __call = function()
-    return last_config
-  end,
-})
+    __call = function()
+      return last_config
+    end,
+  })
 
 local cpptools = mason_registry.get_package("cpptools")
 
