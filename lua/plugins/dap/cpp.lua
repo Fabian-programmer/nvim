@@ -27,12 +27,18 @@ local cpp_launch = {
   },
 }
 
-local function extract_exectuable_from_file(str)
-  local lastUnderscoreIndex = string.find(str, "_[^_]*$")
-  if lastUnderscoreIndex then
-    return string.sub(str, 1, lastUnderscoreIndex - 1)
-  else
-    return str
+local function extract_exectuable_from_file(file)
+  local handle = io.popen("cd " .. get_root() .. " && cmake --build build --target help")
+  if handle then
+    for line in handle:lines() do
+      -- Remove the dots from the beginning of the line
+      line = string.gsub(line, "^[%s%.]+", "")
+      if string.find(file, line) == 1 then
+        return line
+      end
+    end
+
+    handle:close()
   end
 end
 
@@ -52,6 +58,34 @@ local cpp_test_launch = {
       text = '-enable-pretty-printing',
       description = 'enable pretty printing',
       ignoreFailures = false
+    },
+  },
+  logging = {
+    enableLogging = true,
+    trace = true,
+    traceResponse = true,
+  },
+}
+
+local oid_test_launch = {
+  name = 'OID TEST',
+  type = 'cppdbg',
+  request = 'launch',
+  program = '/home/hfu5fe/cp/cp.avp.integration/bin/test_avp_stereo',
+  args = { "-#", "[#test_avp_stereo_gridlabeler]" },
+  cwd = '/home/hfu5fe/cp/cp.avp.integration',
+  stopAtEntry = false,
+  MIMode = 'gdb',
+  externalConsole = false,
+  setupCommands = {
+    {
+      text = '-enable-pretty-printing',
+      description = 'enable pretty printing',
+      ignoreFailures = false
+    },
+    {
+      text = '-gdb-set disassembly-flavor intel',
+      ignoreFailures = true
     },
   },
   logging = {
@@ -91,7 +125,9 @@ local cpp_test_tag_launch = {
     end
     return args
   end,
-  cwd = '${workspaceFolder}',
+  -- args = {"-#", "[#test_avp_stereo_gridlabeler]"},
+  cwd = '/home/hfu5fe/cp/cp.avp.integration',
+  -- cwd = '${workspaceFolder}',
   stopAtEntry = false,
   setupCommands = {
     {
@@ -164,7 +200,7 @@ dap.adapters.cppdbg = {
 }
 
 dap.configurations.cpp = {
-  cpp_launch, cpp_attach, cpp_last_config, cpp_test_launch, cpp_test_tag_launch
+  cpp_launch, cpp_attach, cpp_last_config, cpp_test_launch, cpp_test_tag_launch, oid_test_launch
 }
 
 dap.listeners.after.event_initialized["last_config"] = function()
