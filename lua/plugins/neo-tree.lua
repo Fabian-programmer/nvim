@@ -32,6 +32,7 @@ return {
       end
     end,
     opts = {
+      open_files_do_not_replace_types = { "trouble", "qf" },
       filesystem = {
         bind_to_cwd = true,
         follow_current_file = true,
