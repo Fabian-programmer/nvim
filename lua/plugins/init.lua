@@ -38,8 +38,8 @@ return {
   {
     "ggandor/leap.nvim",
     keys = {
-      { "s", mode = { "n", "x", "o" }, desc = "Leap forward to" },
-      { "S", mode = { "n", "x", "o" }, desc = "Leap backward to" },
+      { "s",  mode = { "n", "x", "o" }, desc = "Leap forward to" },
+      { "S",  mode = { "n", "x", "o" }, desc = "Leap backward to" },
       { "gs", mode = { "n", "x", "o" }, desc = "Leap from windows" },
     },
     config = function(_, opts)
@@ -60,7 +60,7 @@ return {
     event = "BufReadPre",
     keys = {
       { "<A-q>", function() require("mini.bufremove").delete(0, false) end, desc = "Delete Buffer" },
-      { "<A-Q>", function() require("mini.bufremove").delete(0, true) end, desc = "Delete Buffer (Force)" },
+      { "<A-Q>", function() require("mini.bufremove").delete(0, true) end,  desc = "Delete Buffer (Force)" },
     },
   },
 
@@ -73,8 +73,12 @@ return {
     "numToStr/Comment.nvim",
     keys = {
       { "<leader>/", function() require("Comment.api").toggle.linewise.current() end, desc = "Comment" },
-      { "<leader>/", "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>", desc = "Comment",
-        mode = "v" },
+      {
+        "<leader>/",
+        "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>",
+        desc = "Comment",
+        mode = "v"
+      },
     },
   },
 
@@ -82,10 +86,13 @@ return {
   {
     "windwp/nvim-spectre",
     keys = {
-      { "<leader>frr", function() require("spectre").open() end, desc = "Replace all in cwd" },
+      { "<leader>frr", function() require("spectre").open() end,             desc = "Replace all in cwd" },
       { "<leader>frf", function() require("spectre").open_file_search() end, desc = "Replace in file" },
-      { "<leader>frw", function() require("spectre").open_visual({ select_word = true }) end,
-        desc = "Replace word under cursor" },
+      {
+        "<leader>frw",
+        function() require("spectre").open_visual({ select_word = true }) end,
+        desc = "Replace word under cursor"
+      },
 
       { "<leader>fr", "<esc>:lua require('spectre').open_visual()<CR>", desc = "Replace word", mode = "v" },
     },
@@ -97,13 +104,20 @@ return {
     cmd = { "TroubleToggle", "Trouble" },
     keys = {
       { "<leader>xx", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Trouble" },
-      { "<leader>xL", "<cmd>TroubleToggle loclist<cr>", desc = "Location List (Trouble)" },
-      { "<leader>xQ", "<cmd>TroubleToggle quickfix<cr>", desc = "Quickfix List (Trouble)" },
+      { "<leader>xL", "<cmd>TroubleToggle loclist<cr>",               desc = "Location List (Trouble)" },
+      { "<leader>xQ", "<cmd>TroubleToggle quickfix<cr>",              desc = "Quickfix List (Trouble)" },
     },
     config = {
       auto_open = false,
       use_diagnostic_signs = true,
     },
+  },
+
+  {
+    'willothy/flatten.nvim',
+    config = true,
+    lazy = false,
+    priority = 1001,
   },
 
   -- compiler explorer
