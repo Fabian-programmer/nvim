@@ -92,6 +92,8 @@ return {
       disable_commit_confirmation = false,
       disable_insert_on_commit = false,
       disable_builtin_notifications = true,
+      auto_show_console = false,
+      remember_settings = false,
       signs = {
         -- { CLOSED, OPENED }
         section = { "", "" },
