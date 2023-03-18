@@ -2,6 +2,13 @@ return {
 
   "nvim-lua/plenary.nvim",
 
+  -- session manager
+  {
+    "jedrzejboczar/possession.nvim",
+    cmd = { "PossessionLoad", "PossessionList"},
+    config = true,
+  },
+
   -- which-key
   {
     "folke/which-key.nvim",
