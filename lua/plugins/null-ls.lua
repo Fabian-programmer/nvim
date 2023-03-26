@@ -1,23 +1,20 @@
 local M = {
   "jose-elias-alvarez/null-ls.nvim",
+  event = { "BufReadPre", "BufNewFile" },
+  dependencies = { "mason.nvim" },
+  opts = function()
+    local nls = require("null-ls")
+    return {
+      root_dir = require("null-ls.utils").root_pattern(".git"),
+      sources = {
+        nls.builtins.formatting.prettierd.with({ filetypes = { "markdown" } }),
+        nls.builtins.formatting.black,
+        nls.builtins.formatting.clang_format,
+        nls.builtins.formatting.cmake_format,
+      },
+    }
+  end,
 }
-
-function M.setup(options)
-  local nls = require("null-ls")
-  nls.setup({
-    debounce = 150,
-    save_after_format = false,
-    sources = {
-      -- nls.builtins.formatting.stylua,
-      nls.builtins.formatting.prettierd.with({ filetypes = { "markdown" } }),
-      nls.builtins.formatting.black,
-      nls.builtins.formatting.clang_format,
-      nls.builtins.formatting.cmake_format,
-    },
-    on_attach = options.on_attach,
-    root_dir = require("null-ls.utils").root_pattern(".git"),
-  })
-end
 
 function M.has_formatter(ft)
   local sources = require("null-ls.sources")
