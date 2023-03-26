@@ -43,6 +43,11 @@ return {
       window = {
         mappings = {
           ["<space>"] = "none",
+          ["y"] = function(state)
+            local node = state.tree:get_node()
+            local content = node.path
+            vim.fn.setreg("+", content)
+          end,
         },
       },
     },

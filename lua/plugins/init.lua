@@ -114,7 +114,7 @@ return {
       { "<leader>xL", "<cmd>TroubleToggle loclist<cr>",               desc = "Location List (Trouble)" },
       { "<leader>xQ", "<cmd>TroubleToggle quickfix<cr>",              desc = "Quickfix List (Trouble)" },
     },
-    config = {
+    opts = {
       auto_open = false,
       use_diagnostic_signs = true,
     },
