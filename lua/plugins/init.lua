@@ -5,7 +5,13 @@ return {
   -- session manager
   {
     "jedrzejboczar/possession.nvim",
-    cmd = { "PossessionLoad", "PossessionList"},
+    event = "BufReadPre",
+    cmd = { "PossessionLoad", "PossessionList" },
+    keys = {
+      { "<leader>ql", "<cmd>PossessionLoad<cr>", desc = "Load Session" },
+      { "<leader>qq", "<cmd>PossessionList<cr>", desc = "List Sessions" },
+      { "<leader>qs", "<cmd>PossessionSave<cr>", desc = "Save Session" },
+    },
     config = true,
   },
 
