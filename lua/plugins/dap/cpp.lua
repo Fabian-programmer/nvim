@@ -60,39 +60,6 @@ local cpp_test_launch = {
       ignoreFailures = false
     },
   },
-  logging = {
-    enableLogging = true,
-    trace = true,
-    traceResponse = true,
-  },
-}
-
-local oid_test_launch = {
-  name = 'OID TEST',
-  type = 'cppdbg',
-  request = 'launch',
-  program = '/home/hfu5fe/cp/cp.avp.integration/bin/test_avp_stereo',
-  args = { "-#", "[#test_avp_stereo_gridlabeler]" },
-  cwd = '/home/hfu5fe/cp/cp.avp.integration',
-  stopAtEntry = false,
-  MIMode = 'gdb',
-  externalConsole = false,
-  setupCommands = {
-    {
-      text = '-enable-pretty-printing',
-      description = 'enable pretty printing',
-      ignoreFailures = false
-    },
-    {
-      text = '-gdb-set disassembly-flavor intel',
-      ignoreFailures = true
-    },
-  },
-  logging = {
-    enableLogging = true,
-    trace = true,
-    traceResponse = true,
-  },
 }
 
 local function get_scenario_line()
@@ -125,9 +92,7 @@ local cpp_test_tag_launch = {
     end
     return args
   end,
-  -- args = {"-#", "[#test_avp_stereo_gridlabeler]"},
-  cwd = '/home/hfu5fe/cp/cp.avp.integration',
-  -- cwd = '${workspaceFolder}',
+  cwd = '${workspaceFolder}',
   stopAtEntry = false,
   setupCommands = {
     {
@@ -135,11 +100,6 @@ local cpp_test_tag_launch = {
       description = 'enable pretty printing',
       ignoreFailures = false
     },
-  },
-  logging = {
-    enableLogging = true,
-    trace = true,
-    traceResponse = true,
   },
 }
 
@@ -200,7 +160,7 @@ dap.adapters.cppdbg = {
 }
 
 dap.configurations.cpp = {
-  cpp_launch, cpp_attach, cpp_last_config, cpp_test_launch, cpp_test_tag_launch, oid_test_launch
+  cpp_launch, cpp_attach, cpp_last_config, cpp_test_launch, cpp_test_tag_launch
 }
 
 dap.listeners.after.event_initialized["last_config"] = function()

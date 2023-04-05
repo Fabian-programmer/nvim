@@ -9,7 +9,6 @@ vim.api.nvim_create_autocmd("FileType", {
 local M = {
   "mfussenegger/nvim-dap",
   branch = "master",
-
   dependencies = {
     {
       "rcarriga/nvim-dap-ui",
@@ -55,14 +54,14 @@ function M.init()
   vim.keymap.set("n", "<leader>dl", function() require("dap").run_last() end, { desc = "Run Last" })
   vim.keymap.set("n", "<leader>db", function() require("dap").toggle_breakpoint() end, { desc = "Toggle Breakpoint" })
   vim.keymap.set("n", "<leader>dB", function() require("dap").set_breakpoint(vim.fn.input('Breakpoint condition: ')) end
-    , { desc = "Set Breakpoint" })
+  , { desc = "Set Breakpoint" })
   vim.keymap.set("n", "<leader>dr", function() require("dap").repl.toggle({}, "tabnew") end, { desc = "Repl" })
   vim.keymap.set("n", "<leader>du", function() require("dapui").toggle({}) end, { desc = "UI" })
 
 
   vim.keymap.set("n", "<leader>do", function()
     local session = require("dap").session()
-    local command = "-exec source /opt/OpenImageDebugger/oid.py"
+    local command = "-exec source /home/hfu5fe/cp/cp.avp.openimagedebugger/bin/OpenImageDebugger/oid.py"
     session:evaluate(command, function(err)
       if err then
         require("dap.repl").append(err.message)
@@ -71,6 +70,35 @@ function M.init()
     end)
     require("dap.repl").append(command)
   end, { desc = "OpenImageDebugger" })
+
+  vim.keymap.set("n", "<leader>dg", function()
+    local line = vim.fn.expand('%:line')
+    local col = vim.fn.col('.')
+    local start_col = vim.fn.search('\\<', 'bcn', line .. 'c' .. col) + 1
+    local end_col = vim.fn.search('\\>', 'cn', line .. 'c' .. col)
+    local grid_input = string.sub(line, start_col, end_col)
+
+    -- local grid_input = vim.fn.input("Enter grid: ")
+
+    local session = require("dap").session()
+    local command = "print " .. grid_input
+    session:evaluate(command, function(err)
+      if err then
+        require("dap.repl").append(err.message)
+        return
+      end
+    end)
+    require("dap.repl").append(command)
+
+    command = "-exec print " .. grid_input
+    session:evaluate(command, function(err)
+      if err then
+        require("dap.repl").append(err.message)
+        return
+      end
+    end)
+    require("dap.repl").append(command)
+  end, { desc = "Load grid" })
 
   vim.keymap.set("n", "<leader>ds", function()
     local widgets = require('dap.ui.widgets')
@@ -88,7 +116,6 @@ function M.init()
   vim.fn.sign_define('DapBreakpoint', { text = '', texthl = 'dap_red', linehl = '', numhl = '' })
   vim.fn.sign_define('DapBreakpointCondition', { text = '', texthl = 'dap_red', linehl = '', numhl = '' })
   vim.fn.sign_define('DapLogPoint', { text = '', texthl = 'dap_yellow', linehl = '', numhl = '' })
-
 end
 
 function M.config()
