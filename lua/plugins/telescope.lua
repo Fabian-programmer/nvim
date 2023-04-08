@@ -54,6 +54,7 @@ return {
     { "<leader>fb", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Buffer" },
     { "<leader>fh", "<cmd>Telescope command_history<cr>",           desc = "Command History" },
     { "<leader>fp", "<cmd>Telescope project<cr>",                   desc = "Project" },
+    { "<leader>fu", "<cmd>Telescope undo<cr>",                      desc = "Undo Tree" },
     {
       "<leader>fs",
       function()
@@ -90,6 +91,7 @@ return {
     { "nvim-telescope/telescope-project.nvim" },
     { "nvim-telescope/telescope-dap.nvim" },
     { "nvim-telescope/telescope-live-grep-args.nvim" },
+    { "debugloop/telescope-undo.nvim" },
   },
   config = function()
     local telescope = require("telescope")
@@ -160,12 +162,22 @@ return {
               ["<C-a>"] = require("telescope-live-grep-args.actions").quote_prompt({ postfix = " --no-ignore " }),
             },
           },
-        }
+        },
+        undo = {
+          mappings = {
+            i = {
+              ["y"] = require("telescope-undo.actions").yank_additions,
+              ["d"] = require("telescope-undo.actions").yank_deletions,
+              ["<Enter>"] = require("telescope-undo.actions").restore,
+            },
+          },
+        },
       }
     })
     telescope.load_extension("fzf")
     telescope.load_extension("project")
     telescope.load_extension("dap")
     telescope.load_extension("live_grep_args")
+    telescope.load_extension("undo")
   end,
 }
