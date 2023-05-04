@@ -51,7 +51,8 @@ return {
     { "<leader>ff", "<cmd>Telescope find_files<cr>",                desc = "Find File" },
     { "<leader>fo", "<cmd>Telescope oldfiles<cr>",                  desc = "Open Recent File" },
     { "<leader>fg", "<cmd>Telescope live_grep_args<cr>",            desc = "Grep" },
-    { "<leader>fb", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Buffer" },
+    { "<leader>fb", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Find in Buffer" },
+    { "<leader>ft", "<cmd>Telescope scope buffers<cr>",             desc = "Buffers" },
     { "<leader>fh", "<cmd>Telescope command_history<cr>",           desc = "Command History" },
     { "<leader>fp", "<cmd>Telescope project<cr>",                   desc = "Project" },
     { "<leader>fu", "<cmd>Telescope undo<cr>",                      desc = "Undo Tree" },
@@ -179,5 +180,6 @@ return {
     telescope.load_extension("dap")
     telescope.load_extension("live_grep_args")
     telescope.load_extension("undo")
+    telescope.load_extension("scope")
   end,
 }
