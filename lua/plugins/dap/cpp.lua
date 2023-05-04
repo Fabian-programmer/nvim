@@ -6,7 +6,7 @@ local cpp_launch = {
   type = 'cppdbg',
   request = 'launch',
   program = function()
-    return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+    return vim.fn.input('Path to executable: ', get_root() .. '/', 'file')
   end,
   args = function()
     local args = {}
@@ -16,7 +16,9 @@ local cpp_launch = {
     end
     return args
   end,
-  cwd = '${workspaceFolder}',
+  cwd = function()
+    return get_root()
+  end,
   stopAtEntry = false,
   setupCommands = {
     {
@@ -26,6 +28,42 @@ local cpp_launch = {
     },
   },
 }
+
+local function capture(cmd)
+  local handle = assert(io.popen(cmd, 'r'))
+  local output = assert(handle:read('*a'))
+  handle:close()
+  return output
+end
+
+local cpp_attach = setmetatable(
+  {
+    name = "Attach to process",
+    type = 'cppdbg',
+    request = 'attach',
+    setupCommands = {
+      {
+        text = '-enable-pretty-printing',
+        description = 'enable pretty printing',
+        ignoreFailures = false
+      },
+    },
+  }, {
+    __call = function(config)
+      local result = vim.deepcopy(config)
+
+      local option = require('dap.utils').pick_process()
+      local co = coroutine.running()
+      vim.schedule(function()
+        coroutine.resume(option, co)
+      end)
+      local pid = coroutine.yield()
+      result.processId = pid
+      result.program = capture('readlink -f /proc/' .. tostring(pid) .. '/exe'):sub(1, -2)
+      return result
+    end,
+  })
+
 
 local function extract_exectuable_from_file(file)
   local handle = io.popen("cd " .. get_root() .. " && cmake --build build --target help")
@@ -102,41 +140,6 @@ local cpp_test_tag_launch = {
     },
   },
 }
-
-local function capture(cmd)
-  local handle = assert(io.popen(cmd, 'r'))
-  local output = assert(handle:read('*a'))
-  handle:close()
-  return output
-end
-
-local cpp_attach = setmetatable(
-  {
-    name = "Attach to process",
-    type = 'cppdbg',
-    request = 'attach',
-    setupCommands = {
-      {
-        text = '-enable-pretty-printing',
-        description = 'enable pretty printing',
-        ignoreFailures = false
-      },
-    },
-  }, {
-    __call = function(config)
-      local result = vim.deepcopy(config)
-
-      local option = require('dap.utils').pick_process()
-      local co = coroutine.running()
-      vim.schedule(function()
-        coroutine.resume(option, co)
-      end)
-      local pid = coroutine.yield()
-      result.processId = pid
-      result.program = capture('readlink -f /proc/' .. tostring(pid) .. '/exe'):sub(1, -2)
-      return result
-    end,
-  })
 
 local last_config = {}
 

@@ -8,7 +8,6 @@ vim.api.nvim_create_autocmd("FileType", {
 
 local M = {
   "mfussenegger/nvim-dap",
-  branch = "master",
   dependencies = {
     {
       "rcarriga/nvim-dap-ui",
@@ -35,7 +34,7 @@ local M = {
             },
           },
           controls = {
-            enabled = false,
+            enabled = true,
           },
         })
       end,
@@ -50,14 +49,21 @@ function M.init()
   vim.keymap.set("n", "<F8>", function() require("dap").step_over() end, { desc = "Step Over" })
   vim.keymap.set("n", "<F9>", function() require("dap").step_out() end, { desc = "Step Out" })
   vim.keymap.set("n", "<F10>", function() require("dap").run_to_cursor() end, { desc = "Run to Cursor" })
-  vim.keymap.set("n", "<leader>dt", function() require("dap").terminate() end, { desc = "Terminate Debug" })
-  vim.keymap.set("n", "<leader>dl", function() require("dap").run_last() end, { desc = "Run Last" })
   vim.keymap.set("n", "<leader>db", function() require("dap").toggle_breakpoint() end, { desc = "Toggle Breakpoint" })
   vim.keymap.set("n", "<leader>dB", function() require("dap").set_breakpoint(vim.fn.input('Breakpoint condition: ')) end
   , { desc = "Set Breakpoint" })
-  vim.keymap.set("n", "<leader>dr", function() require("dap").repl.toggle({}, "tabnew") end, { desc = "Repl" })
-  vim.keymap.set("n", "<leader>du", function() require("dapui").toggle({}) end, { desc = "UI" })
+  vim.keymap.set("n", "<leader>de", function() require("dapui").float_element() end,
+    { desc = "Open Element" })
 
+  vim.keymap.set("n", "<leader>dt", function()
+    require("dapui").close()
+    require("dap").repl.close()
+    local session = require("dap").session()
+    if session then
+      require("dap").terminate()
+    end
+    require("nvim-dap-virtual-text").refresh()
+  end, { desc = "Terminate Debug" })
 
   vim.keymap.set("n", "<leader>do", function()
     local session = require("dap").session()
@@ -77,8 +83,6 @@ function M.init()
     local start_col = vim.fn.search('\\<', 'bcn', line .. 'c' .. col) + 1
     local end_col = vim.fn.search('\\>', 'cn', line .. 'c' .. col)
     local grid_input = string.sub(line, start_col, end_col)
-
-    -- local grid_input = vim.fn.input("Enter grid: ")
 
     local session = require("dap").session()
     local command = "print " .. grid_input
@@ -119,26 +123,11 @@ function M.init()
 end
 
 function M.config()
-  local dap = require("dap")
-  local dapui = require("dapui")
-
   require("plugins.dap.cpp")
   require("plugins.dap.python")
 
-  dap.listeners.after.event_initialized["dapui_config"] = function()
-    dapui.open()
-  end
-  dap.listeners.before.event_terminated["dapui_config"] = function()
-    dapui.close()
-    dap.repl.close()
-  end
-  dap.listeners.before.disconnect["dapui_config"] = function()
-    dapui.close()
-    dap.repl.close()
-  end
-  dap.listeners.before.event_exited["dapui_config"] = function()
-    dapui.close()
-    dap.repl.close()
+  require("dap").listeners.after.event_initialized["dapui_config"] = function()
+    require("dapui").open()
   end
 end
 
