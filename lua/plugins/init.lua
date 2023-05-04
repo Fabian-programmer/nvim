@@ -50,6 +50,7 @@ return {
   -- easily jump to any location and enhanced f/t motions for Leap
   {
     "ggandor/leap.nvim",
+    event = "BufReadPre",
     keys = {
       { "s",  mode = { "n", "x", "o" }, desc = "Leap forward to" },
       { "S",  mode = { "n", "x", "o" }, desc = "Leap backward to" },
