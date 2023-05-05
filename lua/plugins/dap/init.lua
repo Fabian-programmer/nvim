@@ -8,6 +8,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 local M = {
   "mfussenegger/nvim-dap",
+  branch = "master",
   dependencies = {
     {
       "rcarriga/nvim-dap-ui",
