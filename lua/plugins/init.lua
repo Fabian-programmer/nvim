@@ -8,9 +8,19 @@ return {
     event = "BufReadPre",
     cmd = { "PossessionLoad", "PossessionList" },
     keys = {
-      { "<leader>ql", "<cmd>PossessionLoad<cr>", desc = "Load Session" },
-      { "<leader>qq", "<cmd>PossessionList<cr>", desc = "List Sessions" },
-      { "<leader>qs", "<cmd>PossessionSave<cr>", desc = "Save Session" },
+      { "<leader>sl", function() require('telescope').extensions.possession.list() end, desc = "List Sessions" },
+      {
+        "<leader>ss",
+        function()
+          local input = vim.fn.input("Enter the session name: ")
+          if input ~= "" then
+            require('possession.session').save(input)
+          else
+            print("No input provided.")
+          end
+        end,
+        desc = "Save Session"
+      },
     },
     config = true,
   },
@@ -39,6 +49,7 @@ return {
         ["<leader>h"] = { name = "+help" },
         ["<leader>g"] = { name = "+git" },
         ["<leader>gh"] = { name = "+hunk" },
+        ["<leader>s"] = { name = "+session" },
         ["<leader>t"] = { name = "+test" },
         ["<leader><tab>"] = { name = "+tab" },
         ["<leader>w"] = { name = "+window" },
