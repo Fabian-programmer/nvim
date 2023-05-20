@@ -2,15 +2,6 @@ return {
   -- Better `vim.notify()`
   {
     "rcarriga/nvim-notify",
-    keys = {
-      {
-        "<leader>un",
-        function()
-          require("notify").dismiss({ silent = true, pending = true })
-        end,
-        desc = "Delete all Notifications",
-      },
-    },
     opts = {
       timeout = 3000,
       max_height = function()
@@ -49,7 +40,7 @@ return {
     event = "VeryLazy",
     dependencies = { "tiagovla/scope.nvim", config = true },
     keys = {
-      { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle pin" },
+      { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>",            desc = "Toggle pin" },
       { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete non-pinned buffers" },
     },
     opts = {
@@ -80,7 +71,6 @@ return {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
     opts = function()
-
       local function clock()
         return " " .. os.date("%H:%M")
       end
@@ -112,8 +102,9 @@ return {
           lualine_b = { "branch" },
           lualine_c = {
             { "diagnostics", sources = { "nvim_diagnostic" } },
-            { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
-            { "filename", path = 1, symbols = { modified = "  ", readonly = "", unnamed = "" } },
+            { "filetype",    icon_only = true,               separator = "",                                               padding = {
+              left = 1, right = 0 } },
+            { "filename",    path = 1,                       symbols = { modified = "  ", readonly = "", unnamed = "" } },
             {
               function() return require("nvim-navic").get_location() end,
               cond = function() return package.loaded["nvim-navic"] and require("nvim-navic").is_available() end,
