@@ -4,7 +4,6 @@ local M = {
   dependencies = {
     "hrsh7th/cmp-nvim-lsp",
   },
-  pin = true,
 }
 
 function M.config()
