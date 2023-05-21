@@ -36,12 +36,14 @@ return {
       window = {
         mappings = {
           ["<space>"] = "none",
-          ["y"] = function(state)
-            local node = state.tree:get_node()
-            local content = node.path
-            vim.fn.setreg("+", content)
-          end,
+          ["y"] = "yank_path",
         },
+      },
+      commands = {
+        yank_path = function(state)
+          -- copy path of current node to unnamed register
+          vim.fn.setreg("+", state.tree:get_node().path)
+        end
       },
     },
   },
