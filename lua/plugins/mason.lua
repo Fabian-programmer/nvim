@@ -13,13 +13,16 @@ local M = {
       }
     },
     ensure_installed = {
-      "clangd",
-      "pyright",
-      "clang-format",
+      "bash-debug-adapter",
       "black",
+      "clang-format",
+      "clangd",
       "cmake-language-server",
-      "prettier",
+      "cpptools",
+      "debugpy",
       "lua-language-server",
+      "prettier",
+      "pyright",
     },
   },
   config = function(_, opts)

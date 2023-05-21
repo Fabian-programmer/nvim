@@ -9,7 +9,6 @@ local M = {
       sources = {
         nls.builtins.formatting.prettierd.with({ filetypes = { "markdown" } }),
         nls.builtins.formatting.black,
-        nls.builtins.formatting.clang_format,
         nls.builtins.formatting.cmake_format,
       },
     }
