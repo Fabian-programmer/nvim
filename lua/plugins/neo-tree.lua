@@ -9,14 +9,7 @@ return {
         function()
           require("neo-tree.command").execute({ toggle = true, dir = get_root() })
         end,
-        desc = "Explorer NeoTree (root dir)",
-      },
-      {
-        "<leader>E",
-        function()
-          require("neo-tree.command").execute({ toggle = true, dir = vim.loop.cwd() })
-        end,
-        desc = "Explorer NeoTree (cwd)",
+        desc = "File Explorer (root dir)",
       },
     },
     deactivate = function()
