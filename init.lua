@@ -1,9 +1,6 @@
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
+require("config.options")
 
 require("config.lazy")
-
-require("config.options")
 
 vim.api.nvim_create_autocmd("User", {
   pattern = "VeryLazy",
@@ -12,4 +9,3 @@ vim.api.nvim_create_autocmd("User", {
     require("config.mappings")
   end,
 })
-

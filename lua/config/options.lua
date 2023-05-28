@@ -1,3 +1,6 @@
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
 -- Buffer
 vim.opt.relativenumber = true
 vim.cmd('set noswapfile')
