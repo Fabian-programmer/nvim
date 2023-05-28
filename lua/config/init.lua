@@ -1,21 +1,13 @@
 local M = {}
 
 local defaults = {
-	-- colorscheme can be a string like `catppuccin` or a function that will load the colorscheme
-	colorscheme = function()
-		require("tokyonight").load()
-	end,
-	-- load the default settings
-	defaults = {
-		autocmds = true, -- config.autocmds
-		keymaps = true, -- config.keymaps
-	},
 	-- icons used by other plugins
 	icons = {
+-- stylua: ignore
 		dap = {
 			Stopped = { "󰁕 ", "DiagnosticWarn", "DapStoppedLine" },
-			Breakpoint = " ",
-			BreakpointCondition = " ",
+			Breakpoint = { " ", "DiagnosticError" },
+			BreakpointCondition = { " ", "DiagnosticError" },
 			BreakpointRejected = { " ", "DiagnosticError" },
 			LogPoint = ".>",
 		},
