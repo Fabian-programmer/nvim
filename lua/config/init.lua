@@ -5,7 +5,7 @@ local defaults = {
 	icons = {
 -- stylua: ignore
 		dap = {
-			Stopped = { "󰁕 ", "DiagnosticWarn", "DapStoppedLine" },
+			Stopped = { " ", "DiagnosticWarn", "DapStoppedLine" },
 			Breakpoint = { " ", "DiagnosticError" },
 			BreakpointCondition = { " ", "DiagnosticError" },
 			BreakpointRejected = { " ", "DiagnosticError" },

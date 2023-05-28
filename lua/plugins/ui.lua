@@ -144,8 +144,9 @@ return {
 		"lukas-reineke/indent-blankline.nvim",
 		event = { "BufReadPost", "BufNewFile" },
 		opts = {
+			-- char = "▏",
 			char = "│",
-			filetype_exclude = { "help", "alpha", "dashboard", "neo-tree", "Trouble", "lazy" },
+			filetype_exclude = { "help", "alpha", "dashboard", "neo-tree", "Trouble", "lazy", "mason" },
 			show_trailing_blankline_indent = false,
 			show_current_context = false,
 		},
@@ -154,20 +155,19 @@ return {
 	-- active indent guide and indent text objects
 	{
 		"echasnovski/mini.indentscope",
+		version = false,
 		event = { "BufReadPre", "BufNewFile" },
 		opts = {
-			draw = { delay = 10 },
 			symbol = "│",
 			options = { try_as_border = true },
 		},
-		config = function(_, opts)
+		init = function()
 			vim.api.nvim_create_autocmd("FileType", {
 				pattern = { "help", "alpha", "dashboard", "neo-tree", "Trouble", "lazy", "mason" },
 				callback = function()
 					vim.b.miniindentscope_disable = true
 				end,
 			})
-			require("mini.indentscope").setup(opts)
 		end,
 	},
 
@@ -181,6 +181,28 @@ return {
 		opts = { delay = 200 },
 		config = function(_, opts)
 			require("illuminate").configure(opts)
+		end,
+	},
+
+	-- lsp symbol navigation for lualine
+	{
+		"SmiteshP/nvim-navic",
+		lazy = true,
+		init = function()
+			vim.g.navic_silence = true
+			require("util").on_attach(function(client, buffer)
+				if client.server_capabilities.documentSymbolProvider then
+					require("nvim-navic").attach(client, buffer)
+				end
+			end)
+		end,
+		opts = function()
+			return {
+				separator = " ",
+				highlight = true,
+				depth_limit = 5,
+				icons = require("config").icons.kinds,
+			}
 		end,
 	},
 }
