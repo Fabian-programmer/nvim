@@ -31,8 +31,9 @@ vim.keymap.set({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "No highligh
 vim.keymap.set({ "i", "n" }, "<C-s>", "<cmd>:w<cr><esc>", { desc = "Save Buffer" })
 
 -- change cwd to current file
-vim.keymap.set("n", "<leader>c", function () vim.cmd(":cd " .. get_root()) end, { desc = "cd to current file (root dir)" })
-vim.keymap.set("n", "<leader>C", function () vim.cmd(":cd " .. get_root()) end, { desc = "cd to current file" })
+vim.keymap.set("n", "<leader>c", function()
+	vim.cmd(":cd " .. require("util").get_root())
+end, { desc = "cd to current file (root dir)" })
 
 -- better indenting
 vim.keymap.set("v", "<", "<gv", { desc = "Intend left" })
@@ -59,6 +60,3 @@ vim.keymap.set("n", "<leader><tab>o", "<cmd>tabnew<cr>", { desc = "New Tab" })
 vim.keymap.set("n", "<leader><tab>n", "<cmd>tabnext<cr>", { desc = "Next Tab" })
 vim.keymap.set("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
 vim.keymap.set("n", "<leader><tab>N", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
-
--- avp
--- vim.keymap.set("n", "<leader>as", "<C-W>s", { desc = "Simulation tab" })
