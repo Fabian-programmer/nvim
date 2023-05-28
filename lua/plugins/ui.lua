@@ -121,16 +121,16 @@ return {
 							path = 1,
 							symbols = { modified = "  ", readonly = "", unnamed = "" },
 						},
-						{
-							function()
-								return require("nvim-navic").get_location()
-							end,
-							cond = function()
-								return package.loaded["nvim-navic"] and require("nvim-navic").is_available()
-							end,
+						{},
+					},
+					lualine_x = {
+						"diff",
+						symbols = {
+							added = icons.git.added,
+							modified = icons.git.modified,
+							removed = icons.git.removed,
 						},
 					},
-					lualine_x = { lsp },
 					lualine_y = { "location" },
 					lualine_z = { clock },
 				},
@@ -181,28 +181,6 @@ return {
 		opts = { delay = 200 },
 		config = function(_, opts)
 			require("illuminate").configure(opts)
-		end,
-	},
-
-	-- lsp symbol navigation for lualine
-	{
-		"SmiteshP/nvim-navic",
-		lazy = true,
-		init = function()
-			vim.g.navic_silence = true
-			require("util").on_attach(function(client, buffer)
-				if client.server_capabilities.documentSymbolProvider then
-					require("nvim-navic").attach(client, buffer)
-				end
-			end)
-		end,
-		opts = function()
-			return {
-				separator = " ",
-				highlight = true,
-				depth_limit = 5,
-				icons = require("config").icons.kinds,
-			}
 		end,
 	},
 }
