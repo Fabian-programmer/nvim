@@ -1,5 +1,3 @@
-local M = {}
-
 local defaults = {
 	-- icons used by other plugins
 	icons = {
@@ -62,10 +60,4 @@ local defaults = {
 	},
 }
 
-setmetatable(M, {
-	__index = function(_, key)
-		return vim.deepcopy(defaults)[key]
-	end,
-})
-
-return M
+return defaults
