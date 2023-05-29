@@ -2,7 +2,6 @@ return {
 	{
 		"nvim-neo-tree/neo-tree.nvim",
 		cmd = "Neotree",
-		dependencies = { "nvim-tree/nvim-web-devicons" },
 		keys = {
 			{
 				"<leader>e",
