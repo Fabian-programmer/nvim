@@ -31,7 +31,17 @@ return {
 				desc = "Save Session",
 			},
 		},
-		config = true,
+		opts = {
+			telescope = {
+				list = {
+					default_action = "load",
+					mappings = {
+						delete = { n = "d", i = "<c-d>" },
+						rename = { n = "r", i = "<c-r>" },
+					},
+				},
+			},
+		},
 	},
 
 	-- which-key
