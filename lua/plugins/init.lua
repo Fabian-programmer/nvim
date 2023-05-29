@@ -1,6 +1,9 @@
 return {
 
-	"nvim-lua/plenary.nvim",
+	{
+		"nvim-lua/plenary.nvim",
+		lazy = true,
+	},
 
 	-- session manager
 	{
@@ -35,16 +38,9 @@ return {
 	{
 		"folke/which-key.nvim",
 		event = "VeryLazy",
-		config = function()
-			local wk = require("which-key")
-			wk.setup({
-				plugins = { spelling = true },
-				key_labels = { ["<leader>"] = "SPC" },
-				icons = {
-					separator = "→", -- symbol used between a key and it's label
-				},
-			})
-			wk.register({
+		opts = {
+			plugins = { spelling = true },
+			defaults = {
 				mode = { "n", "v" },
 				["g"] = { name = "+goto" },
 				["<leader>b"] = { name = "+buffer" },
@@ -59,7 +55,12 @@ return {
 				["<leader><tab>"] = { name = "+tab" },
 				["<leader>w"] = { name = "+window" },
 				["<leader>x"] = { name = "+diagnostics/quickfix" },
-			})
+			},
+		},
+		config = function(_, opts)
+			local wk = require("which-key")
+			wk.setup(opts)
+			wk.register(opts.defaults)
 		end,
 	},
 
