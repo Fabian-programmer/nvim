@@ -89,7 +89,8 @@ end
 function M.get_formatters(bufnr)
   local ft = vim.bo[bufnr].filetype
   -- check if we have any null-ls formatters for the current filetype
-  local null_ls = package.loaded["null-ls"] and require("null-ls.sources").get_available(ft, "NULL_LS_FORMATTING") or {}
+  local null_ls = package.loaded["null-ls"] and require("null-ls.sources").get_available(ft, "NULL_LS_FORMATTING")
+      or {}
 
   local ret = {
     active = {},

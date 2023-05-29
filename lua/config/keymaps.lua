@@ -32,7 +32,7 @@ vim.keymap.set({ "i", "n" }, "<C-s>", "<cmd>:w<cr><esc>", { desc = "Save Buffer"
 
 -- change cwd to current file
 vim.keymap.set("n", "<leader>c", function()
-	vim.cmd(":cd " .. require("util").get_root())
+  vim.cmd(":cd " .. require("util").get_root())
 end, { desc = "cd to current file (root dir)" })
 
 -- better indenting
