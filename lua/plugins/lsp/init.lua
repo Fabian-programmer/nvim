@@ -177,11 +177,8 @@ return {
     cmd = "Mason",
     opts = {
       ensure_installed = {
-        "bash-debug-adapter",
-        "black",
         "clang-format",
         "clangd",
-        "cmake-language-server",
         "cpptools",
         "debugpy",
         "prettier",
