@@ -36,7 +36,7 @@ vim.opt.shortmess:append "sI"
 vim.opt.signcolumn = "yes"
 vim.opt.splitbelow = true
 vim.opt.splitright = true
-vim.opt.termguicolors = true
+-- vim.opt.termguicolors = true
 vim.opt.timeoutlen = 400
 vim.opt.undofile = true
 
