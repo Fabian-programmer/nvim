@@ -1,46 +1,54 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
--- Buffer
-vim.opt.relativenumber = true
-vim.cmd('set noswapfile')
 
--- Indenting
-vim.opt.expandtab = true
-vim.opt.shiftwidth = 2
-vim.opt.smartindent = true
-vim.opt.tabstop = 2
-vim.opt.softtabstop = 2
-vim.opt.conceallevel = 3 -- Hide * markup for bold and italic
+local opt = vim.opt
 
-vim.opt.fillchars = { eob = " " }
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
-vim.opt.mouse = "a"
+opt.clipboard = "unnamedplus"  -- Sync with system clipboard
+opt.completeopt = "menu,menuone,noselect"
+opt.conceallevel = 3           -- Hide * markup for bold and italic
+opt.confirm = true             -- Confirm to save changes before exiting modified buffer
+opt.cursorline = true          -- Enable highlighting of the current line
+opt.expandtab = true           -- Use spaces instead of tabs
+opt.formatoptions = "jcroqlnt" -- tcqj
+opt.grepformat = "%f:%l:%c:%m"
+opt.grepprg = "rg --vimgrep"
+opt.ignorecase = true      -- Ignore case
+opt.inccommand = "nosplit" -- preview incremental substitute
+opt.laststatus = 0
+opt.list = true            -- Show some invisible characters (tabs...
+opt.mouse = "a"            -- Enable mouse mode
+opt.number = true          -- Print line number
+opt.pumblend = 10          -- Popup blend
+opt.pumheight = 10         -- Maximum number of entries in a popup
+opt.relativenumber = true  -- Relative line numbers
+opt.scrolloff = 4          -- Lines of context
+opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize" }
+opt.shiftround = true      -- Round indent
+opt.shiftwidth = 2         -- Size of an indent
+opt.shortmess:append({ W = true, I = true, c = true, C = true })
+opt.showmode = false       -- Dont show mode since we have a statusline
+opt.sidescrolloff = 8      -- Columns of context
+opt.signcolumn = "yes"     -- Always show the signcolumn, otherwise it would shift the text each time
+opt.smartcase = true       -- Don't ignore case with capitals
+opt.smartindent = true     -- Insert indents automatically
+opt.spelllang = { "en" }
+opt.splitbelow = true      -- Put new windows below current
+opt.splitright = true      -- Put new windows right of current
+opt.tabstop = 2            -- Number of spaces tabs count for
+-- opt.termguicolors = true -- True color support
+opt.timeoutlen = 300
+opt.undofile = true
+opt.undolevels = 10000
+opt.updatetime = 200               -- Save swap file and trigger CursorHold
+opt.wildmode = "longest:full,full" -- Command-line completion mode
+opt.winminwidth = 5                -- Minimum window width
+opt.wrap = false                   -- Disable line wrap
 
+opt.splitkeep = "screen"
 
-vim.opt.laststatus = 3 -- global statusline
-vim.opt.showmode = false
+-- Fix markdown indentation settings
+vim.g.markdown_recommended_style = 0
 
-vim.opt.clipboard = "unnamedplus"
-vim.opt.cursorline = true
-
--- Numbers
-vim.opt.number = true
-vim.opt.numberwidth = 2
-vim.opt.ruler = false
-
--- disable nvim intro
-vim.opt.shortmess:append "sI"
-
-vim.opt.signcolumn = "yes"
-vim.opt.splitbelow = true
-vim.opt.splitright = true
--- vim.opt.termguicolors = true
-vim.opt.timeoutlen = 400
-vim.opt.undofile = true
-
--- interval for writing swap file to disk, also used by gitsigns
-vim.opt.updatetime = 200
-
+-- Disable LSP logging
 vim.lsp.set_log_level("off")
