@@ -42,3 +42,5 @@ vim.opt.undofile = true
 
 -- interval for writing swap file to disk, also used by gitsigns
 vim.opt.updatetime = 200
+
+vim.lsp.set_log_level("off")
