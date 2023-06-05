@@ -43,7 +43,6 @@ return {
         clangd = {
           root_pattern = ".git",
         },
-        cmake = {},
         pyright = {},
         lua_ls = {
           settings = {
@@ -165,7 +164,6 @@ return {
         sources = {
           nls.builtins.formatting.prettierd.with({ filetypes = { "markdown" } }),
           nls.builtins.formatting.black,
-          nls.builtins.formatting.cmake_format,
         },
       }
     end,
