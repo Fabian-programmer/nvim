@@ -48,6 +48,7 @@ return {
   "nvim-telescope/telescope.nvim",
   cmd = { "Telescope" },
   keys = {
+    { ";",          "<cmd>Telescope resume<cr>",                    desc = "Resume Telescope" },
     { "<leader>ff", "<cmd>Telescope find_files no_ignore=true<cr>", desc = "Find File" },
     { "<leader>fo", "<cmd>Telescope oldfiles<cr>",                  desc = "Open Recent File" },
     { "<leader>fg", "<cmd>Telescope live_grep_args<cr>",            desc = "Grep" },
@@ -105,9 +106,9 @@ return {
     local borderless = true
     telescope.setup({
       defaults = {
-        layout_strategy = "horizontal",
+        layout_strategy = "bottom_pane",
         layout_config = {
-          prompt_position = "top",
+          height = 25,
         },
         sorting_strategy = "ascending",
         mappings = {
@@ -174,6 +175,13 @@ return {
               }),
             },
           },
+        },
+        project = {
+          on_project_selected = function(prompt_bufnr)
+            local project_actions = require("telescope._extensions.project.actions")
+            -- Do anything you want in here. For example:
+            project_actions.change_working_directory(prompt_bufnr, false)
+          end
         },
         undo = {
           mappings = {

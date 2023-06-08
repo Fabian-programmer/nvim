@@ -25,7 +25,17 @@ vim.keymap.set("n", "<S-Left>", "<cmd>vertical resize -2<CR>", { desc = "Resize 
 vim.keymap.set("n", "<S-Right>", "<cmd>vertical resize +2<CR>", { desc = "Resize + vertical" })
 
 -- Clear search with <esc>
-vim.keymap.set({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "No highlight" })
+vim.keymap.set({ "i", "n" }, "<Esc>", "<cmd>noh<cr><Esc>", { desc = "No highlight" })
+
+-- delete word
+vim.keymap.set("i", "<A-BS>", "<Esc>cvb", { desc = "Delete word" })
+vim.keymap.set("n", "<CR>", "ciw", { desc = "Delete word" })
+
+-- alternating buffer
+vim.keymap.set("n", "<BS>", ":b#<CR>", { silent = true })
+
+-- redo on same key
+vim.keymap.set("n", "U", "<C-r>")
 
 -- save in insert mode
 vim.keymap.set({ "i", "n" }, "<C-s>", "<cmd>:w<cr><esc>", { desc = "Save Buffer" })
