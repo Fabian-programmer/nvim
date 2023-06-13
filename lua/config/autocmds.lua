@@ -57,10 +57,3 @@ vim.api.nvim_create_autocmd("FileType", {
     end, { buffer = event.buf, silent = true })
   end,
 })
-
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "Diffview*" },
-  callback = function(event)
-    vim.keymap.set("n", universal_closer, "<cmd>DiffviewClose<cr>", { buffer = event.buf, silent = true })
-  end,
-})

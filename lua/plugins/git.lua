@@ -67,7 +67,6 @@ return {
     "sindrets/diffview.nvim",
     cmd = { "DiffviewOpen", "DiffviewFileHistory" },
     keys = {
-
       { "<leader>go", "<cmd>DiffviewOpen<cr>",          desc = "DiffView Open" },
       { "<leader>gd", "<cmd>DiffviewFileHistory<cr>",   desc = "DiffView Files" },
       { "<leader>gf", "<cmd>DiffviewFileHistory %<cr>", desc = "DiffView Current File" },
@@ -75,17 +74,12 @@ return {
     opts = {
       keymaps = {
         disable_defaults = false, -- Disable the default keymaps
-        -- view = {
-        --   { "n", "nx", require("diffview.actions").prev_conflict,
-        --     { desc = "In the merge-tool: jump to the previous conflict" } },
-        --   { "n", "Nx", require("diffview.actions").next_conflict,
-        --     { desc = "In the merge-tool: jump to the next conflict" } },
-        -- },
-        -- file_panel = {
-        --   { "n", "s", require("diffview.actions").toggle_stage_entry, { desc = "Stage / unstage the selected entry." } },
-        --   { "n", "x", require("diffview.actions").restore_entry,
-        --     { desc = "Restore entry to the state on the left side." } },
-        -- },
+        view = {
+          { "n", "<A-q>", "<cmd>DiffviewClose<cr>", { desc = "Close View" } },
+        },
+        file_panel = {
+          { "n", "<A-q>", "<cmd>DiffviewClose<cr>", { desc = "Close View" } },
+        },
       },
     },
   },
