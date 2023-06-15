@@ -28,11 +28,8 @@ vim.keymap.set("n", "<S-Right>", "<cmd>vertical resize +2<CR>", { desc = "Resize
 vim.keymap.set({ "i", "n" }, "<Esc>", "<cmd>noh<cr><Esc>", { desc = "No highlight" })
 
 -- delete word
-vim.keymap.set("i", "<A-BS>", "<Esc>cvb", { desc = "Delete word" })
-vim.keymap.set("n", "<CR>", "ciw", { desc = "Delete word" })
-
--- alternating buffer
-vim.keymap.set("n", "<BS>", ":b#<CR>", { silent = true })
+vim.keymap.set("i", "<A-BS>", "<Esc>ciw", { desc = "Delete word" })
+vim.keymap.set("n", "<BS>", "ciw", { desc = "Delete word" })
 
 -- redo on same key
 vim.keymap.set("n", "U", "<C-r>")
