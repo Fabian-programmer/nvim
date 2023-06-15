@@ -39,6 +39,8 @@ return {
         "cmake",
         "cpp",
         "diff",
+        "html",
+        "javascript",
         "json",
         "lua",
         "markdown",

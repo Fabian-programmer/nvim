@@ -43,6 +43,8 @@ return {
         clangd = {
           root_pattern = ".git",
         },
+        tsserver = {},
+        html = {},
         pyright = {},
         lua_ls = {
           settings = {
