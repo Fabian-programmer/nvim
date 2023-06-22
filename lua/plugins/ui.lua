@@ -60,6 +60,18 @@ return {
         },
       },
     },
+    keys = {
+      {
+        "<leader>bn",
+        "<cmd>BufferLineMoveNext<cr>",
+        desc = "Move Buffer To the Right",
+      },
+      {
+        "<leader>bN",
+        "<cmd>BufferLineMovePrev<cr>",
+        desc = "Move Buffer To the Left",
+      },
+    }
   },
 
   -- statusline

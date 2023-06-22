@@ -46,6 +46,7 @@ return {
         tsserver = {},
         html = {},
         pyright = {},
+        volar = {},
         lua_ls = {
           settings = {
             Lua = {
@@ -164,8 +165,7 @@ return {
       return {
         root_dir = require("null-ls.utils").root_pattern(".null-ls-root", ".neoconf.json", "Makefile", ".git"),
         sources = {
-          nls.builtins.formatting.prettierd.with({ filetypes = { "markdown" } }),
-          nls.builtins.formatting.black,
+          nls.builtins.formatting.prettierd,
         },
       }
     end,
@@ -177,12 +177,21 @@ return {
     cmd = "Mason",
     opts = {
       ensure_installed = {
-        "clang-format",
-        "clangd",
+        -- LSP
+        -- "clangd",
+        "typescript-language-server",
+        "html-lsp",
+        "lua-language-server",
+        "pyright",
+        "vue-language-server",
+        -- Debugger
         "cpptools",
         "debugpy",
-        "prettier",
-        "pyright",
+        -- Linter
+        "sonarlint-language-server",
+        -- Formatter
+        "clang-format",
+        "prettierd",
       },
     },
     config = function(_, opts)
@@ -202,5 +211,30 @@ return {
         ensure_installed()
       end
     end,
+  },
+
+  -- sonarlint
+  {
+    url = "https://gitlab.com/schrieveslaach/sonarlint.nvim",
+    ft = { "python", "cpp" },
+    config = function()
+      require("sonarlint").setup({
+        server = {
+          cmd = {
+            'sonarlint-language-server',
+            -- Ensure that sonarlint-language-server uses stdio channel
+            '-stdio',
+            '-analyzers',
+            -- paths to the analyzers you need, using those for python and java in this example
+            vim.fn.expand("$MASON/share/sonarlint-analyzers/sonarpython.jar"),
+            vim.fn.expand("$MASON/share/sonarlint-analyzers/sonarcfamily.jar"),
+          }
+        },
+        filetypes = {
+          "python",
+          "cpp",
+        }
+      })
+    end
   },
 }
