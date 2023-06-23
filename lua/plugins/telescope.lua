@@ -57,6 +57,7 @@ return {
     { "<leader>fh", "<cmd>Telescope command_history<cr>",           desc = "Command History" },
     { "<leader>fp", "<cmd>Telescope project<cr>",                   desc = "Project" },
     { "<leader>fu", "<cmd>Telescope undo<cr>",                      desc = "Undo Tree" },
+    { "<leader>cc", "<cmd>Telescope cmake<cr>",                     desc = "CMake Targets" },
     {
       "<leader>fs",
       function()
@@ -100,6 +101,7 @@ return {
     { "nvim-telescope/telescope-project.nvim" },
     { "nvim-telescope/telescope-live-grep-args.nvim" },
     { "debugloop/telescope-undo.nvim" },
+    { "Fabian-programmer/cmake.nvim" },
   },
   config = function()
     local telescope = require("telescope")
@@ -200,5 +202,6 @@ return {
     telescope.load_extension("undo")
     telescope.load_extension("scope")
     telescope.load_extension("possession")
+    telescope.load_extension("cmake")
   end,
 }

@@ -188,7 +188,7 @@ return {
         "cpptools",
         "debugpy",
         -- Linter
-        "sonarlint-language-server",
+        -- "sonarlint-language-server",
         -- Formatter
         "clang-format",
         "prettierd",
