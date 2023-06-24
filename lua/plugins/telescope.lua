@@ -48,7 +48,6 @@ return {
   "nvim-telescope/telescope.nvim",
   cmd = { "Telescope" },
   keys = {
-    { ";",          "<cmd>Telescope resume<cr>",                    desc = "Resume Telescope" },
     { "<leader>ff", "<cmd>Telescope find_files no_ignore=true<cr>", desc = "Find File" },
     { "<leader>fo", "<cmd>Telescope oldfiles<cr>",                  desc = "Open Recent File" },
     { "<leader>fg", "<cmd>Telescope live_grep_args<cr>",            desc = "Grep" },
