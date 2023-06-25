@@ -74,6 +74,26 @@ return {
     end,
   },
 
+  { -- The framework we use to run tasks
+    "stevearc/overseer.nvim",
+    opts = {
+      -- Tasks are disposed 5 minutes after running to free resources.
+      -- If you need to close a task inmediatelly:
+      -- press ENTER in the menu you see after compiling on the task you want to close.
+      task_list = {
+        direction = "bottom",
+        min_height = 25,
+        max_height = 25,
+        default_detail = 1,
+        bindings = {
+          ["q"] = function() vim.cmd("OverseerClose") end,
+        },
+      },
+    },
+    config = function(_, opts) require("overseer").setup(opts) end,
+  },
+
+
   -- easily jump to any location and enhanced f/t motions for Leap
   {
     "folke/flash.nvim",
