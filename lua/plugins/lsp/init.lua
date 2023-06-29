@@ -43,10 +43,11 @@ return {
         clangd = {
           root_pattern = ".git",
         },
-        tsserver = {},
         html = {},
         pyright = {},
-        volar = {},
+        volar = {
+          filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json' },
+        },
         lua_ls = {
           settings = {
             Lua = {
@@ -179,7 +180,6 @@ return {
       ensure_installed = {
         -- LSP
         -- "clangd",
-        "typescript-language-server",
         "html-lsp",
         "lua-language-server",
         "pyright",
