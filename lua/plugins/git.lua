@@ -85,7 +85,7 @@ return {
   },
 
   {
-    "TimUntersberger/neogit",
+    "NeogitOrg/neogit",
     cmd = "Neogit",
     init = function()
       local function commit_range()
