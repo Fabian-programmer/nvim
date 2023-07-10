@@ -15,7 +15,7 @@ function M.on_attach(on_attach)
 end
 
 function M.has(plugin)
-  return require("lazy.core.config").plugins[plugin] ~= nil
+  return require("lazy.core.config").spec.plugins[plugin] ~= nil
 end
 
 function M.on_very_lazy(fn)
