@@ -104,7 +104,6 @@ return {
         "s",
         mode = { "n", "x", "o" },
         function()
-          -- default options: exact mode, multi window, all directions, with a backdrop
           require("flash").jump()
         end,
         desc = "Flash",
@@ -124,6 +123,14 @@ return {
           require("flash").remote()
         end,
         desc = "Remote Flash",
+      },
+      {
+        "R",
+        mode = { "o", "x" },
+        function()
+          require("flash").treesitter_search()
+        end,
+        desc = "Flash Treesitter Search",
       },
     },
   },

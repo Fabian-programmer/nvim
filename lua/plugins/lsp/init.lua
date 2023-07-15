@@ -44,9 +44,9 @@ return {
           root_pattern = ".git",
         },
         html = {},
-        pyright = {},
+        svelte = {},
         volar = {
-          filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json' },
+          filetypes = { 'typescript', 'javascript', 'vue'},
         },
         lua_ls = {
           settings = {
@@ -179,11 +179,11 @@ return {
     opts = {
       ensure_installed = {
         -- LSP
-        -- "clangd",
+        "clangd",
         "html-lsp",
         "lua-language-server",
-        "pyright",
         "vue-language-server",
+        "svelte-language-server",
         -- Debugger
         "cpptools",
         "debugpy",
