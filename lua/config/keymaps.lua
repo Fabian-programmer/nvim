@@ -32,8 +32,8 @@ vim.keymap.set("i", "<A-BS>", "<Esc>ciw", { desc = "Delete word" })
 vim.keymap.set("n", "<BS>", "ciw", { desc = "Delete word" })
 
 -- center in middle
-vim.api.nvim_set_keymap('n', '<C-b>', '<C-b>zz', { noremap = true })
-vim.api.nvim_set_keymap('n', '<C-f>', '<C-f>zz', { noremap = true })
+vim.keymap.set("n", '<C-b>', '<C-b>zz', { noremap = true })
+vim.keymap.set("n", '<C-f>', '<C-f>zz', { noremap = true })
 
 -- redo on same key
 vim.keymap.set("n", "U", "<C-r>")
