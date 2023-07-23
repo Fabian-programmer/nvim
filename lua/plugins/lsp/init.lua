@@ -26,6 +26,9 @@ return {
         },
         severity_sort = true,
       },
+      inlay_hints = {
+        enabled = false,
+      },
       -- add any global capabilities here
       capabilities = {},
       -- Automatically format on save
@@ -40,13 +43,10 @@ return {
       },
       -- LSP Server Settings
       servers = {
-        clangd = {
-          root_pattern = ".git",
-        },
         html = {},
         svelte = {},
         volar = {
-          filetypes = { 'typescript', 'javascript', 'vue'},
+          filetypes = { 'typescript', 'javascript', 'vue' },
         },
         lua_ls = {
           settings = {
@@ -84,10 +84,29 @@ return {
         require("plugins.lsp.keymaps").on_attach(client, buffer)
       end)
 
+      local register_capability = vim.lsp.handlers["client/registerCapability"]
+
+      vim.lsp.handlers["client/registerCapability"] = function(err, res, ctx)
+        local ret = register_capability(err, res, ctx)
+        local client_id = ctx.client_id
+        local client = vim.lsp.get_client_by_id(client_id)
+        local buffer = vim.api.nvim_get_current_buf()
+        require("plugins.lsp.keymaps").on_attach(client, buffer)
+        return ret
+      end
+
       -- diagnostics
       for name, icon in pairs(require("config").icons.diagnostics) do
         name = "DiagnosticSign" .. name
         vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
+      end
+
+      if opts.inlay_hints.enabled and inlay_hint then
+        Util.on_attach(function(client, buffer)
+          if client.server_capabilities.inlayHintProvider then
+            inlay_hint(buffer, true)
+          end
+        end)
       end
 
       if type(opts.diagnostics.virtual_text) == "table" and opts.diagnostics.virtual_text.prefix == "icons" then
@@ -105,11 +124,12 @@ return {
       vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
 
       local servers = opts.servers
+      local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
       local capabilities = vim.tbl_deep_extend(
         "force",
         {},
         vim.lsp.protocol.make_client_capabilities(),
-        require("cmp_nvim_lsp").default_capabilities(),
+        has_cmp and cmp_nvim_lsp.default_capabilities() or {},
         opts.capabilities or {}
       )
 
@@ -179,17 +199,14 @@ return {
     opts = {
       ensure_installed = {
         -- LSP
-        "clangd",
         "html-lsp",
         "lua-language-server",
         "vue-language-server",
         "svelte-language-server",
         -- Debugger
-        "cpptools",
         "debugpy",
         -- Linter
         -- Formatter
-        "clang-format",
         "prettierd",
       },
     },

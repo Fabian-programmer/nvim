@@ -131,9 +131,6 @@ function M.init()
 end
 
 function M.config()
-  require("plugins.dap.cpp")
-  require("plugins.dap.python")
-
   require("dap").listeners.after.event_initialized["dapui_config"] = function()
     require("dapui").open()
   end
