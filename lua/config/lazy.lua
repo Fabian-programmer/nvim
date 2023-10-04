@@ -13,6 +13,7 @@ require("lazy").setup({
     { import = "plugins.lang.cmake" },
     { import = "plugins.lang.cpp" },
     { import = "plugins.lang.python" },
+    { import = "plugins.lang.rust" },
   },
   defaults = {
     lazy = true,

@@ -201,7 +201,6 @@ return {
         -- LSP
         "html-lsp",
         "lua-language-server",
-        "vue-language-server",
         "svelte-language-server",
         -- Debugger
         "debugpy",
