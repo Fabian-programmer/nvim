@@ -7,9 +7,9 @@ return {
       end
     end,
   },
-
   {
-    "jose-elias-alvarez/null-ls.nvim",
+    "nvimtools/none-ls.nvim",
+    optional = true,
     opts = function(_, opts)
       local nls = require("null-ls")
       opts.sources = opts.sources or {}
@@ -17,15 +17,23 @@ return {
         nls.builtins.diagnostics.cmake_lint,
       })
     end,
-    dependencies = {
-      "mason.nvim",
-      opts = function(_, opts)
-        opts.ensure_installed = opts.ensure_installed or {}
-        vim.list_extend(opts.ensure_installed, { "cmakelint" })
-      end,
+  },
+  {
+    "mfussenegger/nvim-lint",
+    optional = true,
+    opts = {
+      linters_by_ft = {
+        cmake = { "cmakelint" },
+      },
     },
   },
-
+  {
+    "mason.nvim",
+    opts = function(_, opts)
+      opts.ensure_installed = opts.ensure_installed or {}
+      vim.list_extend(opts.ensure_installed, { "cmakelang" })
+    end,
+  },
   {
     "neovim/nvim-lspconfig",
     opts = {
@@ -33,5 +41,10 @@ return {
         neocmake = {},
       },
     },
+  },
+  {
+    "Civitasv/cmake-tools.nvim",
+    opts = {},
+    event = {"BufReadPre", "BufNewFile"},
   },
 }

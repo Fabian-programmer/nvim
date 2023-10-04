@@ -3,9 +3,6 @@ local M = {}
 M._keys = nil
 
 function M.get()
-  local format = function()
-    require("plugins.lsp.format").format({ force = true })
-  end
   if not M._keys then
     M._keys = {
       { "<leader>cd", vim.diagnostic.open_float,                 desc = "Line Diagnostics" },
@@ -23,21 +20,6 @@ function M.get()
         desc = "Signature Help",
         has =
         "signatureHelp"
-      },
-      {
-        "<leader>cf",
-        format,
-        desc = "Format Document",
-        has =
-        "documentFormatting"
-      },
-      {
-        "<leader>cf",
-        format,
-        desc = "Format Range",
-        mode = "v",
-        has =
-        "documentRangeFormatting"
       },
       {
         "<leader>ca",

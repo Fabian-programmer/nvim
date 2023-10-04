@@ -72,4 +72,9 @@ vim.keymap.set("n", "<leader><Tab><Tab>", "<cmd>tabnext<cr>", { desc = "Next Tab
 vim.keymap.set("n", "<leader><Tab>q", "<cmd>tabclose<cr>", { desc = "Close Tab" })
 vim.keymap.set("n", "<leader><Tab><S-Tab>", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 
+
+-- formatting
 vim.keymap.set("n", "<leader>ct", require("plugins.lsp.format").toggle, { desc = "Toggle format on Save" })
+vim.keymap.set({ "n", "v" }, "<leader>cf", function()
+  require("plugins.lsp.format").format({ force = true })
+end, { desc = "Format" })

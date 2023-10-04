@@ -1,7 +1,7 @@
 return {
   {
     "neovim/nvim-lspconfig",
-    event = { "BufReadPre", "BufNewFile" },
+    event = {"BufReadPre", "BufNewFile"},
     dependencies = {
       "mason.nvim",
       "williamboman/mason-lspconfig.nvim",
@@ -20,9 +20,6 @@ return {
           spacing = 4,
           source = "if_many",
           prefix = "●",
-          -- this will set set the prefix to a function that returns the diagnostics icon based on the severity
-          -- this only works on a recent 0.10.0 build. Will be set to "●" when not supported
-          -- prefix = "icons",
         },
         severity_sort = true,
       },
@@ -33,9 +30,6 @@ return {
       capabilities = {},
       -- Automatically format on save
       autoformat = true,
-      -- Enable this to show formatters used in a notification
-      -- Useful for debugging formatter issues
-      format_notify = false,
       -- options for vim.lsp.buf.format
       format = {
         formatting_options = nil,
@@ -45,9 +39,6 @@ return {
       servers = {
         html = {},
         svelte = {},
-        volar = {
-          filetypes = { 'typescript', 'javascript', 'vue' },
-        },
         lua_ls = {
           settings = {
             Lua = {
@@ -71,8 +62,6 @@ return {
           },
         },
       },
-      -- you can do any additional lsp server setup here
-      -- return true if you don't want this server to be setup with lspconfig
       setup = {},
     },
     config = function(_, opts)
@@ -175,16 +164,15 @@ return {
       end
     end,
   },
-
   -- formatters
   {
-    "jose-elias-alvarez/null-ls.nvim",
-    event = { "BufReadPre", "BufNewFile" },
+    "nvimtools/none-ls.nvim",
+    event = {"BufReadPre", "BufNewFile"},
     dependencies = { "mason.nvim" },
     opts = function()
       local nls = require("null-ls")
       return {
-        root_dir = require("null-ls.utils").root_pattern(".null-ls-root", ".neoconf.json", "Makefile", ".git"),
+        root_dir = require("null-ls.utils").root_pattern(".git"),
         sources = {
           nls.builtins.formatting.prettierd,
         },
