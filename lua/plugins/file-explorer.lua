@@ -1,6 +1,7 @@
 return {
   {
     "nvim-neo-tree/neo-tree.nvim",
+    branch = "v3.x",
     cmd = "Neotree",
     keys = {
       {
@@ -10,12 +11,22 @@ return {
         end,
         desc = "File Explorer (root dir)",
       },
+      {
+        "<leader>E",
+        function()
+          require("neo-tree.command").execute({ toggle = true, dir = vim.loop.cwd() })
+        end,
+        desc = "File Explorer (cwd)",
+      },
     },
     opts = {
       open_files_do_not_replace_types = { "trouble", "qf" },
       filesystem = {
         bind_to_cwd = true,
-        follow_current_file = true,
+        follow_current_file = {
+          enabled = true,
+          leave_dirs_open = true,
+        },
         filtered_items = {
           hide_gitignored = false,
         },
