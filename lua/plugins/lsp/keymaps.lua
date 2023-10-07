@@ -5,14 +5,20 @@ M._keys = nil
 function M.get()
   if not M._keys then
     M._keys = {
-      { "<leader>cd", vim.diagnostic.open_float,                 desc = "Line Diagnostics" },
-      { "gd",         "<cmd>Telescope lsp_definitions<cr>",      desc = "Goto Definition",       has = "definition" },
-      { "gr",         "<cmd>Telescope lsp_references<cr>",       desc = "References" },
-      { "gD",         vim.lsp.buf.declaration,                   desc = "Goto Declaration" },
-      { "gI",         "<cmd>Telescope lsp_implementations<cr>",  desc = "Goto Implementation" },
-      { "gy",         "<cmd>Telescope lsp_type_definitions<cr>", desc = "Goto T[y]pe Definition" },
-      { "K",          vim.lsp.buf.hover,                         desc = "Hover" },
-      { "gK",         vim.lsp.buf.signature_help,                desc = "Signature Help",        has = "signatureHelp" },
+      { "<leader>cd", vim.diagnostic.open_float, desc = "Line Diagnostics" },
+      { "gd", "<cmd>Telescope lsp_definitions<cr>", desc = "Goto Definition", has = "definition" },
+      { "gr", "<cmd>Telescope lsp_references<cr>", desc = "References" },
+      { "gD", vim.lsp.buf.declaration, desc = "Goto Declaration" },
+      { "gI", "<cmd>Telescope lsp_implementations<cr>", desc = "Goto Implementation" },
+      { "gy", "<cmd>Telescope lsp_type_definitions<cr>", desc = "Goto T[y]pe Definition" },
+      { "K", vim.lsp.buf.hover, desc = "Hover" },
+      { "gK", vim.lsp.buf.signature_help, desc = "Signature Help", has = "signatureHelp" },
+      { "üd", M.diagnostic_goto(true), desc = "Next Diagnostic" },
+      { "+d", M.diagnostic_goto(false), desc = "Prev Diagnostic" },
+      { "üe", M.diagnostic_goto(true, "ERROR"), desc = "Next Error" },
+      { "+e", M.diagnostic_goto(false, "ERROR"), desc = "Prev Error" },
+      { "üw", M.diagnostic_goto(true, "WARN"), desc = "Next Warning" },
+      { "+w", M.diagnostic_goto(false, "WARN"), desc = "Prev Warning" },
       {
         "<c-k>",
         vim.lsp.buf.signature_help,
