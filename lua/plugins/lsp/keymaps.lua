@@ -38,14 +38,6 @@ function M.get()
       has =
       "codeAction"
     },
-    {
-      "<F4>",
-      "<cmd>ClangdSwitchSourceHeader<CR>",
-      desc = "Toggle Header",
-      mode = { "n", "v" },
-      has =
-      "codeAction"
-    },
   }
   M._keys[#M._keys + 1] = { "<leader>cr", vim.lsp.buf.rename, desc = "Rename", has = "rename" }
   return M._keys
