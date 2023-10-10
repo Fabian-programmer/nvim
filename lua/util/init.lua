@@ -3,6 +3,10 @@ local Util = require("lazy.core.util")
 local M = {}
 
 M.root_patterns = { ".git" }
+function M.get_clients(...)
+  local fn = vim.lsp.get_clients or vim.lsp.get_active_clients
+  return fn(...)
+end
 
 function M.on_attach(on_attach)
   vim.api.nvim_create_autocmd("LspAttach", {
