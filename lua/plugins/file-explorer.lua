@@ -20,7 +20,23 @@ return {
       },
     },
     opts = {
-      open_files_do_not_replace_types = { "trouble", "qf" },
+      open_files_do_not_replace_types = { "trouble", "qf", "terminal" },
+      -- If you don't want to use these columns, you can set `enabled = false` for each of them individually
+      file_size = {
+        enabled = false,
+      },
+      type = {
+        enabled = false,
+      },
+      last_modified = {
+        enabled = false,
+      },
+      created = {
+        enabled = false,
+      },
+      symlink_target = {
+        enabled = true,
+      },
       filesystem = {
         bind_to_cwd = true,
         follow_current_file = {
