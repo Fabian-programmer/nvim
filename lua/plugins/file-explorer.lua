@@ -20,7 +20,7 @@ return {
       },
     },
     opts = {
-      open_files_do_not_replace_types = { "trouble", "qf", "terminal" },
+      open_files_do_not_replace_types = { "trouble", "qf" },
       -- If you don't want to use these columns, you can set `enabled = false` for each of them individually
       file_size = {
         enabled = false,
