@@ -31,7 +31,7 @@ return {
     "mason.nvim",
     opts = function(_, opts)
       opts.ensure_installed = opts.ensure_installed or {}
-      vim.list_extend(opts.ensure_installed, { "cmakelang" })
+      vim.list_extend(opts.ensure_installed, { "cmakelang", "cmakelint" })
     end,
   },
   {
@@ -45,6 +45,6 @@ return {
   {
     "Civitasv/cmake-tools.nvim",
     opts = {},
-    event = {"BufReadPre", "BufNewFile"},
+    event = { "BufReadPre", "BufNewFile" },
   },
 }
