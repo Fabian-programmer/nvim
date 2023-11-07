@@ -124,6 +124,12 @@ return {
         hunk = { "", "" },
       },
       integrations = { diffview = true },
+      commit_editor = {
+        kind = "split",
+      },
+      rebase_editor = {
+        kind = "split",
+      },
     },
     keys = {
       {
