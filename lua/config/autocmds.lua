@@ -1,5 +1,3 @@
-vim.api.nvim_command("autocmd TermOpen,TermEnter term://* startinsert")
-
 -- Highlight on yank
 vim.api.nvim_create_autocmd("TextYankPost", {
   callback = function()
@@ -10,7 +8,9 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 -- resize splits if window got resized
 vim.api.nvim_create_autocmd({ "VimResized" }, {
   callback = function()
+    local current_tab = vim.fn.tabpagenr()
     vim.cmd("tabdo wincmd =")
+    vim.cmd("tabnext " .. current_tab)
   end,
 })
 
@@ -42,11 +42,16 @@ vim.api.nvim_create_autocmd("TermOpen", {
   end,
 })
 
+vim.api.nvim_create_autocmd({ "TermOpen", "TermEnter" }, {
+  callback = function()
+    vim.cmd("startinsert")
+  end,
+})
+
 -- hide buffer
 vim.api.nvim_create_autocmd("FileType", {
   pattern = {
     "asm",
-    "fugitive*",
     "help",
     "man",
     "notify",
