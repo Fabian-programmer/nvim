@@ -21,12 +21,10 @@ return {
     "stevearc/dressing.nvim",
     lazy = true,
     init = function()
-      ---@diagnostic disable-next-line: duplicate-set-field
       vim.ui.select = function(...)
         require("lazy").load({ plugins = { "dressing.nvim" } })
         return vim.ui.select(...)
       end
-      ---@diagnostic disable-next-line: duplicate-set-field
       vim.ui.input = function(...)
         require("lazy").load({ plugins = { "dressing.nvim" } })
         return vim.ui.input(...)
@@ -60,18 +58,6 @@ return {
         },
       },
     },
-    keys = {
-      {
-        "<leader>bn",
-        "<cmd>BufferLineMoveNext<cr>",
-        desc = "Move Buffer To the Right",
-      },
-      {
-        "<leader>bN",
-        "<cmd>BufferLineMovePrev<cr>",
-        desc = "Move Buffer To the Left",
-      },
-    }
   },
 
   -- statusline
@@ -138,7 +124,7 @@ return {
     end,
   },
 
-  -- indent guides for Neovim
+  -- indent guides
   {
     "lukas-reineke/indent-blankline.nvim",
     event = { "BufReadPost", "BufNewFile" },
@@ -151,15 +137,12 @@ return {
       exclude = {
         filetypes = {
           "help",
-          "alpha",
           "dashboard",
           "neo-tree",
           "Trouble",
           "lazy",
           "mason",
           "notify",
-          "toggleterm",
-          "lazyterm",
         },
       },
     },
@@ -186,7 +169,7 @@ return {
   },
 
   -- ui components
-  { "MunifTanjim/nui.nvim",        lazy = true },
+  { "MunifTanjim/nui.nvim", lazy = true },
 
   -- icons
   { "nvim-tree/nvim-web-devicons", lazy = true },
@@ -195,9 +178,37 @@ return {
   {
     "RRethy/vim-illuminate",
     event = { "BufReadPost", "BufNewFile" },
-    opts = { delay = 200 },
+    opts = {
+      delay = 200,
+      large_file_cutoff = 2000,
+      large_file_overrides = {
+        providers = { "lsp" },
+      },
+    },
     config = function(_, opts)
       require("illuminate").configure(opts)
+
+      local function map(key, dir, buffer)
+        vim.keymap.set("n", key, function()
+          require("illuminate")["goto_" .. dir .. "_reference"](false)
+        end, { desc = dir:sub(1, 1):upper() .. dir:sub(2) .. " Reference", buffer = buffer })
+      end
+
+      map("üü", "next")
+      map("++", "prev")
+
+      -- also set it after loading ftplugins, since a lot overwrite [[ and ]]
+      vim.api.nvim_create_autocmd("FileType", {
+        callback = function()
+          local buffer = vim.api.nvim_get_current_buf()
+          map("üü", "next", buffer)
+          map("++", "prev", buffer)
+        end,
+      })
     end,
+    keys = {
+      { "üü", desc = "Next Reference" },
+      { "++", desc = "Prev Reference" },
+    },
   },
 }
