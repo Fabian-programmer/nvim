@@ -1,7 +1,7 @@
 return {
   {
     "neovim/nvim-lspconfig",
-    event = {"BufReadPre", "BufNewFile"},
+    event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       "mason.nvim",
       "williamboman/mason-lspconfig.nvim",
@@ -50,13 +50,6 @@ return {
               },
               diagnostics = {
                 globals = { "vim" },
-              },
-              format = {
-                enable = true,
-                defaultConfig = {
-                  indent_style = "space",
-                  indent_size = "2",
-                },
               },
             },
           },
@@ -167,7 +160,7 @@ return {
   -- formatters
   {
     "nvimtools/none-ls.nvim",
-    event = {"BufReadPre", "BufNewFile"},
+    event = { "BufReadPre", "BufNewFile" },
     dependencies = { "mason.nvim" },
     opts = function()
       local nls = require("null-ls")
@@ -175,6 +168,7 @@ return {
         root_dir = require("null-ls.utils").root_pattern(".git"),
         sources = {
           nls.builtins.formatting.prettierd,
+          nls.builtins.formatting.stylua,
         },
       }
     end,
