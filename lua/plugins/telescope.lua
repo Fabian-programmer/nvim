@@ -2,6 +2,7 @@ return {
   "nvim-telescope/telescope.nvim",
   cmd = { "Telescope" },
   keys = {
+    { "<leader>:", "<cmd>Telescope command_history<cr>", desc = "Command History" },
     { "<leader>ff", "<cmd>Telescope find_files <cr>", desc = "Find File" },
     { "<leader>fo", "<cmd>Telescope oldfiles<cr>", desc = "Open Recent File" },
     { "<leader>fg", "<cmd>Telescope live_grep_args<cr>", desc = "Grep" },
