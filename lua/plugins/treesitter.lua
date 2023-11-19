@@ -8,7 +8,6 @@ return {
       {
         "nvim-treesitter/nvim-treesitter-textobjects",
         init = function()
-          -- PERF: no need to load the plugin, if we only need its queries for mini.ai
           local plugin = require("lazy.core.config").spec.plugins["nvim-treesitter"]
           local opts = require("lazy.core.plugin").values(plugin, "opts", false)
           local enabled = false
@@ -28,7 +27,7 @@ return {
     },
     keys = {
       { "<c-space>", desc = "Increment selection" },
-      { "<bs>",      desc = "Decrement selection", mode = "x" },
+      { "<bs>", desc = "Decrement selection", mode = "x" },
     },
     opts = {
       highlight = { enable = true },
@@ -60,7 +59,6 @@ return {
     },
     config = function(_, opts)
       if type(opts.ensure_installed) == "table" then
-        ---@type table<string, boolean>
         local added = {}
         opts.ensure_installed = vim.tbl_filter(function(lang)
           if added[lang] then

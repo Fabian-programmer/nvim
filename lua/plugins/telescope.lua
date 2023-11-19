@@ -1,15 +1,3 @@
-local function open_entry_in_diffview(cmd)
-  -- Open in diffview
-  local selected_entry = require("telescope.actions.state").get_selected_entry()
-  local value = selected_entry.value
-  -- close Telescope window properly prior to switching windows
-  vim.api.nvim_win_close(0, true)
-  vim.cmd("stopinsert")
-  vim.schedule(function()
-    vim.cmd(("DiffviewOpen %s" .. cmd):format(value))
-  end)
-end
-
 return {
   "nvim-telescope/telescope.nvim",
   cmd = { "Telescope" },
@@ -52,25 +40,29 @@ return {
     { "<leader>hs", "<cmd>Telescope highlights<cr>", desc = "Search Highlight Groups" },
     { "<leader>gc", "<cmd>Telescope git_commits<cr>", desc = "Commits" },
     { "<leader>gb", "<cmd>Telescope git_branches<cr>", desc = "Branches" },
-    {
-      "gw",
-      function()
-        require("telescope-live-grep-args.shortcuts").grep_word_under_cursor()
-      end,
-      desc = "Find Word",
-    },
+    -- stylua: ignore
+    { "gw", function() require("telescope-live-grep-args.shortcuts").grep_word_under_cursor() end, desc = "Find Word" },
   },
   dependencies = {
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     { "nvim-telescope/telescope-project.nvim" },
     { "nvim-telescope/telescope-live-grep-args.nvim" },
     { "debugloop/telescope-undo.nvim" },
-    {
-      "Fabian-programmer/cmake.nvim",
-      dependenciens = { "stevearc/overseer.nvim" },
-    },
+    { "Fabian-programmer/cmake.nvim", dependenciens = { "stevearc/overseer.nvim" } },
   },
   config = function()
+    local function open_entry_in_diffview(cmd)
+      -- Open in diffview
+      local selected_entry = require("telescope.actions.state").get_selected_entry()
+      local value = selected_entry.value
+      -- close Telescope window properly prior to switching windows
+      vim.api.nvim_win_close(0, true)
+      vim.cmd("stopinsert")
+      vim.schedule(function()
+        vim.cmd(("DiffviewOpen %s" .. cmd):format(value))
+      end)
+    end
+
     local telescope = require("telescope")
     local borderless = true
     telescope.setup({
