@@ -72,13 +72,17 @@ return {
       { "<leader>gf", "<cmd>DiffviewFileHistory %<cr>", desc = "DiffView Current File" },
     },
     opts = {
+      enhanced_diff_hl = true,
       keymaps = {
         disable_defaults = false, -- Disable the default keymaps
         view = {
-          { "n", "<A-q>", "<cmd>DiffviewClose<cr>", { desc = "Close View" } },
+          { "n", "q", "<cmd>DiffviewClose<cr>", { desc = "Close View" } },
         },
         file_panel = {
-          { "n", "<A-q>", "<cmd>DiffviewClose<cr>", { desc = "Close View" } },
+          { "n", "q", "<cmd>DiffviewClose<cr>", { desc = "Close View" } },
+        },
+        file_history_panel = {
+          { "n", "q", "<cmd>DiffviewClose<cr>", { desc = "Close View" } },
         },
       },
     },
