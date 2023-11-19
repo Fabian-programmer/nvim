@@ -8,7 +8,7 @@ function M.get()
   end
 
   M._keys = {
-    { "<leader>cd", vim.diagnostic.open_float, desc = "Line Diagnostics" },
+    { "cd", vim.diagnostic.open_float, desc = "Line Diagnostics" },
     { "gd", "<cmd>Telescope lsp_definitions<cr>", desc = "Goto Definition", has = "definition" },
     { "gr", "<cmd>Telescope lsp_references<cr>", desc = "References" },
     { "gD", vim.lsp.buf.declaration, desc = "Goto Declaration" },
@@ -27,16 +27,14 @@ function M.get()
       vim.lsp.buf.signature_help,
       mode = "i",
       desc = "Signature Help",
-      has =
-      "signatureHelp"
+      has = "signatureHelp",
     },
     {
       "<leader>ca",
       vim.lsp.buf.code_action,
       desc = "Code Action",
       mode = { "n", "v" },
-      has =
-      "codeAction"
+      has = "codeAction",
     },
   }
   M._keys[#M._keys + 1] = { "<leader>cr", vim.lsp.buf.rename, desc = "Rename", has = "rename" }

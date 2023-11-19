@@ -100,40 +100,12 @@ return {
   {
     "folke/flash.nvim",
     event = { "BufReadPost", "BufNewFile" },
-    opts = {},
+    -- stylua: ignore
     keys = {
-      {
-        "s",
-        mode = { "n", "x", "o" },
-        function()
-          require("flash").jump()
-        end,
-        desc = "Flash",
-      },
-      {
-        "S",
-        mode = { "n", "o", "x" },
-        function()
-          require("flash").treesitter()
-        end,
-        desc = "Flash Treesitter",
-      },
-      {
-        "r",
-        mode = "o",
-        function()
-          require("flash").remote()
-        end,
-        desc = "Remote Flash",
-      },
-      {
-        "R",
-        mode = { "o", "x" },
-        function()
-          require("flash").treesitter_search()
-        end,
-        desc = "Flash Treesitter Search",
-      },
+      { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+      { "S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+      { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
+      { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
     },
   },
 
@@ -141,21 +113,10 @@ return {
   {
     "echasnovski/mini.bufremove",
     event = "BufReadPre",
+    -- stylua: ignore
     keys = {
-      {
-        "<A-q>",
-        function()
-          require("mini.bufremove").delete(0, false)
-        end,
-        desc = "Delete Buffer",
-      },
-      {
-        "<A-Q>",
-        function()
-          require("mini.bufremove").delete(0, true)
-        end,
-        desc = "Delete Buffer (Force)",
-      },
+      { "<A-q>", function() require("mini.bufremove").delete(0, false) end, desc = "Delete Buffer" },
+      { "<A-Q>", function() require("mini.bufremove").delete(0, true) end, desc = "Delete Buffer (Force)" },
     },
   },
 
@@ -179,31 +140,13 @@ return {
 
   -- search/replace in multiple files
   {
-    "windwp/nvim-spectre",
+    "nvim-pack/nvim-spectre",
+    opts = { open_cmd = "noswapfile vnew" },
+    -- stylua: ignore
     keys = {
-      {
-        "<leader>rr",
-        function()
-          require("spectre").open()
-        end,
-        desc = "Replace all in cwd",
-      },
-      {
-        "<leader>rf",
-        function()
-          require("spectre").open_file_search()
-        end,
-        desc = "Replace in file",
-      },
-      {
-        "<leader>rw",
-        function()
-          require("spectre").open_visual({ select_word = true })
-        end,
-        desc = "Replace word under cursor",
-      },
-
-      { "<leader>fr", "<esc>:lua require('spectre').open_visual()<CR>", desc = "Replace word", mode = "v" },
+      { "<leader>rr", function() require("spectre").open() end, desc = "Replace all in cwd" },
+      { "<leader>rw", function() require("spectre").open_visual({ select_word = true }) end, desc = "Replace word under cursor" },
+      { "<leader>rf", function() require("spectre").open_file_search() end, desc = "Replace in file" },
     },
   },
 

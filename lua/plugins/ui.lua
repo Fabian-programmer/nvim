@@ -22,6 +22,7 @@ return {
     lazy = true,
     init = function()
       vim.ui.select = function(...)
+        ---@diagnostic disable-next-line: duplicate-set-field
         require("lazy").load({ plugins = { "dressing.nvim" } })
         return vim.ui.select(...)
       end
