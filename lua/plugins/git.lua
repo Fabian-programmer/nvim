@@ -7,8 +7,8 @@ return {
 		},
     -- stylua: ignore
 		keys = {
-			{ "gp", function() require("gitsigns").preview_hunk() end, desc = "Preview" },
-			{ "gr", function() require("gitsigns").reset_hunk() end, desc = "Reset" },
+			{ "gp", function() require("gitsigns").preview_hunk() end, desc = "Git hunk preview" },
+			{ "gq", function() require("gitsigns").reset_hunk() end, desc = "Git hunk clear" },
 			{ "gü",
         function()
           if vim.wo.diff then
@@ -19,7 +19,7 @@ return {
           end)
           return "<Ignore>"
 				end,
-				desc = "Jump to next hunk",
+				desc = "Jump to next git hunk",
 			},
 			{
 				"g+",
@@ -32,7 +32,7 @@ return {
 					end)
 					return "<Ignore>"
 				end,
-				desc = "Jump to prev hunk",
+				desc = "Jump to prev git hunk",
 			},
 		},
 	},
@@ -67,11 +67,8 @@ return {
 		cmd = "Neogit",
 		init = function()
 			local function commit_range()
-				local first_commit_line = string.gsub(vim.fn.getline("v"), "*", "")
-				local second_commit_line = string.gsub(vim.fn.getline("."), "*", "")
-
-				local first_commit = vim.split(first_commit_line, "%s+")[1]
-				local second_commit = vim.split(second_commit_line, "%s+")[1]
+				local first_commit = string.match(vim.fn.getline("v"), "%S+")
+				local second_commit = string.match(vim.fn.getline("."), "%S+")
 
 				local range = first_commit .. ".." .. second_commit
 
