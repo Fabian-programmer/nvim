@@ -166,7 +166,7 @@ return {
 
   {
     "numToStr/Comment.nvim",
-    event = "VeryLazy",
+    event = { "BufReadPost", "BufNewFile" },
     opts = {
       toggler = {
         line = "<leader>/",
@@ -212,7 +212,6 @@ return {
     "folke/trouble.nvim",
     cmd = { "TroubleToggle", "Trouble" },
     opts = {
-      auto_open = false,
       use_diagnostic_signs = true,
     },
     keys = {
