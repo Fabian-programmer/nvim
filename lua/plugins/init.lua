@@ -85,13 +85,16 @@ return {
         max_height = 25,
         default_detail = 1,
         bindings = {
-          ["q"] = function() vim.cmd("OverseerClose") end,
+          ["q"] = function()
+            vim.cmd("OverseerClose")
+          end,
         },
       },
     },
-    config = function(_, opts) require("overseer").setup(opts) end,
+    config = function(_, opts)
+      require("overseer").setup(opts)
+    end,
   },
-
 
   -- easily jump to any location and enhanced f/t motions for Leap
   {
@@ -163,19 +166,13 @@ return {
 
   {
     "numToStr/Comment.nvim",
-    keys = {
-      {
-        "<leader>/",
-        function()
-          require("Comment.api").toggle.linewise.current()
-        end,
-        desc = "Comment",
+    event = "VeryLazy",
+    opts = {
+      toggler = {
+        line = "<leader>/",
       },
-      {
-        "<leader>/",
-        "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>",
-        desc = "Comment",
-        mode = "v",
+      opleader = {
+        line = "<leader>/",
       },
     },
   },
@@ -219,10 +216,10 @@ return {
       use_diagnostic_signs = true,
     },
     keys = {
-      { "<leader>xx", "<cmd>TroubleToggle document_diagnostics<cr>",  desc = "Document Diagnostics (Trouble)" },
+      { "<leader>xx", "<cmd>TroubleToggle document_diagnostics<cr>", desc = "Document Diagnostics (Trouble)" },
       { "<leader>xX", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Workspace Diagnostics (Trouble)" },
-      { "<leader>xL", "<cmd>TroubleToggle loclist<cr>",               desc = "Location List (Trouble)" },
-      { "<leader>xQ", "<cmd>TroubleToggle quickfix<cr>",              desc = "Quickfix List (Trouble)" },
+      { "<leader>xL", "<cmd>TroubleToggle loclist<cr>", desc = "Location List (Trouble)" },
+      { "<leader>xQ", "<cmd>TroubleToggle quickfix<cr>", desc = "Quickfix List (Trouble)" },
       {
         "üq",
         function()

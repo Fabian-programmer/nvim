@@ -14,15 +14,15 @@ return {
   "nvim-telescope/telescope.nvim",
   cmd = { "Telescope" },
   keys = {
-    { "<leader>ff", "<cmd>Telescope find_files <cr>",               desc = "Find File" },
-    { "<leader>fo", "<cmd>Telescope oldfiles<cr>",                  desc = "Open Recent File" },
-    { "<leader>fg", "<cmd>Telescope live_grep_args<cr>",            desc = "Grep" },
+    { "<leader>ff", "<cmd>Telescope find_files <cr>", desc = "Find File" },
+    { "<leader>fo", "<cmd>Telescope oldfiles<cr>", desc = "Open Recent File" },
+    { "<leader>fg", "<cmd>Telescope live_grep_args<cr>", desc = "Grep" },
     { "<leader>fb", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Find in Buffer" },
-    { "<leader>ft", "<cmd>Telescope scope buffers<cr>",             desc = "Buffers" },
-    { "<leader>fh", "<cmd>Telescope command_history<cr>",           desc = "Command History" },
-    { "<leader>fp", "<cmd>Telescope project<cr>",                   desc = "Project" },
-    { "<leader>fu", "<cmd>Telescope undo<cr>",                      desc = "Undo Tree" },
-    { "<leader>cc", "<cmd>Telescope cmake<cr>",                     desc = "CMake Targets" },
+    { "<leader>ft", "<cmd>Telescope scope buffers<cr>", desc = "Buffers" },
+    { "<leader>fh", "<cmd>Telescope command_history<cr>", desc = "Command History" },
+    { "<leader>fp", "<cmd>Telescope project<cr>", desc = "Project" },
+    { "<leader>fu", "<cmd>Telescope undo<cr>", desc = "Undo Tree" },
+    { "<leader>cc", "<cmd>Telescope cmake<cr>", desc = "CMake Targets" },
     {
       "<leader>fs",
       function()
@@ -43,14 +43,14 @@ return {
       end,
       desc = "Goto Symbol",
     },
-    { "<leader>fm", "<cmd>Telescope marks<cr>",        desc = "Jump to Mark" },
-    { "<leader>ht", "<cmd>Telescope builtin<cr>",      desc = "Telescope" },
-    { "<leader>hc", "<cmd>Telescope commands<cr>",     desc = "Commands" },
-    { "<leader>hh", "<cmd>Telescope help_tags<cr>",    desc = "Help Pages" },
-    { "<leader>hm", "<cmd>Telescope man_pages<cr>",    desc = "Man Pages" },
-    { "<leader>hk", "<cmd>Telescope keymaps<cr>",      desc = "Key Maps" },
-    { "<leader>hs", "<cmd>Telescope highlights<cr>",   desc = "Search Highlight Groups" },
-    { "<leader>gc", "<cmd>Telescope git_commits<cr>",  desc = "Commits" },
+    { "<leader>fm", "<cmd>Telescope marks<cr>", desc = "Jump to Mark" },
+    { "<leader>ht", "<cmd>Telescope builtin<cr>", desc = "Telescope" },
+    { "<leader>hc", "<cmd>Telescope commands<cr>", desc = "Commands" },
+    { "<leader>hh", "<cmd>Telescope help_tags<cr>", desc = "Help Pages" },
+    { "<leader>hm", "<cmd>Telescope man_pages<cr>", desc = "Man Pages" },
+    { "<leader>hk", "<cmd>Telescope keymaps<cr>", desc = "Key Maps" },
+    { "<leader>hs", "<cmd>Telescope highlights<cr>", desc = "Search Highlight Groups" },
+    { "<leader>gc", "<cmd>Telescope git_commits<cr>", desc = "Commits" },
     { "<leader>gb", "<cmd>Telescope git_branches<cr>", desc = "Branches" },
     {
       "gw",
@@ -61,7 +61,7 @@ return {
     },
   },
   dependencies = {
-    { "nvim-telescope/telescope-fzf-native.nvim",    build = "make" },
+    { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
     { "nvim-telescope/telescope-project.nvim" },
     { "nvim-telescope/telescope-live-grep-args.nvim" },
     { "debugloop/telescope-undo.nvim" },
@@ -140,7 +140,7 @@ return {
             local project_actions = require("telescope._extensions.project.actions")
             -- Do anything you want in here. For example:
             project_actions.change_working_directory(prompt_bufnr, false)
-          end
+          end,
         },
         undo = {
           mappings = {

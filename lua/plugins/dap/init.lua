@@ -1,41 +1,41 @@
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "dap-float" },
-	callback = function(event)
-		vim.keymap.set("n", "<Tab>", "", { buffer = event.buf, silent = true })
-		vim.keymap.set("n", "<S-Tab>", "", { buffer = event.buf, silent = true })
-	end,
+  pattern = { "dap-float" },
+  callback = function(event)
+    vim.keymap.set("n", "<Tab>", "", { buffer = event.buf, silent = true })
+    vim.keymap.set("n", "<S-Tab>", "", { buffer = event.buf, silent = true })
+  end,
 })
 
 return {
-	"mfussenegger/nvim-dap",
-	dependencies = {
-		{
-			"rcarriga/nvim-dap-ui",
-			opts = {
-				layouts = {
-					{
-						elements = {
-							-- Elements can be strings or table with id and size keys.
-							{ id = "scopes", size = 0.4 },
-							"breakpoints",
-							"stacks",
-							"watches",
-						},
-						size = 50, -- 40 columns
-						position = "left",
-					},
-					{
-						elements = {
-							"console",
-						},
-						size = 0.3,
-						position = "bottom",
-					},
-				},
-				controls = {
-					enabled = true,
-				},
-			},
+  "mfussenegger/nvim-dap",
+  dependencies = {
+    {
+      "rcarriga/nvim-dap-ui",
+      opts = {
+        layouts = {
+          {
+            elements = {
+              -- Elements can be strings or table with id and size keys.
+              { id = "scopes", size = 0.4 },
+              "breakpoints",
+              "stacks",
+              "watches",
+            },
+            size = 50, -- 40 columns
+            position = "left",
+          },
+          {
+            elements = {
+              "console",
+            },
+            size = 0.3,
+            position = "bottom",
+          },
+        },
+        controls = {
+          enabled = true,
+        },
+      },
       -- stylua: ignore
 			config = function(_, opts)
 				local dap = require("dap")
@@ -45,25 +45,25 @@ return {
 				dap.listeners.before.event_terminated["dapui_config"] = function() dapui.close({}) end
 				dap.listeners.before.event_exited["dapui_config"] = function() dapui.close({}) end
 			end,
-		},
+    },
 
-		-- virtual text for the debugger
-		{
-			"theHamsta/nvim-dap-virtual-text",
-			opts = {},
-		},
+    -- virtual text for the debugger
+    {
+      "theHamsta/nvim-dap-virtual-text",
+      opts = {},
+    },
 
-		-- which key integration
-		{
-			"folke/which-key.nvim",
-			optional = true,
-			opts = {
-				defaults = {
-					["<leader>d"] = { name = "+debug" },
-				},
-			},
-		},
-	},
+    -- which key integration
+    {
+      "folke/which-key.nvim",
+      optional = true,
+      opts = {
+        defaults = {
+          ["<leader>d"] = { name = "+debug" },
+        },
+      },
+    },
+  },
 
   -- stylua: ignore
 	keys = {
@@ -143,20 +143,20 @@ return {
 			desc = "Scope",
 		},
 	},
-	config = function()
-		require("dap").listeners.after.event_initialized["dapui_config"] = function()
-			require("dapui").open()
-		end
+  config = function()
+    require("dap").listeners.after.event_initialized["dapui_config"] = function()
+      require("dapui").open()
+    end
 
-		local config = require("config")
-		vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
+    local config = require("config")
+    vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
 
-		for name, sign in pairs(config.icons.dap) do
-			sign = type(sign) == "table" and sign or { sign }
-			vim.fn.sign_define(
-				"Dap" .. name,
-				{ text = sign[1], texthl = sign[2] or "DiagnosticInfo", linehl = sign[3], numhl = sign[3] }
-			)
-		end
-	end,
+    for name, sign in pairs(config.icons.dap) do
+      sign = type(sign) == "table" and sign or { sign }
+      vim.fn.sign_define(
+        "Dap" .. name,
+        { text = sign[1], texthl = sign[2] or "DiagnosticInfo", linehl = sign[3], numhl = sign[3] }
+      )
+    end
+  end,
 }
