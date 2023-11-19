@@ -99,7 +99,7 @@ return {
   -- easily jump to any location and enhanced f/t motions for Leap
   {
     "folke/flash.nvim",
-    event = "VeryLazy",
+    event = { "BufReadPost", "BufNewFile" },
     opts = {},
     keys = {
       {
