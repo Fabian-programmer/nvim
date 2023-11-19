@@ -92,8 +92,8 @@ return {
         local first_commit_line = string.gsub(vim.fn.getline("v"), "*", "")
         local second_commit_line = string.gsub(vim.fn.getline("."), "*", "")
 
-        local first_commit = vim.split(first_commit_line, "%s+")[2]
-        local second_commit = vim.split(second_commit_line, "%s+")[2]
+        local first_commit = vim.split(first_commit_line, "%s+")[1]
+        local second_commit = vim.split(second_commit_line, "%s+")[1]
 
         local range = first_commit .. ".." .. second_commit
 
