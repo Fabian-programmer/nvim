@@ -73,7 +73,8 @@ return {
     end,
   },
 
-  { -- The framework we use to run tasks
+  -- The framework we use to run tasks
+  {
     "stevearc/overseer.nvim",
     opts = {
       -- Tasks are disposed 5 minutes after running to free resources.
@@ -91,9 +92,6 @@ return {
         },
       },
     },
-    config = function(_, opts)
-      require("overseer").setup(opts)
-    end,
   },
 
   -- easily jump to any location and enhanced f/t motions for Leap
@@ -154,9 +152,7 @@ return {
   {
     "folke/trouble.nvim",
     cmd = { "TroubleToggle", "Trouble" },
-    opts = {
-      use_diagnostic_signs = true,
-    },
+    opts = { use_diagnostic_signs = true },
     keys = {
       { "<leader>xx", "<cmd>TroubleToggle document_diagnostics<cr>", desc = "Document Diagnostics (Trouble)" },
       { "<leader>xX", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Workspace Diagnostics (Trouble)" },
