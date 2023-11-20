@@ -65,27 +65,6 @@ return {
   {
     "NeogitOrg/neogit",
     cmd = "Neogit",
-    init = function()
-      local function commit_range()
-        local first_commit = string.match(vim.fn.getline("v"), "%S+")
-        local second_commit = string.match(vim.fn.getline("."), "%S+")
-
-        local range = first_commit .. ".." .. second_commit
-
-        return range
-      end
-
-      vim.api.nvim_create_autocmd("FileType", {
-        pattern = {
-          "NeogitLogView",
-        },
-        callback = function(event)
-          vim.keymap.set("v", "d", function()
-            vim.api.nvim_command("DiffviewOpen " .. commit_range())
-          end, { buffer = event.buf })
-        end,
-      })
-    end,
     opts = {
       disable_commit_confirmation = false,
       disable_insert_on_commit = false,
