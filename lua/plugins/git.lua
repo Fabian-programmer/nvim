@@ -6,10 +6,11 @@ return {
       current_line_blame_opts = { delay = 100 },
     },
     -- stylua: ignore
-		keys = {
-			{ "gp", function() require("gitsigns").preview_hunk() end, desc = "Git hunk preview" },
-			{ "gq", function() require("gitsigns").reset_hunk() end, desc = "Git hunk clear" },
-			{ "gü",
+    keys = {
+      { "gp", function() require("gitsigns").preview_hunk() end, desc = "Git hunk preview" },
+      { "gq", function() require("gitsigns").reset_hunk() end,   desc = "Git hunk clear" },
+      {
+        "gü",
         function()
           if vim.wo.diff then
             return "]c"
