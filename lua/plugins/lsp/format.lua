@@ -47,7 +47,7 @@ function M.format(opts)
 
   if #client_ids == 0 then
     if opts and opts.force then
-      Util.warn("No formatter available", { title = "LazyVim" })
+      Util.warn("No formatter available", { title = "Lsp" })
     end
     return
   end
@@ -104,7 +104,6 @@ end
 function M.setup(opts)
   M.opts = opts
   vim.api.nvim_create_autocmd("BufWritePre", {
-    group = vim.api.nvim_create_augroup("LazyVimFormat", {}),
     callback = function()
       if M.opts.autoformat then
         M.format()
