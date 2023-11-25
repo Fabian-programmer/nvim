@@ -18,7 +18,7 @@ return {
     end,
   },
 
-  -- Correctly setup lspconfig for clangd 🚀
+  -- Clangd setup
   {
     "neovim/nvim-lspconfig",
     opts = {
@@ -29,6 +29,15 @@ return {
             { "<F4>", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Switch Source/Header (C/C++)" },
           },
           root_pattern = ".git",
+          cmd = {
+            "clangd",
+            "--background-index",
+            "--clang-tidy",
+            "--header-insertion=never",
+            "--completion-style=detailed",
+            "--function-arg-placeholders",
+            "--fallback-style=llvm",
+          },
         },
       },
     },
