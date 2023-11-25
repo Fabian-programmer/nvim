@@ -32,8 +32,8 @@ vim.keymap.set("i", "<A-BS>", "<Esc>ciw", { desc = "Delete word" })
 vim.keymap.set("n", "<BS>", "ciw", { desc = "Delete word" })
 
 -- center in middle
-vim.keymap.set("n", '<C-b>', '<C-b>zz', { noremap = true })
-vim.keymap.set("n", '<C-f>', '<C-f>zz', { noremap = true })
+vim.keymap.set("n", "<C-b>", "<C-b>zz", { noremap = true })
+vim.keymap.set("n", "<C-f>", "<C-f>zz", { noremap = true })
 
 -- redo on same key
 vim.keymap.set("n", "U", "<C-r>")
@@ -71,10 +71,3 @@ vim.keymap.set("n", "<leader><Tab>n", "<cmd>tabnew<cr>", { desc = "New Tab" })
 vim.keymap.set("n", "<leader><Tab><Tab>", "<cmd>tabnext<cr>", { desc = "Next Tab" })
 vim.keymap.set("n", "<leader><Tab>q", "<cmd>tabclose<cr>", { desc = "Close Tab" })
 vim.keymap.set("n", "<leader><Tab><S-Tab>", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
-
-
--- formatting
-vim.keymap.set("n", "<leader>ct", require("plugins.lsp.format").toggle, { desc = "Toggle format on Save" })
-vim.keymap.set({ "n", "v" }, "<leader>cf", function()
-  require("plugins.lsp.format").format({ force = true })
-end, { desc = "Format" })

@@ -39,28 +39,11 @@ return {
       servers = {
         html = {},
         svelte = {},
-        lua_ls = {
-          settings = {
-            Lua = {
-              workspace = {
-                checkThirdParty = false,
-              },
-              completion = {
-                callSnippet = "Replace",
-              },
-              diagnostics = {
-                globals = { "vim" },
-              },
-            },
-          },
-        },
       },
       setup = {},
     },
     config = function(_, opts)
       local Util = require("util")
-      -- setup autoformat
-      require("plugins.lsp.format").setup(opts)
       -- setup formatting and keymaps
       Util.on_attach(function(client, buffer)
         require("plugins.lsp.keymaps").on_attach(client, buffer)
@@ -155,23 +138,6 @@ return {
       if have_mason then
         mlsp.setup({ ensure_installed = ensure_installed, handlers = { setup } })
       end
-    end,
-  },
-
-  -- formatters
-  {
-    "nvimtools/none-ls.nvim",
-    event = { "BufReadPre", "BufNewFile" },
-    dependencies = { "mason.nvim" },
-    opts = function()
-      local nls = require("null-ls")
-      return {
-        root_dir = require("null-ls.utils").root_pattern(".git"),
-        sources = {
-          nls.builtins.formatting.prettierd,
-          nls.builtins.formatting.stylua,
-        },
-      }
     end,
   },
 

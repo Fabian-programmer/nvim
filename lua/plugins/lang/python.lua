@@ -1,4 +1,5 @@
 return {
+  -- syntax highlighting
   {
     "nvim-treesitter/nvim-treesitter",
     opts = function(_, opts)
@@ -8,6 +9,7 @@ return {
     end,
   },
 
+  -- lsp
   {
     "neovim/nvim-lspconfig",
     opts = {
@@ -17,11 +19,13 @@ return {
     },
   },
 
+  -- debugger
   {
     "mfussenegger/nvim-dap",
     optional = true,
     dependencies = {
       "mfussenegger/nvim-dap-python",
+    -- stylua: ignore
       keys = {
         { "<leader>dPt", function() require('dap-python').test_method() end, desc = "Debug Method" },
         { "<leader>dPc", function() require('dap-python').test_class() end,  desc = "Debug Class" },

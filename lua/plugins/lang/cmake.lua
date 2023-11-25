@@ -9,18 +9,16 @@ return {
     end,
   },
 
-  -- installation
-  {
-    "mason.nvim",
-    opts = function(_, opts)
-      opts.ensure_installed = opts.ensure_installed or {}
-      vim.list_extend(opts.ensure_installed, { "cmakelang", "cmakelint" })
-    end,
-  },
-
   -- linter
   {
     "mfussenegger/nvim-lint",
+    dependencies = {
+      "mason.nvim",
+      opts = function(_, opts)
+        opts.ensure_installed = opts.ensure_installed or {}
+        vim.list_extend(opts.ensure_installed, { "cmakelint" })
+      end,
+    },
     event = { "BufReadPre", "BufNewFile" },
     opts = {
       linters_by_ft = {
@@ -29,7 +27,7 @@ return {
     },
   },
 
-  -- lsp
+  -- lsp with formatting
   {
     "neovim/nvim-lspconfig",
     opts = {

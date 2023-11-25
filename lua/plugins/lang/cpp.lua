@@ -1,5 +1,5 @@
 return {
-  -- Add C/C++ to treesitter
+  -- syntax highlighting
   {
     "nvim-treesitter/nvim-treesitter",
     opts = function(_, opts)
@@ -9,16 +9,7 @@ return {
     end,
   },
 
-  -- Install clang-format
-  {
-    "mason.nvim",
-    opts = function(_, opts)
-      opts.ensure_installed = opts.ensure_installed or {}
-      vim.list_extend(opts.ensure_installed, { "clang-format" })
-    end,
-  },
-
-  -- Clangd setup
+  -- lsp includes formatter
   {
     "neovim/nvim-lspconfig",
     opts = {
@@ -43,6 +34,7 @@ return {
     },
   },
 
+  -- debugger
   {
     "mfussenegger/nvim-dap",
     optional = true,
