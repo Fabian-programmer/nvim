@@ -1,4 +1,5 @@
 return {
+  -- syntax highlighting
   {
     "nvim-treesitter/nvim-treesitter",
     opts = function(_, opts)
@@ -7,26 +8,8 @@ return {
       end
     end,
   },
-  {
-    "nvimtools/none-ls.nvim",
-    optional = true,
-    opts = function(_, opts)
-      local nls = require("null-ls")
-      opts.sources = opts.sources or {}
-      vim.list_extend(opts.sources, {
-        nls.builtins.diagnostics.cmake_lint,
-      })
-    end,
-  },
-  {
-    "mfussenegger/nvim-lint",
-    optional = true,
-    opts = {
-      linters_by_ft = {
-        cmake = { "cmakelint" },
-      },
-    },
-  },
+
+  -- installation
   {
     "mason.nvim",
     opts = function(_, opts)
@@ -34,6 +17,19 @@ return {
       vim.list_extend(opts.ensure_installed, { "cmakelang", "cmakelint" })
     end,
   },
+
+  -- linter
+  {
+    "mfussenegger/nvim-lint",
+    event = { "BufReadPre", "BufNewFile" },
+    opts = {
+      linters_by_ft = {
+        cmake = { "cmakelint" },
+      },
+    },
+  },
+
+  -- lsp
   {
     "neovim/nvim-lspconfig",
     opts = {
@@ -41,10 +37,5 @@ return {
         neocmake = {},
       },
     },
-  },
-  {
-    "Civitasv/cmake-tools.nvim",
-    opts = {},
-    event = { "BufReadPre", "BufNewFile" },
   },
 }
