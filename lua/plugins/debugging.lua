@@ -45,18 +45,6 @@ return {
       opts = {},
     },
 
-    -- which key integration
-    {
-      "folke/which-key.nvim",
-      optional = true,
-      opts = {
-        defaults = {
-          ["<leader>d"] = { name = "+debug" },
-        },
-      },
-    },
-  },
-
   -- stylua: ignore
 	keys = {
 		{ "<F5>", function() require("dap").continue() end, desc = "Continue" },
