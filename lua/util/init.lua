@@ -8,16 +8,6 @@ function M.get_clients(...)
   return fn(...)
 end
 
-function M.on_attach(on_attach)
-  vim.api.nvim_create_autocmd("LspAttach", {
-    callback = function(args)
-      local buffer = args.buf
-      local client = vim.lsp.get_client_by_id(args.data.client_id)
-      on_attach(client, buffer)
-    end,
-  })
-end
-
 function M.has(plugin)
   return require("lazy.core.config").spec.plugins[plugin] ~= nil
 end
@@ -56,8 +46,8 @@ function M.get_root()
           and vim.tbl_map(function(ws)
             return vim.uri_to_fname(ws.uri)
           end, workspace)
-          or client.config.root_dir and { client.config.root_dir }
-          or {}
+        or client.config.root_dir and { client.config.root_dir }
+        or {}
       for _, p in ipairs(paths) do
         local r = vim.loop.fs_realpath(p)
         if path:find(r, 1, true) then
@@ -152,14 +142,11 @@ end
 function M.lsp_disable(server, cond)
   local util = require("lspconfig.util")
   local def = M.lsp_get_config(server)
-  def.document_config.on_new_config = util.add_hook_before(
-    def.document_config.on_new_config,
-    function(config, root_dir)
-      if cond(root_dir, config) then
-        config.enabled = false
-      end
+  def.document_config.on_new_config = util.add_hook_before(def.document_config.on_new_config, function(config, root_dir)
+    if cond(root_dir, config) then
+      config.enabled = false
     end
-  )
+  end)
 end
 
 return M

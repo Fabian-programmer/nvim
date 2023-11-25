@@ -1,3 +1,13 @@
+function On_attach(on_attach)
+  vim.api.nvim_create_autocmd("LspAttach", {
+    callback = function(args)
+      local buffer = args.buf
+      local client = vim.lsp.get_client_by_id(args.data.client_id)
+      on_attach(client, buffer)
+    end,
+  })
+end
+
 return {
   {
     "neovim/nvim-lspconfig",
@@ -5,12 +15,6 @@ return {
     dependencies = {
       "mason.nvim",
       "williamboman/mason-lspconfig.nvim",
-      {
-        "hrsh7th/cmp-nvim-lsp",
-        cond = function()
-          return require("util").has("nvim-cmp")
-        end,
-      },
     },
     opts = {
       diagnostics = {
@@ -28,24 +32,19 @@ return {
       },
       -- add any global capabilities here
       capabilities = {},
-      -- Automatically format on save
-      autoformat = true,
+      -- format on save is handled by conform
+      autoformat = false,
       -- options for vim.lsp.buf.format
       format = {
         formatting_options = nil,
         timeout_ms = nil,
       },
-      -- LSP Server Settings
-      servers = {
-        html = {},
-        svelte = {},
-      },
+      servers = {},
       setup = {},
     },
     config = function(_, opts)
-      local Util = require("util")
       -- setup formatting and keymaps
-      Util.on_attach(function(client, buffer)
+      On_attach(function(client, buffer)
         require("plugins.lsp.keymaps").on_attach(client, buffer)
       end)
 
@@ -66,8 +65,10 @@ return {
         vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
       end
 
+      local inlay_hint = vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint
+
       if opts.inlay_hints.enabled and inlay_hint then
-        Util.on_attach(function(client, buffer)
+        On_attach(function(client, buffer)
           if client.server_capabilities.inlayHintProvider then
             inlay_hint(buffer, true)
           end
@@ -141,22 +142,11 @@ return {
     end,
   },
 
-  -- cmdline tools and lsp servers
   {
     "williamboman/mason.nvim",
     cmd = "Mason",
     opts = {
-      ensure_installed = {
-        -- LSP
-        "html-lsp",
-        "lua-language-server",
-        "svelte-language-server",
-        -- Debugger
-        "debugpy",
-        -- Linter
-        -- Formatter
-        "prettierd",
-      },
+      ensure_installed = {},
     },
     config = function(_, opts)
       require("mason").setup(opts)

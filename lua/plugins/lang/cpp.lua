@@ -12,9 +12,17 @@ return {
   -- lsp includes formatter
   {
     "neovim/nvim-lspconfig",
+    dependencies = {
+      "williamboman/mason.nvim",
+      optional = true,
+      opts = function(_, opts)
+        if type(opts.ensure_installed) == "table" then
+          vim.list_extend(opts.ensure_installed, { "clangd" })
+        end
+      end,
+    },
     opts = {
       servers = {
-        -- Ensure mason installs the server
         clangd = {
           keys = {
             { "<F4>", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Switch Source/Header (C/C++)" },
