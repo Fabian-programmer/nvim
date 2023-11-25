@@ -36,7 +36,6 @@ return {
         "bash",
         "diff",
         "html",
-        "javascript",
         "json",
         "markdown",
         "markdown_inline",

@@ -9,6 +9,16 @@ return {
     end,
   },
 
+  -- formatter
+  {
+    "stevearc/conform.nvim",
+    opts = {
+      formatters_by_ft = {
+        lua = { "stylua" },
+      },
+    },
+  },
+
   -- lsp
   {
     "neovim/nvim-lspconfig",

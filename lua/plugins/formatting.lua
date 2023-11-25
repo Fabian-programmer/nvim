@@ -13,11 +13,7 @@ return {
     },
   },
   opts = {
-    formatters_by_ft = {
-      lua = { "stylua" },
-      python = { "autopep8" },
-      javascript = { { "prettierd", "prettier" } },
-    },
+    formatters_by_ft = {},
     format_on_save = { timeout_ms = 500, lsp_fallback = true },
   },
 }

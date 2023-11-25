@@ -19,6 +19,16 @@ return {
     },
   },
 
+  -- formatter
+  {
+    "stevearc/conform.nvim",
+    opts = {
+      formatters_by_ft = {
+        python = { "autopep8" },
+      },
+    },
+  },
+
   -- debugger
   {
     "mfussenegger/nvim-dap",
