@@ -123,26 +123,27 @@ return {
 			desc = "Scope",
 		},
 	},
-  config = function()
-    vim.api.nvim_create_autocmd("FileType", {
-      pattern = { "dap-float" },
-      callback = function(event)
-        vim.keymap.set("n", "<Tab>", "", { buffer = event.buf, silent = true })
-        vim.keymap.set("n", "<S-Tab>", "", { buffer = event.buf, silent = true })
-      end,
-    })
+    config = function()
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = { "dap-float" },
+        callback = function(event)
+          vim.keymap.set("n", "<Tab>", "", { buffer = event.buf, silent = true })
+          vim.keymap.set("n", "<S-Tab>", "", { buffer = event.buf, silent = true })
+        end,
+      })
 
-    require("dap").listeners.after.event_initialized["dapui_config"] = function()
-      require("dapui").open()
-    end
+      require("dap").listeners.after.event_initialized["dapui_config"] = function()
+        require("dapui").open()
+      end
 
-    vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
+      vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
 
-    local config = require("config")
-    for name, sign in pairs(config.icons.dap) do
-      sign = type(sign) == "table" and sign or { sign }
+      local config = require("config")
+      for name, sign in pairs(config.icons.dap) do
+        sign = type(sign) == "table" and sign or { sign }
     -- stylua: ignore
       vim.fn.sign_define("Dap" .. name, { text = sign[1], texthl = sign[2] or "DiagnosticInfo", linehl = sign[3], numhl = sign[3] })
-    end
-  end,
+      end
+    end,
+  },
 }

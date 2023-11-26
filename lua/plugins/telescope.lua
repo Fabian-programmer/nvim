@@ -131,7 +131,6 @@ return {
         project = {
           on_project_selected = function(prompt_bufnr)
             local project_actions = require("telescope._extensions.project.actions")
-            -- Do anything you want in here. For example:
             project_actions.change_working_directory(prompt_bufnr, false)
           end,
         },

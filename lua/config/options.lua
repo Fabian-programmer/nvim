@@ -48,5 +48,7 @@ opt.wrap = false -- Disable line wrap
 -- Fix markdown indentation settings
 vim.g.markdown_recommended_style = 0
 
+vim.g.autoformat = true
+
 -- Disable LSP logging
 vim.lsp.set_log_level("off")
