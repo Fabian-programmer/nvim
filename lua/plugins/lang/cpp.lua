@@ -41,32 +41,26 @@ return {
       "williamboman/mason.nvim",
       optional = true,
       opts = function(_, opts)
-        require("util").ensure_installed(opts, "codelldb")
+        require("util").ensure_installed(opts, "cpptools")
       end,
     },
     opts = function()
       local dap = require("dap")
 
       -- adapter --
-      if not dap.adapters["codelldb"] then
-        require("dap").adapters["codelldb"] = {
-          type = "server",
-          host = "localhost",
-          port = "${port}",
-          executable = {
-            command = "codelldb",
-            args = {
-              "--port",
-              "${port}",
-            },
-          },
+      local path = require("mason-registry").get_package("cpptools"):get_install_path()
+      if not dap.adapters["cppdbg"] then
+        require("dap").adapters["cppdbg"] = {
+          id = "cppdbg",
+          type = "executable",
+          command = path .. "/extension/debugAdapters/bin/OpenDebugAD7",
         }
       end
 
       -- configuration --
       local cpp_launch = {
         name = "Launch Executable",
-        type = "codelldb",
+        type = "cppdbg",
         request = "launch",
         program = function()
           return vim.fn.input("Path to executable: ", require("util").get_root() .. "/", "file")
@@ -93,7 +87,7 @@ return {
 
       local cpp_attach = setmetatable({
         name = "Attach to process",
-        type = "codelldb",
+        type = "cppdbg",
         request = "attach",
       }, {
         __call = function(config)
@@ -128,7 +122,7 @@ return {
 
       local cpp_test_launch = {
         name = "Launch Current Test File (Catch2)",
-        type = "codelldb",
+        type = "cppdbg",
         request = "launch",
         program = function()
           local current_file = vim.fn.expand("%:t:r")
@@ -154,7 +148,7 @@ return {
 
       local cpp_test_tag_launch = {
         name = "Launch Current Test File (Catch2, Tag)",
-        type = "codelldb",
+        type = "cppdbg",
         request = "launch",
         program = function()
           local current_file = vim.fn.expand("%:t:r")
@@ -177,7 +171,7 @@ return {
 
       local cpp_last_config = setmetatable({
         name = "Last Config",
-        type = "codelldb",
+        type = "cppdbg",
         request = "launch",
       }, {
         __call = function()
