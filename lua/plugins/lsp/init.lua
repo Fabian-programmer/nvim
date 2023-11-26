@@ -1,13 +1,3 @@
-function On_attach(on_attach)
-  vim.api.nvim_create_autocmd("LspAttach", {
-    callback = function(args)
-      local buffer = args.buf
-      local client = vim.lsp.get_client_by_id(args.data.client_id)
-      on_attach(client, buffer)
-    end,
-  })
-end
-
 return {
   {
     "neovim/nvim-lspconfig",
@@ -43,8 +33,18 @@ return {
       setup = {},
     },
     config = function(_, opts)
-      -- setup formatting and keymaps
-      On_attach(function(client, buffer)
+      -- keymaps for every lsp
+      local on_attach = function(on_attach)
+        vim.api.nvim_create_autocmd("LspAttach", {
+          callback = function(args)
+            local buffer = args.buf
+            local client = vim.lsp.get_client_by_id(args.data.client_id)
+            on_attach(client, buffer)
+          end,
+        })
+      end
+
+      on_attach(function(client, buffer)
         require("plugins.lsp.keymaps").on_attach(client, buffer)
       end)
 
@@ -68,7 +68,7 @@ return {
       local inlay_hint = vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint
 
       if opts.inlay_hints.enabled and inlay_hint then
-        On_attach(function(client, buffer)
+        on_attach(function(client, buffer)
           if client.server_capabilities.inlayHintProvider then
             inlay_hint(buffer, true)
           end
