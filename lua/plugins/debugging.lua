@@ -87,14 +87,10 @@ return {
       {
         "<leader>dg",
         function()
-          local line = vim.fn.expand("%:line")
-          local col = vim.fn.col(".")
-          local start_col = vim.fn.search("\\<", "bcn", line .. "c" .. col) + 1
-          local end_col = vim.fn.search("\\>", "cn", line .. "c" .. col)
-          local grid_input = string.sub(line, start_col, end_col)
+          local current_grid = vim.fn.expand("<cword>")
 
           local session = require("dap").session()
-          local command = "print " .. grid_input
+          local command = "print " .. current_grid
           session:evaluate(command, function(err)
             if err then
               require("dap.repl").append(err.message)
@@ -103,7 +99,7 @@ return {
           end)
           require("dap.repl").append(command)
 
-          command = "-exec print " .. grid_input
+          command = "-exec print " .. current_grid
           session:evaluate(command, function(err)
             if err then
               require("dap.repl").append(err.message)
