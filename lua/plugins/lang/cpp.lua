@@ -76,6 +76,13 @@ return {
         cwd = function()
           return require("util").get_root()
         end,
+        setupCommands = {
+          {
+            text = "-enable-pretty-printing",
+            description = "enable pretty printing",
+            ignoreFailures = false,
+          },
+        },
       }
 
       local function capture(cmd)
@@ -89,6 +96,13 @@ return {
         name = "Attach to process",
         type = "cppdbg",
         request = "attach",
+        setupCommands = {
+          {
+            text = "-enable-pretty-printing",
+            description = "enable pretty printing",
+            ignoreFailures = false,
+          },
+        },
       }, {
         __call = function(config)
           local result = vim.deepcopy(config)
@@ -131,6 +145,13 @@ return {
         end,
         cwd = "${workspaceFolder}",
         stopAtEntry = false,
+        setupCommands = {
+          {
+            text = "-enable-pretty-printing",
+            description = "enable pretty printing",
+            ignoreFailures = false,
+          },
+        },
       }
 
       local function get_scenario_line()
@@ -165,6 +186,13 @@ return {
         end,
         cwd = "${workspaceFolder}",
         stopAtEntry = false,
+        setupCommands = {
+          {
+            text = "-enable-pretty-printing",
+            description = "enable pretty printing",
+            ignoreFailures = false,
+          },
+        },
       }
 
       local last_config = {}
