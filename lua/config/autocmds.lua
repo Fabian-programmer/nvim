@@ -30,24 +30,22 @@ vim.api.nvim_create_autocmd("BufReadPost", {
   end,
 })
 
--- Close buffer
-local universal_closer = "<A-q>"
-
--- bang the terminal
-vim.api.nvim_create_autocmd("TermOpen", {
-  callback = function(event)
-    vim.keymap.set({ "n", "t" }, universal_closer, function()
-      require("mini.bufremove").delete(0, true)
-    end, { buffer = event.buf, silent = true })
-  end,
-})
-
+-- start in insert mode in terminal
 vim.api.nvim_create_autocmd({ "TermOpen", "TermEnter" }, {
   pattern = {
     "term://*",
   },
   callback = function()
     vim.cmd("startinsert")
+  end,
+})
+
+-- bang the terminal
+vim.api.nvim_create_autocmd("TermOpen", {
+  callback = function(event)
+    vim.keymap.set({ "n", "t" }, "<A-q>", function()
+      require("mini.bufremove").delete(0, true)
+    end, { buffer = event.buf, silent = true })
   end,
 })
 

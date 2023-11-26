@@ -34,6 +34,7 @@ return {
     event = "InsertEnter",
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
     },
     opts = function()
@@ -51,9 +52,10 @@ return {
           ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
         }),
         sources = cmp.config.sources({
-          { name = "luasnip" },
           { name = "nvim_lsp" },
           { name = "path" },
+        }, {
+          { name = "buffer" },
         }),
         formatting = {
           format = function(_, item)

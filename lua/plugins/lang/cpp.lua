@@ -57,6 +57,22 @@ return {
         }
       end
 
+      local pretty_printing = {
+        {
+          text = "-enable-pretty-printing",
+          description = "enable pretty printing",
+          ignoreFailures = false,
+        },
+      }
+
+      local args_string2table = function(args_string)
+        local args = {}
+        for word in args_string:gmatch("%S+") do
+          table.insert(args, word)
+        end
+        return args
+      end
+
       -- configuration --
       local cpp_launch = {
         name = "Launch Executable",
@@ -66,23 +82,11 @@ return {
           return vim.fn.input("Path to executable: ", require("util").get_root() .. "/", "file")
         end,
         args = function()
-          local args = {}
-          local args_string = vim.fn.input("Args: ")
-          for word in args_string:gmatch("%S+") do
-            table.insert(args, word)
-          end
-          return args
+          return args_string2table(vim.fn.input("Args: "))
         end,
-        cwd = function()
-          return require("util").get_root()
-        end,
-        setupCommands = {
-          {
-            text = "-enable-pretty-printing",
-            description = "enable pretty printing",
-            ignoreFailures = false,
-          },
-        },
+        cwd = "${workspaceFolder}",
+        stopAtEntry = true,
+        setupCommands = pretty_printing,
       }
 
       local function capture(cmd)
@@ -96,13 +100,7 @@ return {
         name = "Attach to process",
         type = "cppdbg",
         request = "attach",
-        setupCommands = {
-          {
-            text = "-enable-pretty-printing",
-            description = "enable pretty printing",
-            ignoreFailures = false,
-          },
-        },
+        setupCommands = pretty_printing,
       }, {
         __call = function(config)
           local result = vim.deepcopy(config)
@@ -119,7 +117,8 @@ return {
         end,
       })
 
-      local function extract_exectuable_from_file(file)
+      local function extract_exectuable_from_file()
+        local file = vim.fn.expand("%:t:r")
         local handle = io.popen("cd " .. require("util").get_root() .. " && cmake --build build --target help")
         if handle then
           for line in handle:lines() do
@@ -139,19 +138,12 @@ return {
         type = "cppdbg",
         request = "launch",
         program = function()
-          local current_file = vim.fn.expand("%:t:r")
-          local test_executable = extract_exectuable_from_file(current_file)
+          local test_executable = extract_exectuable_from_file()
           return require("util").get_root() .. "/bin/" .. test_executable
         end,
         cwd = "${workspaceFolder}",
         stopAtEntry = false,
-        setupCommands = {
-          {
-            text = "-enable-pretty-printing",
-            description = "enable pretty printing",
-            ignoreFailures = false,
-          },
-        },
+        setupCommands = pretty_printing,
       }
 
       local function get_scenario_line()
@@ -172,27 +164,15 @@ return {
         type = "cppdbg",
         request = "launch",
         program = function()
-          local current_file = vim.fn.expand("%:t:r")
-          local test_executable = extract_exectuable_from_file(current_file)
+          local test_executable = extract_exectuable_from_file()
           return require("util").get_root() .. "/bin/" .. test_executable
         end,
         args = function()
-          local args = {}
-          local args_string = get_scenario_line()
-          for word in args_string:gmatch("%S+") do
-            table.insert(args, word)
-          end
-          return args
+          return args_string2table(get_scenario_line())
         end,
         cwd = "${workspaceFolder}",
         stopAtEntry = false,
-        setupCommands = {
-          {
-            text = "-enable-pretty-printing",
-            description = "enable pretty printing",
-            ignoreFailures = false,
-          },
-        },
+        setupCommands = pretty_printing,
       }
 
       local last_config = {}
