@@ -53,9 +53,6 @@ return {
       "Fabian-programmer/cmake.nvim",
       dependenciens = {
         { "stevearc/overseer.nvim" },
-        {
-          "mfussenegger/nvim-dap",
-        },
       },
     },
   },
@@ -159,6 +156,6 @@ return {
     telescope.load_extension("undo")
     telescope.load_extension("scope")
     telescope.load_extension("possession")
-    -- telescope.load_extension("cmake")
+    telescope.load_extension("cmake")
   end,
 }
