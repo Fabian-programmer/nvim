@@ -103,4 +103,9 @@ function M.telescope(builtin, opts)
   end
 end
 
+function M.ensure_installed(opts, args)
+  opts.ensure_installed = opts.ensure_installed or {}
+  vim.list_extend(opts.ensure_installed, { args })
+end
+
 return M

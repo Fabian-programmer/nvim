@@ -3,10 +3,9 @@ return {
   -- syntax highlighting
   {
     "nvim-treesitter/nvim-treesitter",
+    optional = true,
     opts = function(_, opts)
-      if type(opts.ensure_installed) == "table" then
-        vim.list_extend(opts.ensure_installed, { "ron", "rust", "toml" })
-      end
+      require("util").ensure_installed(opts, { "ron", "rust", "toml" })
     end,
   },
 
@@ -15,7 +14,6 @@ return {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
-        -- Ensure mason installs the server
         rust_analyzer = {
           keys = {
             { "K", "<cmd>RustHoverActions<cr>", desc = "Hover Actions (Rust)" },
@@ -65,6 +63,15 @@ return {
     },
   },
 
+  -- debugger
+  {
+    "williamboman/mason.nvim",
+    optional = true,
+    opts = function(_, opts)
+      require("util").ensure_installed(opts, "codelldb")
+    end,
+  },
+
   -- auto completion
   {
     "hrsh7th/nvim-cmp",
@@ -80,17 +87,6 @@ return {
       opts.sources = cmp.config.sources(vim.list_extend(opts.sources, {
         { name = "crates" },
       }))
-    end,
-  },
-
-  -- debugger
-  {
-    "williamboman/mason.nvim",
-    optional = true,
-    opts = function(_, opts)
-      if type(opts.ensure_installed) == "table" then
-        vim.list_extend(opts.ensure_installed, { "codelldb" })
-      end
     end,
   },
 

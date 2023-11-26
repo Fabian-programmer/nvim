@@ -55,7 +55,6 @@ return {
         ["g"] = { name = "+goto" },
         ["<leader>b"] = { name = "+buffer" },
         ["<leader>c"] = { name = "+code" },
-        ["<leader>d"] = { name = "+debug" },
         ["<leader>f"] = { name = "+find" },
         ["<leader>h"] = { name = "+help" },
         ["<leader>g"] = { name = "+git" },

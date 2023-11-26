@@ -2,9 +2,10 @@ return {
   -- syntax highlighting
   {
     "nvim-treesitter/nvim-treesitter",
-    opts = {
-      ensure_installed = { "javascript" },
-    },
+    optional = true,
+    opts = function(_, opts)
+      require("util").ensure_installed(opts, "javascript")
+    end,
   },
 
   -- formatter

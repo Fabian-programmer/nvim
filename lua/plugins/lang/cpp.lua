@@ -2,25 +2,15 @@ return {
   -- syntax highlighting
   {
     "nvim-treesitter/nvim-treesitter",
+    optional = true,
     opts = function(_, opts)
-      if type(opts.ensure_installed) == "table" then
-        vim.list_extend(opts.ensure_installed, { "c", "cpp" })
-      end
+      require("util").ensure_installed(opts, { "c", "cpp" })
     end,
   },
 
   -- lsp includes formatter
   {
     "neovim/nvim-lspconfig",
-    dependencies = {
-      "williamboman/mason.nvim",
-      optional = true,
-      opts = function(_, opts)
-        if type(opts.ensure_installed) == "table" then
-          vim.list_extend(opts.ensure_installed, { "clangd" })
-        end
-      end,
-    },
     opts = {
       servers = {
         clangd = {
@@ -51,28 +41,32 @@ return {
       "williamboman/mason.nvim",
       optional = true,
       opts = function(_, opts)
-        if type(opts.ensure_installed) == "table" then
-          vim.list_extend(opts.ensure_installed, { "cpptools" })
-        end
+        require("util").ensure_installed(opts, "codelldb")
       end,
     },
     opts = function()
       local dap = require("dap")
 
       -- adapter --
-      local path = require("mason-registry").get_package("cpptools"):get_install_path()
-      if not dap.adapters["cppdbg"] then
-        require("dap").adapters["cppdbg"] = {
-          id = "cppdbg",
-          type = "executable",
-          command = path .. "/extension/debugAdapters/bin/OpenDebugAD7",
+      if not dap.adapters["codelldb"] then
+        require("dap").adapters["codelldb"] = {
+          type = "server",
+          host = "localhost",
+          port = "${port}",
+          executable = {
+            command = "codelldb",
+            args = {
+              "--port",
+              "${port}",
+            },
+          },
         }
       end
 
       -- configuration --
       local cpp_launch = {
         name = "Launch Executable",
-        type = "cppdbg",
+        type = "codelldb",
         request = "launch",
         program = function()
           return vim.fn.input("Path to executable: ", require("util").get_root() .. "/", "file")
@@ -99,7 +93,7 @@ return {
 
       local cpp_attach = setmetatable({
         name = "Attach to process",
-        type = "cppdbg",
+        type = "codelldb",
         request = "attach",
       }, {
         __call = function(config)
@@ -134,7 +128,7 @@ return {
 
       local cpp_test_launch = {
         name = "Launch Current Test File (Catch2)",
-        type = "cppdbg",
+        type = "codelldb",
         request = "launch",
         program = function()
           local current_file = vim.fn.expand("%:t:r")
@@ -160,7 +154,7 @@ return {
 
       local cpp_test_tag_launch = {
         name = "Launch Current Test File (Catch2, Tag)",
-        type = "cppdbg",
+        type = "codelldb",
         request = "launch",
         program = function()
           local current_file = vim.fn.expand("%:t:r")
@@ -183,7 +177,7 @@ return {
 
       local cpp_last_config = setmetatable({
         name = "Last Config",
-        type = "cppdbg",
+        type = "codelldb",
         request = "launch",
       }, {
         __call = function()

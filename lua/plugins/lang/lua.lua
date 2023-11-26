@@ -2,10 +2,9 @@ return {
   -- syntax highlighting
   {
     "nvim-treesitter/nvim-treesitter",
+    optional = true,
     opts = function(_, opts)
-      if type(opts.ensure_installed) == "table" then
-        vim.list_extend(opts.ensure_installed, { "lua" })
-      end
+      require("util").ensure_installed(opts, "lua")
     end,
   },
 
@@ -29,13 +28,6 @@ return {
   -- lsp
   {
     "neovim/nvim-lspconfig",
-    dependencies = {
-      "williamboman/mason.nvim",
-      opts = function(_, opts)
-        opts.ensure_installed = opts.ensure_installed or {}
-        vim.list_extend(opts.ensure_installed, { "lua-language-server" })
-      end,
-    },
     opts = {
       servers = {
         lua_ls = {
