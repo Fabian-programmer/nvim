@@ -43,6 +43,9 @@ vim.api.nvim_create_autocmd("TermOpen", {
 })
 
 vim.api.nvim_create_autocmd({ "TermOpen", "TermEnter" }, {
+  pattern = {
+    "term://*",
+  },
   callback = function()
     vim.cmd("startinsert")
   end,
