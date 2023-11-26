@@ -79,7 +79,7 @@ return {
     "stevearc/overseer.nvim",
     opts = {
       -- Tasks are disposed 5 minutes after running to free resources.
-      -- If you need to close a task inmediatelly:
+      -- If you need to close a task immediatelly:
       -- press ENTER in the menu you see after compiling on the task you want to close.
       task_list = {
         direction = "bottom",

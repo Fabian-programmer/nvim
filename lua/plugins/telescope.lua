@@ -49,7 +49,15 @@ return {
     { "nvim-telescope/telescope-project.nvim" },
     { "nvim-telescope/telescope-live-grep-args.nvim" },
     { "debugloop/telescope-undo.nvim" },
-    { "Fabian-programmer/cmake.nvim", dependenciens = { "stevearc/overseer.nvim" } },
+    {
+      "Fabian-programmer/cmake.nvim",
+      dependenciens = {
+        { "stevearc/overseer.nvim" },
+        {
+          "mfussenegger/nvim-dap",
+        },
+      },
+    },
   },
   config = function()
     local function open_entry_in_diffview(cmd)
@@ -151,6 +159,6 @@ return {
     telescope.load_extension("undo")
     telescope.load_extension("scope")
     telescope.load_extension("possession")
-    telescope.load_extension("cmake")
+    -- telescope.load_extension("cmake")
   end,
 }
