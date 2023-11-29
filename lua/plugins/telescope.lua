@@ -3,6 +3,7 @@ return {
   cmd = { "Telescope" },
   keys = {
     { "<leader>:", "<cmd>Telescope command_history<cr>", desc = "Command History" },
+    { ";", "<cmd>Telescope resume<cr>", desc = "Telescope Resume" },
     { "<leader>ff", "<cmd>Telescope find_files <cr>", desc = "Find File" },
     { "<leader>fo", "<cmd>Telescope oldfiles<cr>", desc = "Open Recent File" },
     { "<leader>fg", "<cmd>Telescope live_grep_args<cr>", desc = "Grep" },
@@ -38,11 +39,12 @@ return {
     { "<leader>hh", "<cmd>Telescope help_tags<cr>", desc = "Help Pages" },
     { "<leader>hm", "<cmd>Telescope man_pages<cr>", desc = "Man Pages" },
     { "<leader>hk", "<cmd>Telescope keymaps<cr>", desc = "Key Maps" },
-    { "<leader>hs", "<cmd>Telescope highlights<cr>", desc = "Search Highlight Groups" },
     { "<leader>gc", "<cmd>Telescope git_commits<cr>", desc = "Commits" },
     { "<leader>gb", "<cmd>Telescope git_branches<cr>", desc = "Branches" },
     -- stylua: ignore
-    { "gw", function() require("telescope-live-grep-args.shortcuts").grep_word_under_cursor() end, desc = "Find Word" },
+    { "gw", mode = "n", function() require("telescope-live-grep-args.shortcuts").grep_word_under_cursor() end, desc = "Find Word" },
+    -- stylua: ignore
+    { "gw", mode = "v", function() require("telescope-live-grep-args.shortcuts").grep_visual_selection() end, desc = "Find Selection" },
   },
   dependencies = {
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
@@ -124,9 +126,6 @@ return {
           mappings = {
             i = {
               ["<C-k>"] = require("telescope-live-grep-args.actions").quote_prompt(),
-              ["<C-i>"] = require("telescope-live-grep-args.actions").quote_prompt({
-                postfix = " --iglob ",
-              }),
               ["<C-a>"] = require("telescope-live-grep-args.actions").quote_prompt({
                 postfix = " --no-ignore ",
               }),
