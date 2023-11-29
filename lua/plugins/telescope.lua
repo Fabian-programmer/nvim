@@ -3,7 +3,7 @@ return {
   cmd = { "Telescope" },
   keys = {
     { "<leader>:", "<cmd>Telescope command_history<cr>", desc = "Command History" },
-    { ";", "<cmd>Telescope resume<cr>", desc = "Telescope Resume" },
+    { "<leader>;", "<cmd>Telescope resume<cr>", desc = "Telescope Resume" },
     { "<leader>ff", "<cmd>Telescope find_files <cr>", desc = "Find File" },
     { "<leader>fo", "<cmd>Telescope oldfiles<cr>", desc = "Open Recent File" },
     { "<leader>fg", "<cmd>Telescope live_grep_args<cr>", desc = "Grep" },
