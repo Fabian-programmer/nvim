@@ -3,6 +3,9 @@ return {
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v3.x",
     cmd = "Neotree",
+    dependencies = {
+      { "MunifTanjim/nui.nvim", lazy = true },
+    },
     keys = {
       {
         "<leader>e",
