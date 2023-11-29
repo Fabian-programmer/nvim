@@ -182,6 +182,7 @@ return {
       large_file_overrides = {
         providers = { "lsp" },
       },
+      under_cursor = false,
     },
     config = function(_, opts)
       require("illuminate").configure(opts)
