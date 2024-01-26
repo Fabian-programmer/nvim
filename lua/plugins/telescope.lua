@@ -59,18 +59,6 @@ return {
     },
   },
   config = function()
-    local function open_entry_in_diffview(cmd)
-      -- Open in diffview
-      local selected_entry = require("telescope.actions.state").get_selected_entry()
-      local value = selected_entry.value
-      -- close Telescope window properly prior to switching windows
-      vim.api.nvim_win_close(0, true)
-      vim.cmd("stopinsert")
-      vim.schedule(function()
-        vim.cmd(("DiffviewOpen %s" .. cmd):format(value))
-      end)
-    end
-
     local telescope = require("telescope")
     local borderless = true
     telescope.setup({
@@ -97,29 +85,7 @@ return {
         selection_caret = " ",
         winblend = borderless and 0 or 10,
       },
-      pickers = {
-        git_commits = {
-          mappings = {
-            i = {
-              ["<F2>"] = function()
-                open_entry_in_diffview("")
-              end,
-              ["<F3>"] = function()
-                open_entry_in_diffview("^!")
-              end,
-            },
-          },
-        },
-        git_branches = {
-          mappings = {
-            i = {
-              ["<F2>"] = function()
-                open_entry_in_diffview("")
-              end,
-            },
-          },
-        },
-      },
+      pickers = {},
       extensions = {
         live_grep_args = {
           auto_quoting = true,
@@ -127,7 +93,7 @@ return {
             i = {
               ["<C-k>"] = require("telescope-live-grep-args.actions").quote_prompt(),
               ["<C-i>"] = require("telescope-live-grep-args.actions").quote_prompt({
-                postfix = " --iglob ",
+                postfix = " --iglob !*messages-gen* --iglob ",
               }),
               ["<C-a>"] = require("telescope-live-grep-args.actions").quote_prompt({
                 postfix = " --no-ignore ",
