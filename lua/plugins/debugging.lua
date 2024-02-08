@@ -69,7 +69,7 @@ return {
       { "<leader>db", function() require("dap").toggle_breakpoint() end, desc = "Toggle Breakpoint" },
       { "<leader>dj", function() require("dap").down() end, desc = "Down" },
       { "<leader>dk", function() require("dap").up() end, desc = "Up" },
-      { "<leader>de", function() require("dapui").float_element() end, desc = "Open Element" },
+      { "<leader>de", function() require("dapui").float_element(nil, {enter = true}) end, desc = "Open Element" },
       { "<leader>dw", function() require("dap.ui.widgets").hover() end, desc = "Widgets" },
       -- stylua: ignore end
       {
