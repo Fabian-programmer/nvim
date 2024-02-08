@@ -47,15 +47,11 @@ return {
     opts = function()
       local dap = require("dap")
 
-      -- adapter --
-      local path = require("mason-registry").get_package("cpptools"):get_install_path()
-      if not dap.adapters["cppdbg"] then
-        require("dap").adapters["cppdbg"] = {
-          id = "cppdbg",
-          type = "executable",
-          command = path .. "/extension/debugAdapters/bin/OpenDebugAD7",
-        }
-      end
+      dap.adapters.gdb = {
+        type = "executable",
+        command = "gdb",
+        args = { "-i", "dap" },
+      }
 
       local pretty_printing = {
         {
@@ -76,7 +72,7 @@ return {
       -- configuration --
       local cpp_launch = {
         name = "Launch Executable",
-        type = "cppdbg",
+        type = "gdb",
         request = "launch",
         program = function()
           return vim.fn.input("Path to executable: ", require("util").get_root() .. "/", "file")
@@ -85,7 +81,7 @@ return {
           return args_string2table(vim.fn.input("Args: "))
         end,
         cwd = "${workspaceFolder}",
-        stopAtEntry = true,
+        stopAtBeginningOfMainSubprogram = true,
         setupCommands = pretty_printing,
       }
 
@@ -98,7 +94,7 @@ return {
 
       local cpp_attach = setmetatable({
         name = "Attach to process",
-        type = "cppdbg",
+        type = "gdb",
         request = "attach",
         setupCommands = pretty_printing,
       }, {
@@ -135,7 +131,7 @@ return {
 
       local cpp_test_launch = {
         name = "Launch Current Test File (Catch2)",
-        type = "cppdbg",
+        type = "gdb",
         request = "launch",
         program = function()
           local test_executable = extract_exectuable_from_file()
@@ -161,7 +157,7 @@ return {
 
       local cpp_test_tag_launch = {
         name = "Launch Current Test File (Catch2, Tag)",
-        type = "cppdbg",
+        type = "gdb",
         request = "launch",
         program = function()
           local test_executable = extract_exectuable_from_file()
@@ -179,7 +175,7 @@ return {
 
       local cpp_last_config = setmetatable({
         name = "Last Config",
-        type = "cppdbg",
+        type = "gdb",
         request = "launch",
       }, {
         __call = function()
