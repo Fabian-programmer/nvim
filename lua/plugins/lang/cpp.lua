@@ -45,22 +45,6 @@ return {
         args = { "-i", "dap" },
       }
 
-      local pretty_printing = {
-        {
-          text = "-enable-pretty-printing",
-          description = "enable pretty printing",
-          ignoreFailures = false,
-        },
-      }
-
-      local args_string2table = function(args_string)
-        local args = {}
-        for word in args_string:gmatch("%S+") do
-          table.insert(args, word)
-        end
-        return args
-      end
-
       -- configuration --
       local cpp_launch = {
         name = "Launch Executable",
@@ -70,40 +54,21 @@ return {
           return vim.fn.input("Path to executable: ", require("util").get_root() .. "/", "file")
         end,
         args = function()
-          return args_string2table(vim.fn.input("Args: "))
+          local args_str = vim.fn.input({
+            prompt = "Arguments: ",
+          })
+          return vim.split(args_str, " +")
         end,
         cwd = "${workspaceFolder}",
         stopAtBeginningOfMainSubprogram = true,
-        setupCommands = pretty_printing,
       }
 
-      local function capture(cmd)
-        local handle = assert(io.popen(cmd, "r"))
-        local output = assert(handle:read("*a"))
-        handle:close()
-        return output
-      end
-
-      local cpp_attach = setmetatable({
+      local cpp_attach = {
         name = "Attach to process",
         type = "gdb",
         request = "attach",
-        setupCommands = pretty_printing,
-      }, {
-        __call = function(config)
-          local result = vim.deepcopy(config)
-
-          local option = require("dap.utils").pick_process()
-          local co = coroutine.running()
-          vim.schedule(function()
-            coroutine.resume(option, co)
-          end)
-          local pid = coroutine.yield()
-          result.processId = pid
-          result.program = capture("readlink -f /proc/" .. tostring(pid) .. "/exe"):sub(1, -2)
-          return result
-        end,
-      })
+        pid = require("dap.utils").pick_process,
+      }
 
       local function extract_exectuable_from_file()
         local file = vim.fn.expand("%:t:r")
@@ -130,8 +95,6 @@ return {
           return require("util").get_root() .. "/bin/" .. test_executable
         end,
         cwd = "${workspaceFolder}",
-        stopAtEntry = false,
-        setupCommands = pretty_printing,
       }
 
       local function get_scenario_line()
@@ -156,11 +119,9 @@ return {
           return require("util").get_root() .. "/bin/" .. test_executable
         end,
         args = function()
-          return args_string2table(get_scenario_line())
+          return vim.split(get_scenario_line(), " +")
         end,
         cwd = "${workspaceFolder}",
-        stopAtEntry = false,
-        setupCommands = pretty_printing,
       }
 
       local last_config = {}
