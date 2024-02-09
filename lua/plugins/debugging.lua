@@ -19,14 +19,14 @@ return {
             },
             {
               elements = {
-                "console",
+                "repl",
               },
               size = 0.3,
               position = "bottom",
             },
           },
           controls = {
-            enabled = true,
+            enabled = false,
           },
         },
         -- stylua: ignore
@@ -85,36 +85,10 @@ return {
         desc = "Terminate",
       },
       {
-        "<leader>dg",
-        function()
-          local current_grid = vim.fn.expand("<cword>")
-
-          local session = require("dap").session()
-          local command = "print " .. current_grid
-          session:evaluate(command, function(err)
-            if err then
-              require("dap.repl").append(err.message)
-              return
-            end
-          end)
-          require("dap.repl").append(command)
-
-          command = "-exec print " .. current_grid
-          session:evaluate(command, function(err)
-            if err then
-              require("dap.repl").append(err.message)
-              return
-            end
-          end)
-          require("dap.repl").append(command)
-        end,
-        desc = "Load grid",
-      },
-      {
         "<leader>do",
         function()
           local session = require("dap").session()
-          local command = "-exec source /home/hfu5fe/cp/cp.avp.openimagedebugger/bin/OpenImageDebugger/oid.py"
+          local command = "source /home/hfu5fe/cp/cp.avp.openimagedebugger/bin/OpenImageDebugger/oid.py"
           session:evaluate(command, function(err)
             if err then
               require("dap.repl").append(err.message)

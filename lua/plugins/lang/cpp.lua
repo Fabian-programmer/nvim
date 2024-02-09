@@ -36,14 +36,6 @@ return {
   {
     "mfussenegger/nvim-dap",
     optional = true,
-    dependencies = {
-      -- Ensure C/C++ debugger is installed
-      "williamboman/mason.nvim",
-      optional = true,
-      opts = function(_, opts)
-        require("util").ensure_installed(opts, "cpptools")
-      end,
-    },
     opts = function()
       local dap = require("dap")
 
