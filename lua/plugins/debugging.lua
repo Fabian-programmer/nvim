@@ -88,7 +88,7 @@ return {
         "<leader>do",
         function()
           local session = require("dap").session()
-          local command = "source /home/hfu5fe/cp/cp.avp.openimagedebugger/bin/OpenImageDebugger/oid.py"
+          local command = "source /usr/local/OpenImageDebugger/oid.py"
           session:evaluate(command, function(err)
             if err then
               require("dap.repl").append(err.message)
