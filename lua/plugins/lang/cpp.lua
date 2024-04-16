@@ -119,7 +119,7 @@ return {
           return require("util").get_root() .. "/bin/" .. test_executable
         end,
         args = function()
-          return vim.split(get_scenario_line(), " +")
+          return get_scenario_line()
         end,
         cwd = "${workspaceFolder}",
       }
