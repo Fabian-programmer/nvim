@@ -52,7 +52,7 @@ vim.keymap.set("n", "<S-Tab>", "<cmd>:bprev<cr>", { desc = "Previous buffer" })
 vim.keymap.set("t", "<Esc>", "<C-\\><C-N>", { desc = "Normal mode" })
 
 -- Open Terminal
-vim.keymap.set({ "i", "n" }, "<A-t>", "<cmd>tab term<cr>", { desc = "Open Terminal" })
+vim.keymap.set({ "i", "n" }, "<A-t>", "<cmd>:terminal<cr>", { desc = "Open Terminal" })
 
 -- windows
 vim.keymap.set("n", "<leader>wo", "<C-W>o", { desc = "Only visible" })
