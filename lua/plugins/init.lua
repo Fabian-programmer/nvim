@@ -123,19 +123,6 @@ return {
     event = "BufReadPre",
   },
 
-  {
-    "numToStr/Comment.nvim",
-    event = { "BufReadPost", "BufNewFile" },
-    opts = {
-      toggler = {
-        line = "<leader>/",
-      },
-      opleader = {
-        line = "<leader>/",
-      },
-    },
-  },
-
   -- search/replace in multiple files
   {
     "nvim-pack/nvim-spectre",
