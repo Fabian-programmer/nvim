@@ -36,9 +36,16 @@ vim.keymap.set("n", "U", "<C-r>")
 vim.keymap.set({ "i", "n" }, "<C-s>", "<cmd>:w<cr><esc>", { desc = "Save Buffer" })
 
 -- change cwd to current file
-vim.keymap.set("n", "<leader>c", function()
+vim.keymap.set("n", "<leader>C", function()
   vim.cmd(":cd " .. require("util").get_root())
 end, { desc = "cd to current file (root dir)" })
+
+-- toggle inlay hints
+if vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint then
+  vim.keymap.set("n", "<leader>ci", function()
+    require("util").toggle_inlay_hints()
+  end, { desc = "Toggle Inlay Hints" })
+end
 
 -- better indenting
 vim.keymap.set("v", "<", "<gv", { desc = "Intend left" })
