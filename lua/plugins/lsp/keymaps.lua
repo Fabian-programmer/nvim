@@ -14,7 +14,6 @@ function M.get()
     { "gD", vim.lsp.buf.declaration, desc = "Goto Declaration" },
     { "gI", "<cmd>Telescope lsp_implementations<cr>", desc = "Goto Implementation" },
     { "gy", "<cmd>Telescope lsp_type_definitions<cr>", desc = "Goto T[y]pe Definition" },
-    { "K", vim.lsp.buf.hover, desc = "Hover" },
     { "gK", vim.lsp.buf.signature_help, desc = "Signature Help", has = "signatureHelp" },
     { "üd", M.diagnostic_goto(true), desc = "Next Diagnostic" },
     { "+d", M.diagnostic_goto(false), desc = "Prev Diagnostic" },

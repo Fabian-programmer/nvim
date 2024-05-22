@@ -33,19 +33,23 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 -- start in insert mode in terminal
 vim.api.nvim_create_autocmd({ "TermOpen", "TermEnter" }, {
   pattern = {
-    "term://*",
+    "term://*bash",
   },
   callback = function()
     vim.cmd("startinsert")
   end,
 })
 
--- bang the terminal
 vim.api.nvim_create_autocmd("TermOpen", {
+  pattern = {
+    "term://*bash",
+  },
   callback = function(event)
-    vim.keymap.set({ "n", "t" }, "<A-q>", function()
-      require("mini.bufremove").delete(0, true)
-    end, { buffer = event.buf, silent = true })
+    -- go to normal mode
+    vim.keymap.set("t", "<Esc>", "<C-\\><C-N>", { desc = "Normal mode", buffer = event.buf, silent = true })
+    -- bang the terminal
+    -- stylua: ignore
+    vim.keymap.set({ "n", "t" }, "<A-q>", function() require("mini.bufremove").delete(0, true) end, { buffer = event.buf, silent = true })
   end,
 })
 

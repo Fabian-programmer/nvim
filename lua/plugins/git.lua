@@ -64,54 +64,19 @@ return {
   },
 
   {
-    "NeogitOrg/neogit",
-    cmd = "Neogit",
-    opts = {
-      disable_commit_confirmation = false,
-      disable_insert_on_commit = false,
-      disable_builtin_notifications = true,
-      auto_show_console = false,
-      remember_settings = false,
-      signs = {
-        -- { CLOSED, OPENED }
-        section = { "", "" },
-        item = { "", "" },
-        hunk = { "", "" },
-      },
-      integrations = { diffview = true },
-      commit_editor = {
-        kind = "split",
-      },
-      rebase_editor = {
-        kind = "split",
-      },
+    "kdheepak/lazygit.nvim",
+    cmd = {
+      "LazyGit",
+      "LazyGitConfig",
+      "LazyGitCurrentFile",
+      "LazyGitFilter",
+      "LazyGitFilterCurrentFile",
     },
     keys = {
-      {
-        "<leader>gg",
-        function()
-          require("neogit").open({ cwd = require("util").get_root() })
-        end,
-        desc = "Neogit",
-      },
-      {
-        "<leader>gl",
-        function()
-          require("neogit.popups.log").create()
-          vim.cmd("normal l")
-          vim.cmd(":wincmd p| wincmd T")
-        end,
-        desc = "Log current",
-      },
-      {
-        "<leader>gL",
-        function()
-          require("neogit.popups.log").create()
-          vim.cmd("normal b")
-          vim.cmd(":wincmd p| wincmd T")
-        end,
-        desc = "Log",
-      },
+      { "<leader>gg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
     },
+    init = function()
+      vim.g.lazygit_floating_window_scaling_factor = 1.0
+    end,
   },
 }

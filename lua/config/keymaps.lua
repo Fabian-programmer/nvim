@@ -48,9 +48,6 @@ vim.keymap.set("v", ">", ">gv", { desc = "Intend right" })
 vim.keymap.set("n", "<Tab>", "<cmd>:bnext<cr>", { desc = "Next buffer" })
 vim.keymap.set("n", "<S-Tab>", "<cmd>:bprev<cr>", { desc = "Previous buffer" })
 
--- Use <esc> to go to normal mode
-vim.keymap.set("t", "<Esc>", "<C-\\><C-N>", { desc = "Normal mode" })
-
 -- Open Terminal
 vim.keymap.set({ "i", "n" }, "<A-t>", "<cmd>:terminal<cr>", { desc = "Open Terminal" })
 
