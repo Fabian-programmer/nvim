@@ -18,7 +18,7 @@ return {
         severity_sort = true,
       },
       inlay_hints = {
-        enabled = true,
+        enabled = false,
       },
       -- add any global capabilities here
       capabilities = {},
