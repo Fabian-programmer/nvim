@@ -30,6 +30,23 @@ vim.api.nvim_create_autocmd("BufReadPost", {
   end,
 })
 
+-- wrap and check for spell in text filetypes
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "gitcommit", "markdown", "adoc" },
+  callback = function()
+    vim.opt_local.wrap = true
+    vim.opt_local.spell = true
+  end,
+})
+
+-- Fix conceallevel for json files
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  pattern = { "json", "jsonc", "json5" },
+  callback = function()
+    vim.opt_local.conceallevel = 0
+  end,
+})
+
 -- start in insert mode in terminal
 vim.api.nvim_create_autocmd({ "TermOpen", "TermEnter" }, {
   pattern = {
