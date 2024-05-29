@@ -35,9 +35,9 @@ vim.keymap.set("n", "U", "<C-r>")
 -- save in insert mode
 vim.keymap.set({ "i", "n" }, "<C-s>", "<cmd>:w<cr><esc>", { desc = "Save Buffer" })
 
--- change cwd to current file
+-- change cwd to current buffer
 vim.keymap.set("n", "<leader>C", function()
-  vim.cmd(":cd " .. require("util").get_root())
+  vim.cmd(":cd %:h")
 end, { desc = "cd to current file (root dir)" })
 
 -- toggle inlay hints
