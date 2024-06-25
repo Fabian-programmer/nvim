@@ -7,6 +7,8 @@ return {
     },
     -- stylua: ignore
     keys = {
+      { "<leader>gW", function() require("gitsigns").blame_line{full=true} end, desc = "Git blame line" },
+      { "<leader>gw", function() require("gitsigns").blame() end, desc = "Git blame" },
       { "gp", function() require("gitsigns").preview_hunk() end, desc = "Git hunk preview" },
       { "gq", function() require("gitsigns").reset_hunk() end,   desc = "Git hunk clear" },
       {
