@@ -81,6 +81,7 @@ vim.api.nvim_create_autocmd("FileType", {
     "Trouble*",
     "dap-float",
     "spectre_panel",
+    "gitsigns*",
   },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
