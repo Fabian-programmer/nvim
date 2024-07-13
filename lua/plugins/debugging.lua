@@ -40,17 +40,6 @@ return {
           dap.listeners.before.event_exited["dapui_config"] = function() dapui.close({}) end
         end,
       },
-
-      -- which key integration
-      {
-        "folke/which-key.nvim",
-        optional = true,
-        opts = {
-          defaults = {
-            ["<leader>d"] = { name = "+debug" },
-          },
-        },
-      },
     },
 
     keys = {

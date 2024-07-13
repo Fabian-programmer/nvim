@@ -49,27 +49,29 @@ return {
     "folke/which-key.nvim",
     event = "VeryLazy",
     opts = {
-      plugins = { spelling = true },
-      defaults = {
-        mode = { "n", "v" },
-        ["g"] = { name = "+goto" },
-        ["<leader>b"] = { name = "+buffer" },
-        ["<leader>c"] = { name = "+code" },
-        ["<leader>f"] = { name = "+find" },
-        ["<leader>h"] = { name = "+help" },
-        ["<leader>g"] = { name = "+git" },
-        ["<leader>gh"] = { name = "+hunk" },
-        ["<leader>r"] = { name = "+replace" },
-        ["<leader>s"] = { name = "+session" },
-        ["<leader><tab>"] = { name = "+tab" },
-        ["<leader>w"] = { name = "+window" },
-        ["<leader>x"] = { name = "+diagnostics/quickfix" },
+      icons = {
+        rules = false,
+      },
+      spec = {
+        {
+          mode = { "n", "v" },
+          { "<leader><tab>", group = "tab" },
+          { "<leader>b", group = "buffer" },
+          { "<leader>c", group = "code" },
+          { "<leader>d", group = "debug" },
+          { "<leader>f", group = "find" },
+          { "<leader>g", group = "git" },
+          { "<leader>h", group = "help" },
+          { "<leader>r", group = "replace" },
+          { "<leader>s", group = "session" },
+          { "<leader>w", group = "window" },
+          { "<leader>x", group = "diagnostics/quickfix" },
+          { "g", group = "goto" },
+        },
       },
     },
     config = function(_, opts)
-      local wk = require("which-key")
-      wk.setup(opts)
-      wk.register(opts.defaults)
+      require("which-key").setup(opts)
     end,
   },
 

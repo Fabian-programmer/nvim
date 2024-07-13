@@ -58,12 +58,6 @@ vim.keymap.set("n", "<S-Tab>", "<cmd>:bprev<cr>", { desc = "Previous buffer" })
 -- Open Terminal
 vim.keymap.set({ "i", "n" }, "<A-t>", "<cmd>:terminal<cr>", { desc = "Open Terminal" })
 
--- windows
-vim.keymap.set("n", "<leader>wo", "<C-W>o", { desc = "Only visible" })
-vim.keymap.set("n", "<leader>wq", "<C-W>c", { desc = "Delete" })
-vim.keymap.set("n", "<leader>-", "<C-W>s", { desc = "Split below" })
-vim.keymap.set("n", "<leader>|", "<C-W>v", { desc = "Split right" })
-
 -- tabs
 vim.keymap.set("n", "<leader><Tab>n", "<cmd>tabnew<cr>", { desc = "New Tab" })
 vim.keymap.set("n", "<leader><Tab><Tab>", "<cmd>tabnext<cr>", { desc = "Next Tab" })
