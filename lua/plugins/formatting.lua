@@ -8,12 +8,11 @@ return {
     {
       "<leader>ct",
       function()
-        local Util = require("lazy.core.util")
         vim.g.autoformat = not vim.g.autoformat
         if vim.g.autoformat then
-          Util.info("Enabled format on save", { title = "Format" })
+          require("lazy.core.util").info("Enabled format on save", { title = "Format" })
         else
-          Util.warn("Disabled format on save", { title = "Format" })
+          require("lazy.core.util").warn("Disabled format on save", { title = "Format" })
         end
       end,
       desc = "Toggle format on save",

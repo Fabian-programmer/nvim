@@ -1,11 +1,14 @@
 return {
+  -- external artefacts
+  {
+    "mason.nvim",
+    opts = { ensure_installed = { "clangd" } },
+  },
+
   -- syntax highlighting
   {
     "nvim-treesitter/nvim-treesitter",
-    optional = true,
-    opts = function(_, opts)
-      require("util").ensure_installed(opts, { "c", "cpp" })
-    end,
+    opts = { ensure_installed = { "c", "cpp" } },
   },
 
   -- lsp includes formatter

@@ -1,12 +1,14 @@
 return {
+  -- external artefacts
+  {
+    "williamboman/mason.nvim",
+    opts = { ensure_installed = { "rust_analyzer", "taplo" } },
+  },
 
   -- syntax highlighting
   {
     "nvim-treesitter/nvim-treesitter",
-    optional = true,
-    opts = function(_, opts)
-      require("util").ensure_installed(opts, { "ron", "rust", "toml" })
-    end,
+    opts = { ensure_installed = { "ron", "rust", "toml" } },
   },
 
   -- lsp
@@ -48,15 +50,6 @@ return {
     },
   },
 
-  -- debugger
-  {
-    "williamboman/mason.nvim",
-    optional = true,
-    opts = function(_, opts)
-      require("util").ensure_installed(opts, "codelldb")
-    end,
-  },
-
   -- auto completion
   {
     "hrsh7th/nvim-cmp",
@@ -73,19 +66,5 @@ return {
         { name = "crates" },
       }))
     end,
-  },
-
-  -- test
-  {
-    "nvim-neotest/neotest",
-    optional = true,
-    dependencies = {
-      "rouge8/neotest-rust",
-    },
-    opts = {
-      adapters = {
-        ["neotest-rust"] = {},
-      },
-    },
   },
 }

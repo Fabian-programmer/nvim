@@ -1,5 +1,3 @@
-local Util = require("lazy.core.util")
-
 local M = {}
 
 M.root_patterns = { ".git" }
@@ -101,11 +99,6 @@ function M.telescope(builtin, opts)
 
     require("telescope.builtin")[builtin](opts)
   end
-end
-
-function M.ensure_installed(opts, args)
-  opts.ensure_installed = opts.ensure_installed or {}
-  vim.list_extend(opts.ensure_installed, { args })
 end
 
 function M.toggle_inlay_hints(buf, value)

@@ -1,23 +1,19 @@
 return {
+  -- external artefacts
+  {
+    "mason.nvim",
+    opts = { ensure_installed = { "stylua" } },
+  },
+
   -- syntax highlighting
   {
     "nvim-treesitter/nvim-treesitter",
-    optional = true,
-    opts = function(_, opts)
-      require("util").ensure_installed(opts, "lua")
-    end,
+    opts = { ensure_installed = { "lua" } },
   },
 
   -- formatter
   {
     "stevearc/conform.nvim",
-    dependencies = {
-      "williamboman/mason.nvim",
-      opts = function(_, opts)
-        opts.ensure_installed = opts.ensure_installed or {}
-        vim.list_extend(opts.ensure_installed, { "stylua" })
-      end,
-    },
     opts = {
       formatters_by_ft = {
         lua = { "stylua" },
