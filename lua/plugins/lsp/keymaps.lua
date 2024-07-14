@@ -6,7 +6,7 @@ function M.get()
   if M._keys then
     return M._keys
   end
-
+  -- stylua: ignore
   M._keys = {
     { "cd", vim.diagnostic.open_float, desc = "Line Diagnostics" },
     { "gd", "<cmd>Telescope lsp_definitions<cr>", desc = "Goto Definition", has = "definition" },
@@ -21,22 +21,10 @@ function M.get()
     { "+e", M.diagnostic_goto(false, "ERROR"), desc = "Prev Error" },
     { "üw", M.diagnostic_goto(true, "WARN"), desc = "Next Warning" },
     { "+w", M.diagnostic_goto(false, "WARN"), desc = "Prev Warning" },
-    {
-      "<c-k>",
-      vim.lsp.buf.signature_help,
-      mode = "i",
-      desc = "Signature Help",
-      has = "signatureHelp",
-    },
-    {
-      "<leader>ca",
-      vim.lsp.buf.code_action,
-      desc = "Code Action",
-      mode = { "n", "v" },
-      has = "codeAction",
-    },
+    { "<c-k>", vim.lsp.buf.signature_help, mode = "i", desc = "Signature Help", has = "signatureHelp" },
+    { "<leader>ca", vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "v" }, has = "codeAction" },
+    { "<leader>cr", vim.lsp.buf.rename, desc = "Rename", has = "rename" },
   }
-  M._keys[#M._keys + 1] = { "<leader>cr", vim.lsp.buf.rename, desc = "Rename", has = "rename" }
   return M._keys
 end
 
