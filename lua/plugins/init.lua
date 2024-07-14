@@ -49,6 +49,9 @@ return {
     "folke/which-key.nvim",
     event = "VeryLazy",
     opts = {
+      modes = {
+        x = false, -- Visual mode
+      },
       icons = {
         rules = false,
       },
@@ -68,6 +71,16 @@ return {
           { "<leader>x", group = "diagnostics/quickfix" },
           { "g", group = "goto" },
         },
+      },
+    },
+    keys = {
+      {
+        "<leader>?",
+        function()
+          require("which-key").show({ global = true })
+        end,
+        desc = "Keymaps",
+        mode = { "n", "v" },
       },
     },
   },
