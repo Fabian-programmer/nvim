@@ -70,9 +70,6 @@ return {
         },
       },
     },
-    config = function(_, opts)
-      require("which-key").setup(opts)
-    end,
   },
 
   -- The framework we use to run tasks
@@ -188,7 +185,6 @@ return {
 
   {
     "willothy/flatten.nvim",
-    config = true,
     lazy = false,
     priority = 1001,
   },
@@ -197,6 +193,5 @@ return {
   {
     "Fabian-programmer/compiler-explorer.nvim",
     cmd = { "CECompile" },
-    config = true,
   },
 }

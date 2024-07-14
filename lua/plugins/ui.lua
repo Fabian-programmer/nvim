@@ -37,7 +37,7 @@ return {
   {
     "akinsho/bufferline.nvim",
     event = "VeryLazy",
-    dependencies = { "tiagovla/scope.nvim", config = true },
+    dependencies = { "tiagovla/scope.nvim" },
     opts = {
       options = {
         always_show_bufferline = true,
