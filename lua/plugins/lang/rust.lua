@@ -2,7 +2,7 @@ return {
   -- external artefacts
   {
     "williamboman/mason.nvim",
-    opts = { ensure_installed = { "rust_analyzer", "taplo" } },
+    opts = { ensure_installed = { "rust-analyzer", "taplo" } },
   },
 
   -- syntax highlighting
