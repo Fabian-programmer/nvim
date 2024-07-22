@@ -22,13 +22,13 @@ return {
     },
   },
 
-  -- lsp with formatting
-  {
-    "neovim/nvim-lspconfig",
-    opts = {
-      servers = {
-        neocmake = {},
-      },
-    },
-  },
+  -- lsp with formatting. This has horribly many dependencies. Don't use it
+  -- {
+  --   "neovim/nvim-lspconfig",
+  --   opts = {
+  --     servers = {
+  --       neocmake = {},
+  --     },
+  --   },
+  -- },
 }
