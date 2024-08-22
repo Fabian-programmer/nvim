@@ -124,15 +124,23 @@ return {
 
   -- search/replace in multiple files
   {
-    "nvim-pack/nvim-spectre",
-    build = false,
-    opts = { open_cmd = "noswapfile vnew" },
+    "MagicDuck/grug-far.nvim",
     -- stylua: ignore
     keys = {
-      { "<leader>rr", function() require("spectre").open() end, desc = "Replace all in cwd" },
-      { "<leader>rw", function() require("spectre").open_visual({ select_word = true }) end, desc = "Replace word under cursor" },
-      { "<leader>rf", function() require("spectre").open_file_search() end, desc = "Replace in file" },
+      { "<leader>rr", mode = "n", function() require('grug-far').grug_far({ prefills = { paths = require("util").get_root()} }) end, desc = "Replace all" },
+
+      { "<leader>rw", mode = "n", function() require('grug-far').grug_far({ prefills = { search = vim.fn.expand("<cword>") } }) end, desc = "Replace word under cursor" },
+      { "<leader>rf", mode = "n", function() require('grug-far').grug_far({ prefills = { paths = vim.fn.expand("%") } }) end, desc = "Replace in file" },
+      { "<leader>rf", mode = "v", function() require('grug-far').with_visual_selection({ prefills = { paths = vim.fn.expand("%") } }) end, desc = "Replace in file" },
     },
+    config = function()
+      require("grug-far").setup({
+        transient = true,
+        keymaps = {
+          close = { n = "q" },
+        },
+      })
+    end,
   },
 
   -- diagnostics
