@@ -80,7 +80,6 @@ vim.api.nvim_create_autocmd("FileType", {
     "qf",
     "Trouble*",
     "dap-float",
-    "spectre_panel",
     "gitsigns*",
   },
   callback = function(event)
