@@ -23,12 +23,21 @@ return {
       "LazyGit",
       "LazyGitConfig",
     },
+    -- stylua: ignore
     keys = {
       { "<leader>gg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
       { "<leader>gf", "<cmd>LazyGitFilterCurrentFile<cr>", desc = "LazyGit Current File" },
+      { "<leader>gp", function() require("telescope").extensions.lazygit.lazygit() end, desc = "LazyGit Tracked Projects" },
+    },
+    dependencies = {
+      "nvim-telescope/telescope.nvim",
+      "nvim-lua/plenary.nvim",
     },
     init = function()
       vim.g.lazygit_floating_window_scaling_factor = 1.0
+    end,
+    config = function()
+      require("telescope").load_extension("lazygit")
     end,
   },
 }

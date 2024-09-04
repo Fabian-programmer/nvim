@@ -87,3 +87,9 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
   end,
 })
+
+vim.api.nvim_create_autocmd("BufEnter", {
+  callback = function()
+    require("lazygit.utils").project_root_dir()
+  end,
+})
