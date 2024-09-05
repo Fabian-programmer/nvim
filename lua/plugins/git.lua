@@ -18,7 +18,7 @@ return {
   },
 
   {
-    "kdheepak/lazygit.nvim",
+    "Fabian-programmer/lazygit.nvim",
     cmd = {
       "LazyGit",
       "LazyGitConfig",
