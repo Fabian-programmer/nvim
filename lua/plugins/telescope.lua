@@ -44,7 +44,7 @@ return {
     { "gw", mode = "n", function() require("telescope-live-grep-args.shortcuts").grep_word_under_cursor() end, desc = "Find Word" },
     -- stylua: ignore
     { "gw", mode = "v", function() require("telescope-live-grep-args.shortcuts").grep_visual_selection() end, desc = "Find Selection" },
-    { "<leader>uC", "<cmd>Telescope colorscheme<cr>", desc = "Colorscheme" },
+    { "<leader>hC", "<cmd>Telescope colorscheme<cr>", desc = "Colorschemes" },
   },
   dependencies = {
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },

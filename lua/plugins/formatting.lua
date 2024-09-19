@@ -2,8 +2,8 @@ return {
   "stevearc/conform.nvim",
   event = { "BufWritePre" },
   cmd = { "ConformInfo" },
+  -- stylua: ignore
   keys = {
-    -- stylua: ignore
     { "<leader>cf", function() require("conform").format({ async = true, lsp_fallback = true }) end, desc = "Format" },
     {
       "<leader>ct",
