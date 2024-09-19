@@ -112,4 +112,19 @@ function M.toggle_inlay_hints(buf, value)
     ih.enable(value, { bufnr = buf })
   end
 end
+
+function M.create_fullscreen_terminal(command)
+  require("toggleterm.terminal").Terminal
+    :new({
+      cmd = command,
+      hidden = true,
+      direction = "float",
+      float_opts = {
+        width = vim.o.columns,
+        height = vim.o.lines,
+      },
+    })
+    :toggle()
+end
+
 return M

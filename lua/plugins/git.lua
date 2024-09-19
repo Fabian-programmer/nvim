@@ -18,26 +18,16 @@ return {
   },
 
   {
-    "Fabian-programmer/lazygit.nvim",
-    cmd = {
-      "LazyGit",
-      "LazyGitConfig",
-    },
-    -- stylua: ignore
+    "akinsho/toggleterm.nvim",
+    version = "*",
     keys = {
-      { "<leader>gg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
-      { "<leader>gf", "<cmd>LazyGitFilterCurrentFile<cr>", desc = "LazyGit Current File" },
-      { "<leader>gp", function() require("telescope").extensions.lazygit.lazygit() end, desc = "LazyGit Tracked Projects" },
+      {
+        "<leader>gg",
+        function()
+          require("util").create_fullscreen_terminal("lazygit")
+        end,
+        desc = "Lazy Git",
+      },
     },
-    dependencies = {
-      "nvim-telescope/telescope.nvim",
-      "nvim-lua/plenary.nvim",
-    },
-    init = function()
-      vim.g.lazygit_floating_window_scaling_factor = 0.99
-    end,
-    config = function()
-      require("telescope").load_extension("lazygit")
-    end,
   },
 }

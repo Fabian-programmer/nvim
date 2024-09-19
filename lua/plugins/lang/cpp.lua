@@ -152,4 +152,10 @@ return {
       end
     end,
   },
+
+  -- compiler explorer
+  {
+    "Fabian-programmer/compiler-explorer.nvim",
+    cmd = { "CECompile" },
+  },
 }

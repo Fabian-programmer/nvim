@@ -197,9 +197,17 @@ return {
     priority = 1001,
   },
 
-  -- compiler explorer
   {
-    "Fabian-programmer/compiler-explorer.nvim",
-    cmd = { "CECompile" },
+    "akinsho/toggleterm.nvim",
+    version = "*",
+    keys = {
+      {
+        "<leader>hp",
+        function()
+          require("util").create_fullscreen_terminal("htop")
+        end,
+        desc = "Htop",
+      },
+    },
   },
 }
