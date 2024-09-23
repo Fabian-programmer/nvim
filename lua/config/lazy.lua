@@ -22,7 +22,6 @@ require("lazy").setup({
     { import = "plugins.lang.python" },
     -- { import = "plugins.lang.rust" },
   },
-  concurrency = 10,
   defaults = {
     lazy = true,
     version = false, -- always use the latest git commit
