@@ -1,7 +1,7 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
-    version = false, -- last release is way too old and doesn't work on Windows
+    version = false,
     build = ":TSUpdate",
     event = { "BufReadPost", "BufNewFile" },
     lazy = vim.fn.argc(-1) == 0, -- load treesitter early when opening a file from the cmdline
@@ -14,31 +14,11 @@ return {
       require("lazy.core.loader").add_to_rtp(plugin)
       require("nvim-treesitter.query_predicates")
     end,
-    dependencies = {
-      {
-        "nvim-treesitter/nvim-treesitter-textobjects",
-        init = function()
-          local plugin = require("lazy.core.config").spec.plugins["nvim-treesitter"]
-          local opts = require("lazy.core.plugin").values(plugin, "opts", false)
-          local enabled = false
-          if opts.textobjects then
-            for _, mod in ipairs({ "move", "select", "swap", "lsp_interop" }) do
-              if opts.textobjects[mod] and opts.textobjects[mod].enable then
-                enabled = true
-                break
-              end
-            end
-          end
-          if not enabled then
-            require("lazy.core.loader").disable_rtp_plugin("nvim-treesitter-textobjects")
-          end
-        end,
-      },
-    },
     keys = {
       { "<c-space>", desc = "Increment selection" },
       { "<bs>", desc = "Decrement selection", mode = "x" },
     },
+    opts_extend = { "ensure_installed" },
     opts = {
       highlight = { enable = true },
       indent = { enable = true },
@@ -58,10 +38,19 @@ return {
       incremental_selection = {
         enable = true,
         keymaps = {
-          init_selection = "<C-space>",
-          node_incremental = "<C-space>",
+          init_selection = "<A-space>",
+          node_incremental = "<A-space>",
           scope_incremental = false,
           node_decremental = "<bs>",
+        },
+      },
+      textobjects = {
+        move = {
+          enable = true,
+          goto_next_start = { ["+f"] = "@function.outer", ["+c"] = "@class.outer", ["+a"] = "@parameter.inner" },
+          goto_next_end = { ["+F"] = "@function.outer", ["+C"] = "@class.outer", ["+A"] = "@parameter.inner" },
+          goto_previous_start = { ["üf"] = "@function.outer", ["üc"] = "@class.outer", ["üa"] = "@parameter.inner" },
+          goto_previous_end = { ["üF"] = "@function.outer", ["üC"] = "@class.outer", ["üA"] = "@parameter.inner" },
         },
       },
     },
@@ -77,6 +66,20 @@ return {
         end, opts.ensure_installed)
       end
       require("nvim-treesitter.configs").setup(opts)
+    end,
+  },
+
+  {
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    event = "VeryLazy",
+    enabled = true,
+    config = function()
+      local plugin = require("lazy.core.config").spec.plugins["nvim-treesitter"]
+      -- If treesitter is already loaded, we need to run config again for textobjects
+      if plugin then
+        local opts = require("lazy.core.plugin").values(plugin, "opts", false)
+        require("nvim-treesitter.configs").setup({ textobjects = opts.textobjects })
+      end
     end,
   },
 }
