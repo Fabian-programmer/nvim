@@ -85,7 +85,11 @@ return {
         selection_caret = " ",
         winblend = borderless and 0 or 10,
       },
-      pickers = {},
+      pickers = {
+        colorscheme = {
+          enable_preview = true,
+        },
+      },
       extensions = {
         live_grep_args = {
           auto_quoting = true,
