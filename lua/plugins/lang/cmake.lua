@@ -2,7 +2,7 @@ return {
   -- external artefacts
   {
     "mason.nvim",
-    opts = { ensure_installed = { "cmakelint", "neocmake" } },
+    opts = { ensure_installed = { "cmakelint" } },
   },
 
   -- syntax highlighting
@@ -21,14 +21,4 @@ return {
       },
     },
   },
-
-  -- lsp with formatting. This has horribly many dependencies. Don't use it
-  -- {
-  --   "neovim/nvim-lspconfig",
-  --   opts = {
-  --     servers = {
-  --       neocmake = {},
-  --     },
-  --   },
-  -- },
 }

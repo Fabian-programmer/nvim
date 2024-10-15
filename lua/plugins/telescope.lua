@@ -127,7 +127,6 @@ return {
     telescope.load_extension("live_grep_args")
     telescope.load_extension("undo")
     telescope.load_extension("scope")
-    telescope.load_extension("possession")
     telescope.load_extension("cmake")
   end,
 }

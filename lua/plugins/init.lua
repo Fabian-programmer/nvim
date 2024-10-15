@@ -5,45 +5,6 @@ return {
     lazy = true,
   },
 
-  -- session manager
-  {
-    "jedrzejboczar/possession.nvim",
-    event = "BufReadPre",
-    cmd = { "PossessionLoad", "PossessionList" },
-    keys = {
-      {
-        "<leader>sl",
-        function()
-          require("telescope").extensions.possession.list()
-        end,
-        desc = "List Sessions",
-      },
-      {
-        "<leader>ss",
-        function()
-          local input = vim.fn.input("Enter the session name: ")
-          if input ~= "" then
-            require("possession.session").save(input)
-          else
-            print("No input provided.")
-          end
-        end,
-        desc = "Save Session",
-      },
-    },
-    opts = {
-      telescope = {
-        list = {
-          default_action = "load",
-          mappings = {
-            delete = { n = "d", i = "<c-d>" },
-            rename = { n = "r", i = "<c-r>" },
-          },
-        },
-      },
-    },
-  },
-
   -- which-key
   {
     "folke/which-key.nvim",
@@ -72,7 +33,6 @@ return {
     },
   },
 
-  -- The framework we use to run tasks
   {
     "stevearc/overseer.nvim",
     opts = {
@@ -127,7 +87,6 @@ return {
     -- stylua: ignore
     keys = {
       { "<leader>rr", mode = "n", function() require('grug-far').grug_far({ prefills = { paths = require("util").get_root()} }) end, desc = "Replace all" },
-
       { "<leader>rw", mode = "n", function() require('grug-far').grug_far({ prefills = { search = vim.fn.expand("<cword>") } }) end, desc = "Replace word under cursor" },
       { "<leader>rf", mode = "n", function() require('grug-far').grug_far({ prefills = { paths = vim.fn.expand("%") } }) end, desc = "Replace in file" },
       { "<leader>rf", mode = "v", function() require('grug-far').with_visual_selection({ prefills = { paths = vim.fn.expand("%") } }) end, desc = "Replace in file" },
@@ -143,7 +102,6 @@ return {
   },
 
   -- diagnostics
-
   {
     "folke/trouble.nvim",
     cmd = { "TroubleToggle", "Trouble" },
@@ -210,7 +168,7 @@ return {
         function()
           require("util").create_fullscreen_terminal("htop")
         end,
-        desc = "Htop",
+        desc = "htop",
       },
     },
   },
