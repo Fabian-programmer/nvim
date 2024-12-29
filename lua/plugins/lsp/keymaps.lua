@@ -9,11 +9,11 @@ function M.get()
   -- stylua: ignore
   M._keys = {
     { "cd", vim.diagnostic.open_float, desc = "Line Diagnostics" },
-    { "gd", "<cmd>Telescope lsp_definitions<cr>", desc = "Goto Definition", has = "definition" },
-    { "gr", "<cmd>Telescope lsp_references<cr>", desc = "References" },
+    { "gd", vim.lsp.buf.definition, desc = "Goto Definition", has = "definition" },
+    { "gr", vim.lsp.buf.references, desc = "References", nowait = true },
     { "gD", vim.lsp.buf.declaration, desc = "Goto Declaration" },
-    { "gI", "<cmd>Telescope lsp_implementations<cr>", desc = "Goto Implementation" },
-    { "gy", "<cmd>Telescope lsp_type_definitions<cr>", desc = "Goto T[y]pe Definition" },
+    { "gI", vim.lsp.buf.implementation, desc = "Goto Implementation" },
+    { "gy", vim.lsp.buf.type_definition, desc = "Goto T[y]pe Definition" },
     { "gK", vim.lsp.buf.signature_help, desc = "Signature Help", has = "signatureHelp" },
     { "üd", M.diagnostic_goto(true), desc = "Next Diagnostic" },
     { "+d", M.diagnostic_goto(false), desc = "Prev Diagnostic" },
