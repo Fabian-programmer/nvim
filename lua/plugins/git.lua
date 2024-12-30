@@ -20,14 +20,9 @@ return {
   {
     "akinsho/toggleterm.nvim",
     version = "*",
+    -- stylua: ignore
     keys = {
-      {
-        "<leader>gg",
-        function()
-          require("util").create_fullscreen_terminal("lazygit")
-        end,
-        desc = "Lazy Git",
-      },
+      { "<leader>gg", function() require("util").create_fullscreen_terminal("lazygit") end, desc = "Lazy Git" },
     },
   },
 }

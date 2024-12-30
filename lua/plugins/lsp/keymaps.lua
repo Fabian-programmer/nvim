@@ -10,20 +10,21 @@ function M.get()
   M._keys = {
     { "cd", vim.diagnostic.open_float, desc = "Line Diagnostics" },
     { "gd", vim.lsp.buf.definition, desc = "Goto Definition", has = "definition" },
-    { "gr", vim.lsp.buf.references, desc = "References", nowait = true },
+    { "gr", function() require('fzf-lua').lsp_references() end, desc = "References", nowait = true },
     { "gD", vim.lsp.buf.declaration, desc = "Goto Declaration" },
     { "gI", vim.lsp.buf.implementation, desc = "Goto Implementation" },
     { "gy", vim.lsp.buf.type_definition, desc = "Goto T[y]pe Definition" },
     { "gK", vim.lsp.buf.signature_help, desc = "Signature Help", has = "signatureHelp" },
-    { "üd", M.diagnostic_goto(true), desc = "Next Diagnostic" },
-    { "+d", M.diagnostic_goto(false), desc = "Prev Diagnostic" },
-    { "üe", M.diagnostic_goto(true, "ERROR"), desc = "Next Error" },
-    { "+e", M.diagnostic_goto(false, "ERROR"), desc = "Prev Error" },
-    { "üw", M.diagnostic_goto(true, "WARN"), desc = "Next Warning" },
-    { "+w", M.diagnostic_goto(false, "WARN"), desc = "Prev Warning" },
     { "<c-k>", vim.lsp.buf.signature_help, mode = "i", desc = "Signature Help", has = "signatureHelp" },
     { "<leader>ca", vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "v" }, has = "codeAction" },
     { "<leader>cr", vim.lsp.buf.rename, desc = "Rename", has = "rename" },
+    -- diagnostics
+    { "üd", vim.diagnostic.goto_next, desc = "Next Diagnostic" },
+    { "+d", vim.diagnostic.goto_prev, desc = "Prev Diagnostic" },
+    { "üe", function() vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR }) end, desc = "Next Error" },
+    { "+e", function() vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR }) end, desc = "Prev Error" },
+    { "üw", function() vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.WARN }) end, desc = "Next Warning" },
+    { "+w", function() vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.WARN }) end, desc = "Prev Warning" },
   }
   return M._keys
 end
@@ -66,14 +67,6 @@ function M.on_attach(_, buffer)
       opts.buffer = buffer
       vim.keymap.set(keys.mode or "n", keys.lhs, keys.rhs, opts)
     end
-  end
-end
-
-function M.diagnostic_goto(next, severity)
-  local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
-  severity = severity and vim.diagnostic.severity[severity] or nil
-  return function()
-    go({ severity = severity })
   end
 end
 

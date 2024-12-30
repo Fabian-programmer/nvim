@@ -22,7 +22,6 @@ return {
     lazy = true,
     init = function()
       vim.ui.select = function(...)
-        ---@diagnostic disable-next-line: duplicate-set-field
         require("lazy").load({ plugins = { "dressing.nvim" } })
         return vim.ui.select(...)
       end
@@ -212,16 +211,7 @@ return {
   },
 
   {
-    "leath-dub/snipe.nvim",
-    keys = {
-      {
-        "ft",
-        function()
-          require("snipe").open_buffer_menu()
-        end,
-        desc = "Open Snipe buffer menu",
-      },
-    },
-    opts = {},
+    "echasnovski/mini.trailspace",
+    event = "BufReadPre",
   },
 }

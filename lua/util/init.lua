@@ -127,4 +127,27 @@ function M.create_fullscreen_terminal(command)
     :toggle()
 end
 
+function M.projects(opts)
+  local project_file = "~/.local/share/nvim/projects.txt"
+  opts = opts or {}
+  opts.prompt = "Projects> "
+  opts.actions = {
+    ["default"] = function(selected)
+      vim.cmd("cd " .. selected[1])
+    end,
+  }
+  require("fzf-lua").fzf_exec("cat " .. project_file, opts)
+end
+
+function M.find_directory(opts)
+  opts = opts or {}
+  opts.prompt = "Directories> "
+  opts.actions = {
+    ["default"] = function(selected)
+      vim.cmd("cd " .. selected[1])
+    end,
+  }
+  require("fzf-lua").fzf_exec("fd --type d . $HOME", opts)
+end
+
 return M

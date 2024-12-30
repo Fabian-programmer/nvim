@@ -158,4 +158,54 @@ return {
     "Fabian-programmer/compiler-explorer.nvim",
     cmd = { "CECompile" },
   },
+
+  -- find cmake targets
+  {
+    "ibhagwan/fzf-lua",
+    optional = true,
+    keys = {
+      {
+        "<leader>cc",
+        function()
+          local buildFolder = require("util").get_root() .. "/build"
+          local bashCommand = "cmake --build " .. buildFolder .. " --target help"
+
+          require("fzf-lua").fzf_exec(bashCommand, {
+            fn_transform = function(x)
+              if x:match("^%.%.%.%s*(.+)") then -- filter only results with "... word"
+                return x:match("^%S+%s+(%S+)") -- return second word
+              end
+            end,
+            actions = {
+              ["default"] = function(selected, _)
+                local overseer = require("overseer")
+                local task = overseer.new_task({
+                  name = "- Build",
+                  strategy = {
+                    "orchestrator",
+                    tasks = {
+                      {
+                        "shell",
+                        name = "- Build this target → " .. selected[1],
+                        cwd = require("util").get_root(),
+                        cmd = "cmake --build build --target " .. selected[1] .. " -- -j8",
+                      },
+                    },
+                  },
+                })
+                task:start()
+                vim.cmd("OverseerOpen")
+              end,
+              ["ctrl-y"] = function(selected, _)
+                vim.fn.setreg("+", selected[1])
+              end,
+            },
+            prompt = "CMake Targets> ",
+            previewer = false,
+          })
+        end,
+        desc = "CMake Targets",
+      },
+    },
+  },
 }
