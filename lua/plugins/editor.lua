@@ -14,7 +14,7 @@ return {
   {
     "ibhagwan/fzf-lua",
     dependencies = { "nvim-tree/nvim-web-devicons" },
-    opts = function(_, opts)
+    opts = function(_, _)
       local actions = require("fzf-lua.actions")
 
       return {
@@ -187,6 +187,15 @@ return {
         end,
         desc = "Next Trouble/Quickfix Item",
       },
+    },
+  },
+
+  {
+    "akinsho/toggleterm.nvim",
+    optional = true,
+    -- stylua: ignore
+    keys = {
+      { "<leader>hp", function() require("util").create_fullscreen_terminal("htop") end, desc = "Htop" },
     },
   },
 }

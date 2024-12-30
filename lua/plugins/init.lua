@@ -1,14 +1,14 @@
 return {
   {
-    "nvim-lua/plenary.nvim",
-    lazy = true,
-  },
-
-  {
     "willothy/flatten.nvim",
     config = true,
     lazy = false,
     priority = 1001,
+  },
+
+  {
+    "nvim-lua/plenary.nvim",
+    lazy = true,
   },
 
   -- framework to run tasks
@@ -36,9 +36,5 @@ return {
   {
     "akinsho/toggleterm.nvim",
     version = "*",
-    -- stylua: ignore
-    keys = {
-      { "<leader>hp", function() require("util").create_fullscreen_terminal("htop") end, desc = "Htop" },
-    },
   },
 }
