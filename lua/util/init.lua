@@ -66,41 +66,6 @@ function M.get_root()
   return root
 end
 
--- this will return a function that calls telescope.
--- cwd will default to util.get_root
--- for `files`, git_files or find_files will be chosen depending on .git
-function M.telescope(builtin, opts)
-  local params = { builtin = builtin, opts = opts }
-  return function()
-    builtin = params.builtin
-    opts = params.opts
-    opts = vim.tbl_deep_extend("force", { cwd = M.get_root() }, opts or {})
-    if builtin == "files" then
-      if vim.loop.fs_stat((opts.cwd or vim.loop.cwd()) .. "/.git") then
-        opts.show_untracked = true
-        builtin = "git_files"
-      else
-        builtin = "find_files"
-      end
-    end
-    if opts.cwd and opts.cwd ~= vim.loop.cwd() then
-      opts.attach_mappings = function(_, map)
-        map("i", "<a-c>", function()
-          local action_state = require("telescope.actions.state")
-          local line = action_state.get_current_line()
-          M.telescope(
-            params.builtin,
-            vim.tbl_deep_extend("force", {}, params.opts or {}, { cwd = false, default_text = line })
-          )()
-        end)
-        return true
-      end
-    end
-
-    require("telescope.builtin")[builtin](opts)
-  end
-end
-
 function M.toggle_inlay_hints(buf, value)
   local ih = vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint
   if type(ih) == "function" then
@@ -146,8 +111,9 @@ function M.find_directory(opts)
     ["default"] = function(selected)
       vim.cmd("cd " .. selected[1])
     end,
+    ["ctrl-g"] = { require("fzf-lua.actions").toggle_hidden },
   }
-  require("fzf-lua").fzf_exec("fd --type d . $HOME", opts)
+  require("fzf-lua").fzf_exec("fd --type d --hidden --follow --exclude .git . $HOME", opts)
 end
 
 return M

@@ -73,3 +73,8 @@ end, { desc = "Projects" })
 vim.keymap.set("n", "<A-c>", function()
   require("util").find_directory()
 end, { desc = "Directories" })
+
+-- cmake targets
+vim.keymap.set("n", "<leader>cc", function()
+  require("util.cmake").find_cmake_targets()
+end, { desc = "CMake Targets" })
