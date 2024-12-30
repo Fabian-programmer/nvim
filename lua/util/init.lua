@@ -113,7 +113,10 @@ function M.find_directory(opts)
     end,
     ["ctrl-g"] = { require("fzf-lua.actions").toggle_hidden },
   }
-  require("fzf-lua").fzf_exec("fd --type d --hidden --follow --exclude .git . $HOME", opts)
+  require("fzf-lua").fzf_exec(
+    "fd --type d --hidden --follow --exclude .git --exclude .npm --exclude node_modules . $HOME",
+    opts
+  )
 end
 
 return M
