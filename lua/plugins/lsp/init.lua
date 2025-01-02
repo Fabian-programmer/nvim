@@ -59,34 +59,15 @@ return {
         return ret
       end
 
-      -- diagnostics
+      -- update diagnostic icons
       for name, icon in pairs(require("config").icons.diagnostics) do
         name = "DiagnosticSign" .. name
         vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
       end
 
-      if opts.inlay_hints.enabled then
-        on_attach(function(client, buffer)
-          if client.supports_method("textDocument/inlayHint") then
-            require("util").toggle_inlay_hints(buffer, true)
-          end
-        end)
-      end
-
-      if type(opts.diagnostics.virtual_text) == "table" and opts.diagnostics.virtual_text.prefix == "icons" then
-        opts.diagnostics.virtual_text.prefix = vim.fn.has("nvim-0.10.0") == 0 and "●"
-          or function(diagnostic)
-            local icons = require("config").icons.diagnostics
-            for d, icon in pairs(icons) do
-              if diagnostic.severity == vim.diagnostic.severity[d:upper()] then
-                return icon
-              end
-            end
-          end
-      end
-
       vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
 
+      -- merge capabilities
       local servers = opts.servers
       local has_blink, blink = pcall(require, "blink.cmp")
       local capabilities = vim.tbl_deep_extend(
@@ -97,6 +78,7 @@ return {
         opts.capabilities or {}
       )
 
+      -- setup lsp server
       local function setup(server)
         local server_opts = vim.tbl_deep_extend("force", {
           capabilities = vim.deepcopy(capabilities),
@@ -106,15 +88,11 @@ return {
           if opts.setup[server](server, server_opts) then
             return
           end
-        elseif opts.setup["*"] then
-          if opts.setup["*"](server, server_opts) then
-            return
-          end
         end
         require("lspconfig")[server].setup(server_opts)
       end
 
-      -- get all the servers that are available thourgh mason-lspconfig
+      -- get all the servers that are available thourgh mason-lspconfig and install lsp default config
       local have_mason, mlsp = pcall(require, "mason-lspconfig")
       local all_mslp_servers = {}
       if have_mason then
@@ -143,25 +121,5 @@ return {
   {
     "williamboman/mason.nvim",
     cmd = "Mason",
-    opts = {
-      ensure_installed = {},
-    },
-    config = function(_, opts)
-      require("mason").setup(opts)
-      local mr = require("mason-registry")
-      local function ensure_installed()
-        for _, tool in ipairs(opts.ensure_installed) do
-          local p = mr.get_package(tool)
-          if not p:is_installed() then
-            p:install()
-          end
-        end
-      end
-      if mr.refresh then
-        mr.refresh(ensure_installed)
-      else
-        ensure_installed()
-      end
-    end,
   },
 }
