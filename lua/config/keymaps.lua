@@ -78,3 +78,8 @@ end, { desc = "Directories" })
 vim.keymap.set("n", "<leader>cc", function()
   require("util.cmake").find_cmake_targets()
 end, { desc = "CMake Targets" })
+
+-- find and open corresponding assembly
+vim.keymap.set("n", "<leader>ba", function()
+  require("util.workflow").open_asm_file_in_split()
+end, { desc = "Find corresponding assembly file" })

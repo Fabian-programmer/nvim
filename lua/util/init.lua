@@ -44,8 +44,8 @@ function M.get_root()
           and vim.tbl_map(function(ws)
             return vim.uri_to_fname(ws.uri)
           end, workspace)
-        or client.config.root_dir and { client.config.root_dir }
-        or {}
+          or client.config.root_dir and { client.config.root_dir }
+          or {}
       for _, p in ipairs(paths) do
         local r = vim.loop.fs_realpath(p)
         if path:find(r, 1, true) then
@@ -80,16 +80,16 @@ end
 
 function M.create_fullscreen_terminal(command)
   require("toggleterm.terminal").Terminal
-    :new({
-      cmd = command,
-      hidden = true,
-      direction = "float",
-      float_opts = {
-        width = vim.o.columns,
-        height = vim.o.lines,
-      },
-    })
-    :toggle()
+      :new({
+        cmd = command,
+        hidden = true,
+        direction = "float",
+        float_opts = {
+          width = vim.o.columns,
+          height = vim.o.lines,
+        },
+      })
+      :toggle()
 end
 
 function M.projects(opts)
@@ -117,6 +117,30 @@ function M.find_directory(opts)
     "fd --type d --hidden --follow --exclude .git --exclude .npm --exclude node_modules . $HOME",
     opts
   )
+end
+
+function M.find_latest_build_folder()
+  local build_path = M.get_root() .. "/build"
+  local latest_folder = nil
+  local latest_time = 0
+
+  -- Iterate through files in the specified directory
+  local files = vim.fn.glob(build_path .. '/*', 0, 1) -- Get all files and directories
+
+  for _, file in ipairs(files) do
+    -- Check if the file is a directory
+    if vim.fn.isdirectory(file) == 1 then
+      -- Get the modification time of the directory
+      local mod_time = vim.fn.getftime(file)
+      -- Check if this directory is the latest one
+      if mod_time > latest_time then
+        latest_time = mod_time
+        latest_folder = file
+      end
+    end
+  end
+
+  return latest_folder
 end
 
 return M
