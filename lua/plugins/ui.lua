@@ -1,35 +1,20 @@
 return {
-  -- Better `vim.notify()`
   {
-    "rcarriga/nvim-notify",
+    "folke/snacks.nvim",
+    lazy = false,
     opts = {
-      timeout = 3000,
-      max_height = function()
-        return math.floor(vim.o.lines * 0.75)
-      end,
-      max_width = function()
-        return math.floor(vim.o.columns * 0.75)
-      end,
+      indent = { enabled = true },
+      input = { enabled = true },
+      notifier = { enabled = true },
+      scope = { enabled = true },
+      words = { enabled = true },
     },
-    init = function()
-      vim.notify = require("notify")
-    end,
-  },
 
-  -- better vim.ui
-  {
-    "stevearc/dressing.nvim",
-    lazy = true,
-    init = function()
-      vim.ui.select = function(...)
-        require("lazy").load({ plugins = { "dressing.nvim" } })
-        return vim.ui.select(...)
-      end
-      vim.ui.input = function(...)
-        require("lazy").load({ plugins = { "dressing.nvim" } })
-        return vim.ui.input(...)
-      end
-    end,
+    -- stylua: ignore
+    keys = {
+      { "++", function() Snacks.words.jump(1) end, desc = "Next LSP Word" },
+      { "üü", function() Snacks.words.jump(-1) end, desc = "Previous LSP Word" },
+    },
   },
 
   -- bufferline
@@ -124,91 +109,8 @@ return {
     end,
   },
 
-  -- indent guides
-  {
-    "lukas-reineke/indent-blankline.nvim",
-    event = { "BufReadPost", "BufNewFile" },
-    opts = {
-      indent = {
-        char = "│",
-        tab_char = "│",
-      },
-      scope = { enabled = false },
-      exclude = {
-        filetypes = {
-          "help",
-          "dashboard",
-          "neo-tree",
-          "Trouble",
-          "lazy",
-          "mason",
-          "notify",
-        },
-      },
-    },
-    main = "ibl",
-  },
-
-  -- active indent guide and indent text objects
-  {
-    "echasnovski/mini.indentscope",
-    version = false,
-    event = { "BufReadPre", "BufNewFile" },
-    opts = {
-      symbol = "│",
-      options = { try_as_border = true },
-    },
-    init = function()
-      vim.api.nvim_create_autocmd("FileType", {
-        pattern = { "help", "alpha", "dashboard", "neo-tree", "Trouble", "lazy", "mason" },
-        callback = function()
-          vim.b.miniindentscope_disable = true
-        end,
-      })
-    end,
-  },
-
   -- icons
   { "nvim-tree/nvim-web-devicons", lazy = true },
-
-  -- references
-  {
-    "RRethy/vim-illuminate",
-    event = { "BufReadPost", "BufNewFile" },
-    opts = {
-      delay = 200,
-      large_file_cutoff = 2000,
-      large_file_overrides = {
-        providers = { "lsp" },
-      },
-      under_cursor = false,
-    },
-    config = function(_, opts)
-      require("illuminate").configure(opts)
-
-      local function map(key, dir, buffer)
-        vim.keymap.set("n", key, function()
-          require("illuminate")["goto_" .. dir .. "_reference"](false)
-        end, { desc = dir:sub(1, 1):upper() .. dir:sub(2) .. " Reference", buffer = buffer })
-      end
-
-      map("üü", "next")
-      map("++", "prev")
-
-      -- also set it after loading ftplugins, since a lot overwrite [[ and ]]
-      vim.api.nvim_create_autocmd("FileType", {
-        callback = function()
-          local buffer = vim.api.nvim_get_current_buf()
-          map("üü", "next", buffer)
-          map("++", "prev", buffer)
-        end,
-      })
-    end,
-    keys = {
-      { "üü", desc = "Next Reference" },
-      { "++", desc = "Prev Reference" },
-    },
-  },
 
   {
     "echasnovski/mini.trailspace",

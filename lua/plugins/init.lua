@@ -37,4 +37,12 @@ return {
     "akinsho/toggleterm.nvim",
     version = "*",
   },
+
+  -- special handling for big files, like .asm
+  {
+    "folke/snacks.nvim",
+    opts = {
+      bigfile = {},
+    },
+  },
 }

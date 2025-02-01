@@ -38,7 +38,7 @@ vim.keymap.set({ "i", "n" }, "<C-s>", "<cmd>:w<cr><esc>", { desc = "Save Buffer"
 -- change cwd to current buffer
 vim.keymap.set("n", "<leader>C", function()
   vim.cmd(":cd %:h")
-end, { desc = "cd to current file (root dir)" })
+end, { desc = "cd to current file" })
 
 -- toggle inlay hints
 if vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint then
