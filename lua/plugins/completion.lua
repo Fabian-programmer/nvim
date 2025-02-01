@@ -4,7 +4,6 @@ return {
   {
     "saghen/blink.cmp",
     version = "*",
-    build = "cargo build --release",
     dependencies = "rafamadriz/friendly-snippets",
     event = "InsertEnter",
 
@@ -50,5 +49,6 @@ return {
         ["<C-y>"] = { "select_and_accept" },
       },
     },
+    opts_extend = { "sources.default" },
   },
 }
