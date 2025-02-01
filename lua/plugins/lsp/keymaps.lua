@@ -9,11 +9,6 @@ function M.get()
   -- stylua: ignore
   M._keys = {
     { "cd", vim.diagnostic.open_float, desc = "Line Diagnostics" },
-    { "gd", vim.lsp.buf.definition, desc = "Goto Definition", has = "definition" },
-    { "gr", function() require('fzf-lua').lsp_references() end, desc = "References", nowait = true },
-    { "gD", vim.lsp.buf.declaration, desc = "Goto Declaration" },
-    { "gI", vim.lsp.buf.implementation, desc = "Goto Implementation" },
-    { "gy", vim.lsp.buf.type_definition, desc = "Goto T[y]pe Definition" },
     { "gK", vim.lsp.buf.signature_help, desc = "Signature Help", has = "signatureHelp" },
     { "<c-k>", vim.lsp.buf.signature_help, mode = "i", desc = "Signature Help", has = "signatureHelp" },
     { "<leader>ca", vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "v" }, has = "codeAction" },

@@ -12,62 +12,50 @@ return {
 
   -- finds everything
   {
-    "ibhagwan/fzf-lua",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    opts = function(_, _)
-      local actions = require("fzf-lua.actions")
-
-      return {
-        "default-title",
-        fzf_colors = true,
-        defaults = {
-          formatter = "path.dirname_first",
-        },
-        winopts = {
-          height = 0.6,
-          width = 1.0,
-          row = 1.0,
-          backdrop = 80,
-        },
-        files = {
-          cwd_prompt = false,
-          git_icons = false,
-          actions = {
-            ["ctrl-h"] = { actions.toggle_hidden },
-          },
-        },
-        grep = {
-          rg_glob = true,
-          glob_flag = "--iglob",
-          glob_separator = "%s%-%-",
-          actions = {
-            ["ctrl-h"] = { actions.toggle_hidden },
-          },
-        },
-      }
-    end,
+    "folke/snacks.nvim",
     -- stylua: ignore
     keys = {
-      { "<leader>;", function() require('fzf-lua').resume() end, desc = "FzfLua Resume" },
-      { "<leader>ht", function() require('fzf-lua').builtin() end, desc = "FzfLua Builtin" },
-      { "<leader>fh", function() require('fzf-lua').command_history() end, desc = "Command History" },
-      { "<leader>hC", function() require('fzf-lua').colorschemes() end, desc = "Colorschemes" },
-      { "<leader>fm", function() require('fzf-lua').marks() end, desc = "Jump to Mark" },
-      { "<leader>hc", function() require('fzf-lua').commands() end, desc = "Commands" },
-      { "<leader>hh", function() require('fzf-lua').help_tags() end, desc = "Help Pages" },
-      { "<leader>hm", function() require('fzf-lua').man_pages() end, desc = "Man Pages" },
-      { "<leader>hk", function() require('fzf-lua').keymaps() end, desc = "Key Maps" },
-      -- search
-      { "<leader>fg", function() require('fzf-lua').live_grep() end, desc = "Grep" },
-      { "<leader>ff", function() require('fzf-lua').files() end, desc = "Find File" },
-      { "<leader>fo", function() require('fzf-lua').oldfiles() end, desc = "Open Recent File" },
-      { "<leader>fb", function() require('fzf-lua').blines() end, desc = "Find in Buffer" },
-      { "gw", mode = "n", function() require('fzf-lua').grep_cword() end, desc = "Find Word" },
-      { "gw", mode = "v", function() require('fzf-lua').grep_visual() end, desc = "Find Selection" },
+      { "<leader>;", function() Snacks.picker.resume() end, desc = "Resume" },
+      -- find
+      { "<leader>ff", function() Snacks.picker.files() end, desc = "Find Files" },
+      { "<leader>fo", function() Snacks.picker.recent() end, desc = "Open Recent File" },
+      { "<leader>fg", function() Snacks.picker.grep() end, desc = "Grep" },
+      { "gw", function() Snacks.picker.grep_word() end, desc = "Visual selection or word", mode = { "n", "x" } },
+      { "<leader>fb", function() Snacks.picker.lines() end, desc = "Find in Buffer" },
+      { "<leader>fm", function() Snacks.picker.marks() end, desc = "Marks" },
+      --help
+      { "<leader>ht", function() Snacks.picker.pickers() end, desc = "Pickers" },
+      { "<leader>fc", function() Snacks.picker.command_history() end, desc = "Command History" },
+      { "<leader>hC", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
+      { "<leader>hc", function() Snacks.picker.commands() end, desc = "Commands" },
+      { "<leader>hh", function() Snacks.picker.help() end, desc = "Help Pages" },
+      { "<leader>hm", function() Snacks.picker.man() end, desc = "Man Pages" },
+      { "<leader>hk", function() Snacks.picker.keymaps() end, desc = "Keymaps" },
       -- git
-      { "<leader>gc", function() require('fzf-lua').git_commits() end, desc = "Commits" },
-      { "<leader>gb", function() require('fzf-lua').git_branches() end, desc = "Branches" },
+      { "<leader>gc", function() Snacks.picker.git_log() end, desc = "Git Log" },
+      { "<leader>gs", function() Snacks.picker.git_status() end, desc = "Git Status" },
+    -- LSP
+      { "gd", function() Snacks.picker.lsp_definitions() end, desc = "Goto Definition" },
+      { "gr", function() Snacks.picker.lsp_references() end, nowait = true, desc = "References" },
+      { "gI", function() Snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
+      { "gy", function() Snacks.picker.lsp_type_definitions() end, desc = "Goto T[y]pe Definition" },
+      { "<leader>ss", function() Snacks.picker.lsp_symbols() end, desc = "LSP Symbols" },
+    },
 
+    opts = {
+      picker = {
+        layouts = {
+          default = {
+            layout = {
+              box = "horizontal",
+              width = 0,
+              height = 0.6,
+              backdrop = 80,
+              row = -1,
+            },
+          },
+        },
+      },
     },
   },
 

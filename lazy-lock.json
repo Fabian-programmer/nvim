@@ -29,7 +29,7 @@
   "overseer.nvim": { "branch": "master", "commit": "390332d4687e3d07495a545ba11e62fcf30339f1" },
   "plenary.nvim": { "branch": "master", "commit": "3707cdb1e43f5cea73afb6037e6494e7ce847a66" },
   "scope.nvim": { "branch": "main", "commit": "e1799fa37178382fc228245c41af5547e3f95182" },
-  "snacks.nvim": { "branch": "main", "commit": "50834bbf43f135c5afa0313f4bf6831392e0a5aa" },
+  "snacks.nvim": { "branch": "main", "commit": "ba2f6137b188ff3a1d073774f357f03c440e2e9f" },
   "snipe.nvim": { "branch": "main", "commit": "0d0a482ac713370196e4fc0025d5aaac5030104d" },
   "toggleterm.nvim": { "branch": "main", "commit": "50ea089fc548917cc3cc16b46a8211833b9e3c7c" },
   "tokyonight.nvim": { "branch": "main", "commit": "dca4adba7dc5f09302a00b0e76078d54d82d2658" },
