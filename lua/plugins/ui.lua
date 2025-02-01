@@ -6,6 +6,7 @@ return {
       indent = { enabled = true },
       input = { enabled = true },
       notifier = { enabled = true },
+      picker = { enabled = true },
       scope = { enabled = true },
       words = { enabled = true },
     },
