@@ -10,9 +10,9 @@ return {
       function()
         vim.g.autoformat = not vim.g.autoformat
         if vim.g.autoformat then
-          require("lazy.core.util").info("Enabled format on save", { title = "Format" })
+          Snacks.notify.info("Enabled format on save", { title = "Format" })
         else
-          require("lazy.core.util").warn("Disabled format on save", { title = "Format" })
+          Snacks.notify.warn("Disabled format on save", { title = "Format" })
         end
       end,
       desc = "Toggle format on save",

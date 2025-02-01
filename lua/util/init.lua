@@ -44,8 +44,8 @@ function M.get_root()
           and vim.tbl_map(function(ws)
             return vim.uri_to_fname(ws.uri)
           end, workspace)
-          or client.config.root_dir and { client.config.root_dir }
-          or {}
+        or client.config.root_dir and { client.config.root_dir }
+        or {}
       for _, p in ipairs(paths) do
         local r = vim.loop.fs_realpath(p)
         if path:find(r, 1, true) then
@@ -80,67 +80,83 @@ end
 
 function M.create_fullscreen_terminal(command)
   require("toggleterm.terminal").Terminal
-      :new({
-        cmd = command,
-        hidden = true,
-        direction = "float",
-        float_opts = {
-          width = vim.o.columns,
-          height = vim.o.lines,
-        },
-      })
-      :toggle()
+    :new({
+      cmd = command,
+      hidden = true,
+      direction = "float",
+      float_opts = {
+        width = vim.o.columns,
+        height = vim.o.lines,
+      },
+    })
+    :toggle()
 end
 
-function M.projects(opts)
-  local project_file = "~/.local/share/nvim/projects.txt"
-  opts = opts or {}
-  opts.prompt = "Projects> "
-  opts.actions = {
-    ["default"] = function(selected)
-      vim.cmd("cd " .. selected[1])
-    end,
-  }
-  require("fzf-lua").fzf_exec("cat " .. project_file, opts)
-end
+function M.projects()
+  local project_file = os.getenv("HOME") .. "/.local/share/nvim/projects.txt"
 
-function M.find_directory(opts)
-  opts = opts or {}
-  opts.prompt = "Directories> "
-  opts.actions = {
-    ["default"] = function(selected)
-      vim.cmd("cd " .. selected[1])
-    end,
-    ["ctrl-g"] = { require("fzf-lua.actions").toggle_hidden },
-  }
-  require("fzf-lua").fzf_exec(
-    "fd --type d --hidden --follow --exclude .git --exclude .npm --exclude node_modules . $HOME",
-    opts
-  )
-end
-
-function M.find_latest_build_folder()
-  local build_path = M.get_root() .. "/build"
-  local latest_folder = nil
-  local latest_time = 0
-
-  -- Iterate through files in the specified directory
-  local files = vim.fn.glob(build_path .. '/*', 0, 1) -- Get all files and directories
-
-  for _, file in ipairs(files) do
-    -- Check if the file is a directory
-    if vim.fn.isdirectory(file) == 1 then
-      -- Get the modification time of the directory
-      local mod_time = vim.fn.getftime(file)
-      -- Check if this directory is the latest one
-      if mod_time > latest_time then
-        latest_time = mod_time
-        latest_folder = file
-      end
+  local gen_items_from_file = function(filepath)
+    local items = {}
+    local file = io.open(filepath, "r")
+    if not file then
+      vim.notify("Failed to open file: " .. filepath, vim.log.levels.ERROR)
+      return items
     end
+
+    for line in file:lines() do
+      table.insert(items, { text = line })
+    end
+    file:close()
+
+    return items
   end
 
-  return latest_folder
+  Snacks.picker.pick({
+    source = "Projects",
+    items = gen_items_from_file(project_file),
+    preview = "none",
+    format = "text",
+    layout = {
+      preset = "select",
+    },
+    confirm = function(picker, item)
+      picker:close()
+      vim.notify("Changed cwd to: " .. item.text)
+      vim.cmd("cd " .. item.text)
+    end,
+  })
+end
+
+function M.find_directory()
+  local cmd = "fd --type d --hidden --follow --exclude .git --exclude .npm --exclude node_modules . $HOME"
+
+  local gen_items_from_cmd = function(command)
+    -- Run the command and get the output as a list
+    local raw_items = vim.fn.systemlist(command)
+
+    -- Convert raw list into { { text = "..." }, { text = "..." } } format
+    local items = {}
+    for _, line in ipairs(raw_items) do
+      table.insert(items, { text = line })
+    end
+
+    return items
+  end
+
+  Snacks.picker.pick({
+    source = "Directories",
+    items = gen_items_from_cmd(cmd),
+    preview = "none",
+    format = "text",
+    layout = {
+      preset = "select",
+    },
+    confirm = function(picker, item)
+      picker:close()
+      vim.notify("Changed cwd to: " .. item.text)
+      vim.cmd("cd " .. item.text)
+    end,
+  })
 end
 
 return M
