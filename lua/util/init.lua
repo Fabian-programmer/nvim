@@ -92,6 +92,16 @@ function M.create_fullscreen_terminal(command)
     :toggle()
 end
 
+local change_directory = function(picker)
+  picker:close()
+  local item = picker:current()
+  if not item then
+    return
+  end
+  local dir = item.text
+  vim.fn.chdir(dir)
+end
+
 function M.projects()
   local project_file = os.getenv("HOME") .. "/.local/share/nvim/projects.txt"
 
@@ -119,10 +129,7 @@ function M.projects()
     layout = {
       preset = "select",
     },
-    confirm = function(picker, item)
-      picker:close()
-      vim.api.nvim_set_current_dir(item.text)
-    end,
+    confirm = change_directory,
   })
 end
 
@@ -142,19 +149,11 @@ function M.find_directory()
           ".npm",
           "--exclude",
           "node_modules",
+          ".",
+          os.getenv("HOME"),
         },
       },
     }, ctx)
-  end
-
-  local change_directory = function(picker)
-    picker:close()
-    local item = picker:current()
-    if not item then
-      return
-    end
-    local dir = item.text
-    vim.fn.chdir(dir)
   end
 
   Snacks.picker.pick({
