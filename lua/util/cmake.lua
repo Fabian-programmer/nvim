@@ -48,7 +48,6 @@ end
 
 function M.find_cmake_targets()
   local cmd = "cmake --build " .. M.find_latest_build_folder() .. " --target help"
-  -- local cmd = "cmake --build build --target help"
 
   local fn_transform = function(x)
     if x:match("^%.%.%.%s*(.+)") then -- filter only results with the pattern "... <word>"
