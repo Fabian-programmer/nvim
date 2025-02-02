@@ -47,31 +47,31 @@ function M.find_latest_build_folder()
 end
 
 function M.find_cmake_targets()
-  local cmd = "cmake --build " .. M.find_latest_build_folder() .. " --target help"
-
-  local fn_transform = function(x)
-    if x:match("^%.%.%.%s*(.+)") then -- filter only results with the pattern "... <word>"
-      return x:match("^%S+%s+(%S+)") -- return second word, which represents the target
-    end
-  end
-
-  local gen_items_from_cmd = function(command)
-    local raw_items = vim.fn.systemlist(command)
-
-    local items = {}
-    for _, line in ipairs(raw_items) do
-      local transformed_line = fn_transform(line)
-      if transformed_line then
-        table.insert(items, { text = transformed_line })
-      end
-    end
-
-    return items
+  local find_cmake_targets = function(opts, ctx)
+    return require("snacks.picker.source.proc").proc({
+      opts,
+      {
+        cmd = "cmake",
+        args = {
+          "--build",
+          M.find_latest_build_folder(),
+          "--target",
+          "help",
+        },
+        transform = function(item)
+          if item.text:match("^%.%.%.%s*(.+)") then -- filter only results with the pattern "... <word>"
+            item.text = item.text:match("^%S+%s+(%S+)") -- return second word, which represents the target
+          else
+            return false
+          end
+        end,
+      },
+    }, ctx)
   end
 
   Snacks.picker.pick({
     source = "CMake Targets",
-    items = gen_items_from_cmd(cmd),
+    finder = find_cmake_targets,
     preview = "none",
     format = "text",
     layout = {
