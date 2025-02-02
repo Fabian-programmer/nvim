@@ -127,33 +127,45 @@ function M.projects()
 end
 
 function M.find_directory()
-  local cmd = "fd --type d --hidden --follow --exclude .git --exclude .npm --exclude node_modules . $HOME"
+  local find_directory = function(opts, ctx)
+    return require("snacks.picker.source.proc").proc({
+      opts,
+      {
+        cmd = "fd",
+        args = {
+          "--type",
+          "d",
+          "--hidden",
+          "--exclude",
+          ".git",
+          "--exclude",
+          ".npm",
+          "--exclude",
+          "node_modules",
+        },
+      },
+    }, ctx)
+  end
 
-  local gen_items_from_cmd = function(command)
-    -- Run the command and get the output as a list
-    local raw_items = vim.fn.systemlist(command)
-
-    -- Convert raw list into { { text = "..." }, { text = "..." } } format
-    local items = {}
-    for _, line in ipairs(raw_items) do
-      table.insert(items, { text = line })
+  local change_directory = function(picker)
+    picker:close()
+    local item = picker:current()
+    if not item then
+      return
     end
-
-    return items
+    local dir = item.text
+    vim.fn.chdir(dir)
   end
 
   Snacks.picker.pick({
     source = "Directories",
-    items = gen_items_from_cmd(cmd),
-    preview = "none",
+    finder = find_directory,
     format = "text",
+    confirm = change_directory,
+    preview = "none",
     layout = {
       preset = "select",
     },
-    confirm = function(picker, item)
-      picker:close()
-      vim.api.nvim_set_current_dir(item.text)
-    end,
   })
 end
 
