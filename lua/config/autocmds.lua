@@ -5,6 +5,13 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   end,
 })
 
+-- Notification if working directory changed
+vim.api.nvim_create_autocmd("DirChanged", {
+  callback = function()
+    vim.notify("Change cwd to: " .. vim.fn.getcwd())
+  end,
+})
+
 -- resize splits if window got resized
 vim.api.nvim_create_autocmd({ "VimResized" }, {
   callback = function()

@@ -121,8 +121,7 @@ function M.projects()
     },
     confirm = function(picker, item)
       picker:close()
-      vim.notify("Changed cwd to: " .. item.text)
-      vim.cmd("cd " .. item.text)
+      vim.api.nvim_set_current_dir(item.text)
     end,
   })
 end
@@ -153,8 +152,7 @@ function M.find_directory()
     },
     confirm = function(picker, item)
       picker:close()
-      vim.notify("Changed cwd to: " .. item.text)
-      vim.cmd("cd " .. item.text)
+      vim.api.nvim_set_current_dir(item.text)
     end,
   })
 end

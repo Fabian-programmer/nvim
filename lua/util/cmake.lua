@@ -7,7 +7,7 @@ function M.find_latest_build_folder()
 
   -- Ensure build directory exists
   if vim.fn.isdirectory(build_path) == 0 then
-    Snacks.notify.error("Build directory does not exist: " .. build_path)
+    vim.notify("Build directory does not exist: " .. build_path, vim.log.levels.ERROR)
     return latest_folder
   end
 

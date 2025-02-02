@@ -18,14 +18,14 @@ function M.open_asm_file_in_split()
   current_file = current_file ~= "" and vim.loop.fs_realpath(current_file) or nil
 
   if current_file == nil then
-    Snacks.notify.warn(current_file .. " does not exist", { title = "ASM file" })
+    vim.notify(current_file .. " does not exist", vim.log.levels.WARN)
     return
   end
 
   local build_folder = require("util.cmake").find_latest_build_folder()
 
   if build_folder == nil then
-    Snacks.notify.warn("build folder for " .. current_file .. " not found", { title = "ASM file" })
+    vim.notify("build folder for " .. current_file .. " not found", vim.log.levels.WARN)
     return
   end
 
@@ -35,7 +35,7 @@ function M.open_asm_file_in_split()
     -- Open the ASM file in a vertical split
     vim.cmd("vsplit " .. asm_file_path)
   else
-    Snacks.notify.warn(asm_file_path .. " does not exist", { title = "ASM file" })
+    vim.notify(asm_file_path .. " does not exist", vim.log.levels.WARN)
   end
 end
 
