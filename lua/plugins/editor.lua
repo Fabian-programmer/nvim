@@ -40,7 +40,7 @@ return {
       { "gr", function() Snacks.picker.lsp_references() end, nowait = true, desc = "References" },
       { "gI", function() Snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
       { "gy", function() Snacks.picker.lsp_type_definitions() end, desc = "Goto T[y]pe Definition" },
-      { "<leader>ss", function() Snacks.picker.lsp_symbols() end, desc = "LSP Symbols" },
+      { "<leader>cs", function() Snacks.picker.lsp_symbols() end, desc = "LSP Symbols" },
     },
 
     opts = {
@@ -143,12 +143,7 @@ return {
     keys = {
       { "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics (Trouble)" },
       { "<leader>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Buffer Diagnostics (Trouble)" },
-      { "<leader>cs", "<cmd>Trouble symbols toggle focus=false<cr>", desc = "Symbols (Trouble)" },
-      {
-        "<leader>cS",
-        "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
-        desc = "LSP references/definitions/... (Trouble)",
-      },
+      { "<leader>cS", "<cmd>Trouble symbols toggle focus=false<cr>", desc = "Symbols (Trouble)" },
       { "<leader>xL", "<cmd>Trouble loclist toggle<cr>", desc = "Location List (Trouble)" },
       { "<leader>xQ", "<cmd>Trouble qflist toggle<cr>", desc = "Quickfix List (Trouble)" },
       {
