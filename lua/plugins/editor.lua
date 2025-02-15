@@ -56,6 +56,9 @@ return {
             },
           },
         },
+        sources = {
+          files = { ignored = true },
+        },
       },
     },
   },

@@ -5,11 +5,16 @@ return {
       explorer = {
         replace_netrw = true,
       },
+      picker = {
+        sources = {
+          explorer = { diagnostics = false, hidden = true, ignored = true },
+        },
+      },
     },
     -- stylua: ignore
     keys = {
-      { "<leader>e", function() Snacks.explorer({ cwd = require("util").get_root(), diagnostics = false }) end, desc = "File Explorer (root dir)" },
-      { "<leader>E", function() Snacks.explorer({ diagnostics = false }) end, desc = "File Explorer (cwd)" },
+      { "<leader>e", function() Snacks.explorer({ cwd = require("util").get_root() }) end, desc = "File Explorer (root dir)" },
+      { "<leader>E", function() Snacks.explorer() end, desc = "File Explorer (cwd)" },
     },
   },
 
