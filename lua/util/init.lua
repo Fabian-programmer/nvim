@@ -102,37 +102,6 @@ local change_directory = function(picker)
   vim.fn.chdir(dir)
 end
 
-function M.projects()
-  local project_file = os.getenv("HOME") .. "/.local/share/nvim/projects.txt"
-
-  local gen_items_from_file = function(filepath)
-    local items = {}
-    local file = io.open(filepath, "r")
-    if not file then
-      vim.notify("Failed to open file: " .. filepath, vim.log.levels.ERROR)
-      return items
-    end
-
-    for line in file:lines() do
-      table.insert(items, { text = line })
-    end
-    file:close()
-
-    return items
-  end
-
-  Snacks.picker.pick({
-    source = "Projects",
-    items = gen_items_from_file(project_file),
-    preview = "none",
-    format = "text",
-    layout = {
-      preset = "select",
-    },
-    confirm = change_directory,
-  })
-end
-
 function M.find_directory()
   local find_directory = function(opts, ctx)
     return require("snacks.picker.source.proc").proc({

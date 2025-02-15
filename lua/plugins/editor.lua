@@ -18,6 +18,7 @@ return {
       { "<leader>;", function() Snacks.picker.resume() end, desc = "Resume" },
       -- find
       { "<leader>ff", function() Snacks.picker.files() end, desc = "Find Files" },
+      { "<leader>fp", function() Snacks.picker.projects() end, desc = "Projects" },
       { "<leader>fo", function() Snacks.picker.recent() end, desc = "Open Recent File" },
       { "<leader>fg", function() Snacks.picker.grep() end, desc = "Grep" },
       { "gw", function() Snacks.picker.grep_word() end, desc = "Visual selection or word", mode = { "n", "x" } },

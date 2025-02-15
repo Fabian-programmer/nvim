@@ -64,11 +64,6 @@ vim.keymap.set("n", "<leader><Tab><Tab>", "<cmd>tabnext<cr>", { desc = "Next Tab
 vim.keymap.set("n", "<leader><Tab>q", "<cmd>tabclose<cr>", { desc = "Close Tab" })
 vim.keymap.set("n", "<leader><Tab><S-Tab>", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 
--- projects
-vim.keymap.set("n", "<leader>fp", function()
-  require("util").projects()
-end, { desc = "Projects" })
-
 -- directories (like fzf keybinding)
 vim.keymap.set("n", "<A-c>", function()
   require("util").find_directory()
