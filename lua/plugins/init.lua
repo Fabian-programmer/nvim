@@ -6,11 +6,6 @@ return {
     priority = 1001,
   },
 
-  {
-    "nvim-lua/plenary.nvim",
-    lazy = true,
-  },
-
   -- framework to run tasks
   {
     "stevearc/overseer.nvim",
