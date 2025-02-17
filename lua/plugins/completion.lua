@@ -10,9 +10,9 @@ return {
       -- disables autocomplete in rename ui input
       enabled = function()
         return not vim.tbl_contains({}, vim.bo.filetype)
-          and vim.bo.buftype ~= "nofile"
-          and vim.bo.buftype ~= "prompt"
-          and vim.b.completion ~= false
+            and vim.bo.buftype ~= "nofile"
+            and vim.bo.buftype ~= "prompt"
+            and vim.b.completion ~= false
       end,
       appearance = {
         use_nvim_cmp_as_default = false,
@@ -40,7 +40,9 @@ return {
 
       sources = {
         default = { "lsp", "path", "snippets", "buffer" },
-        cmdline = {},
+      },
+      cmdline = {
+        enabled = false
       },
 
       keymap = {
