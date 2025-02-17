@@ -15,32 +15,32 @@ return {
     "folke/snacks.nvim",
     -- stylua: ignore
     keys = {
-      { "<leader>;", function() Snacks.picker.resume() end, desc = "Resume" },
+      { "<leader>;",  function() Snacks.picker.resume() end,                      desc = "Resume" },
       -- find
-      { "<leader>ff", function() Snacks.picker.files() end, desc = "Find Files" },
-      { "<leader>fp", function() Snacks.picker.projects() end, desc = "Projects" },
-      { "<leader>fo", function() Snacks.picker.recent() end, desc = "Open Recent File" },
-      { "<leader>fg", function() Snacks.picker.grep() end, desc = "Grep" },
-      { "gw", function() Snacks.picker.grep_word() end, desc = "Visual selection or word", mode = { "n", "x" } },
-      { "<leader>fb", function() Snacks.picker.lines() end, desc = "Find in Buffer" },
-      { "<leader>fm", function() Snacks.picker.marks() end, desc = "Marks" },
+      { "<leader>ff", function() Snacks.picker.files() end,                       desc = "Find Files" },
+      { "<leader>fp", function() Snacks.picker.projects() end,                    desc = "Projects" },
+      { "<leader>fo", function() Snacks.picker.recent() end,                      desc = "Open Recent File" },
+      { "<leader>fg", function() Snacks.picker.grep() end,                        desc = "Grep" },
+      { "gw",         function() Snacks.picker.grep_word() end,                   desc = "Visual selection or word", mode = { "n", "x" } },
+      { "<leader>fb", function() Snacks.picker.lines({ layout = "default" }) end, desc = "Find in Buffer" },
+      { "<leader>fm", function() Snacks.picker.marks() end,                       desc = "Marks" },
       --help
-      { "<leader>ht", function() Snacks.picker.pickers() end, desc = "Pickers" },
-      { "<leader>fc", function() Snacks.picker.command_history() end, desc = "Command History" },
-      { "<leader>hC", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
-      { "<leader>hc", function() Snacks.picker.commands() end, desc = "Commands" },
-      { "<leader>hh", function() Snacks.picker.help() end, desc = "Help Pages" },
-      { "<leader>hm", function() Snacks.picker.man() end, desc = "Man Pages" },
-      { "<leader>hk", function() Snacks.picker.keymaps() end, desc = "Keymaps" },
+      { "<leader>ht", function() Snacks.picker.pickers() end,                     desc = "Pickers" },
+      { "<leader>fc", function() Snacks.picker.command_history() end,             desc = "Command History" },
+      { "<leader>hC", function() Snacks.picker.colorschemes() end,                desc = "Colorschemes" },
+      { "<leader>hc", function() Snacks.picker.commands() end,                    desc = "Commands" },
+      { "<leader>hh", function() Snacks.picker.help() end,                        desc = "Help Pages" },
+      { "<leader>hm", function() Snacks.picker.man() end,                         desc = "Man Pages" },
+      { "<leader>hk", function() Snacks.picker.keymaps() end,                     desc = "Keymaps" },
       -- git
-      { "<leader>gc", function() Snacks.picker.git_log() end, desc = "Git Log" },
-      { "<leader>gs", function() Snacks.picker.git_status() end, desc = "Git Status" },
-    -- LSP
-      { "gd", function() Snacks.picker.lsp_definitions() end, desc = "Goto Definition" },
-      { "gr", function() Snacks.picker.lsp_references() end, nowait = true, desc = "References" },
-      { "gI", function() Snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
-      { "gy", function() Snacks.picker.lsp_type_definitions() end, desc = "Goto T[y]pe Definition" },
-      { "<leader>cs", function() Snacks.picker.lsp_symbols() end, desc = "LSP Symbols" },
+      { "<leader>gc", function() Snacks.picker.git_log() end,                     desc = "Git Log" },
+      { "<leader>gs", function() Snacks.picker.git_status() end,                  desc = "Git Status" },
+      -- LSP
+      { "gd",         function() Snacks.picker.lsp_definitions() end,             desc = "Goto Definition" },
+      { "gr",         function() Snacks.picker.lsp_references() end,              nowait = true,                     desc = "References" },
+      { "gI",         function() Snacks.picker.lsp_implementations() end,         desc = "Goto Implementation" },
+      { "gy",         function() Snacks.picker.lsp_type_definitions() end,        desc = "Goto T[y]pe Definition" },
+      { "<leader>cs", function() Snacks.picker.lsp_symbols() end,                 desc = "LSP Symbols" },
     },
 
     opts = {
@@ -76,17 +76,17 @@ return {
         {
           mode = { "n", "v" },
           { "<leader><tab>", group = "tab" },
-          { "<leader>b", group = "buffer" },
-          { "<leader>c", group = "code" },
-          { "<leader>d", group = "debug" },
-          { "<leader>f", group = "find" },
-          { "<leader>g", group = "git" },
-          { "<leader>h", group = "help" },
-          { "<leader>r", group = "replace" },
-          { "<leader>s", group = "session" },
-          { "<leader>w", group = "window" },
-          { "<leader>x", group = "diagnostics/quickfix" },
-          { "g", group = "goto" },
+          { "<leader>b",     group = "buffer" },
+          { "<leader>c",     group = "code" },
+          { "<leader>d",     group = "debug" },
+          { "<leader>f",     group = "find" },
+          { "<leader>g",     group = "git" },
+          { "<leader>h",     group = "help" },
+          { "<leader>r",     group = "replace" },
+          { "<leader>s",     group = "session" },
+          { "<leader>w",     group = "window" },
+          { "<leader>x",     group = "diagnostics/quickfix" },
+          { "g",             group = "goto" },
         },
       },
     },
@@ -98,9 +98,9 @@ return {
     event = { "BufReadPost", "BufNewFile" },
     -- stylua: ignore
     keys = {
-      { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
-      { "S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
-      { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+      { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
+      { "S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
+      { "R", mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
     },
   },
 
@@ -111,7 +111,7 @@ return {
     -- stylua: ignore
     keys = {
       { "<A-q>", function() require("mini.bufremove").delete(0, false) end, desc = "Delete Buffer" },
-      { "<A-Q>", function() require("mini.bufremove").delete(0, true) end, desc = "Delete Buffer (Force)" },
+      { "<A-Q>", function() require("mini.bufremove").delete(0, true) end,  desc = "Delete Buffer (Force)" },
     },
   },
 
@@ -120,9 +120,9 @@ return {
     "MagicDuck/grug-far.nvim",
     -- stylua: ignore
     keys = {
-      { "<leader>rr", mode = "n", function() require('grug-far').grug_far({ prefills = { paths = require("util").get_root()} }) end, desc = "Replace all" },
-      { "<leader>rw", mode = "n", function() require('grug-far').grug_far({ prefills = { search = vim.fn.expand("<cword>") } }) end, desc = "Replace word under cursor" },
-      { "<leader>rf", mode = "n", function() require('grug-far').grug_far({ prefills = { paths = vim.fn.expand("%") } }) end, desc = "Replace in file" },
+      { "<leader>rr", mode = "n", function() require('grug-far').grug_far({ prefills = { paths = require("util").get_root() } }) end,      desc = "Replace all" },
+      { "<leader>rw", mode = "n", function() require('grug-far').grug_far({ prefills = { search = vim.fn.expand("<cword>") } }) end,       desc = "Replace word under cursor" },
+      { "<leader>rf", mode = "n", function() require('grug-far').grug_far({ prefills = { paths = vim.fn.expand("%") } }) end,              desc = "Replace in file" },
       { "<leader>rf", mode = "v", function() require('grug-far').with_visual_selection({ prefills = { paths = vim.fn.expand("%") } }) end, desc = "Replace in file" },
     },
     config = function()
@@ -141,11 +141,11 @@ return {
     cmd = { "TroubleToggle", "Trouble" },
     opts = { use_diagnostic_signs = true },
     keys = {
-      { "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics (Trouble)" },
+      { "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>",              desc = "Diagnostics (Trouble)" },
       { "<leader>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Buffer Diagnostics (Trouble)" },
-      { "<leader>cS", "<cmd>Trouble symbols toggle focus=false<cr>", desc = "Symbols (Trouble)" },
-      { "<leader>xL", "<cmd>Trouble loclist toggle<cr>", desc = "Location List (Trouble)" },
-      { "<leader>xQ", "<cmd>Trouble qflist toggle<cr>", desc = "Quickfix List (Trouble)" },
+      { "<leader>cS", "<cmd>Trouble symbols toggle focus=false<cr>",      desc = "Symbols (Trouble)" },
+      { "<leader>xL", "<cmd>Trouble loclist toggle<cr>",                  desc = "Location List (Trouble)" },
+      { "<leader>xQ", "<cmd>Trouble qflist toggle<cr>",                   desc = "Quickfix List (Trouble)" },
       {
         "üq",
         function()
