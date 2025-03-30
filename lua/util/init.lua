@@ -1,10 +1,6 @@
 local M = {}
 
 M.root_patterns = { ".git" }
-function M.get_clients(...)
-  local fn = vim.lsp.get_clients or vim.lsp.get_active_clients
-  return fn(...)
-end
 
 function M.has(plugin)
   return require("lazy.core.config").spec.plugins[plugin] ~= nil
@@ -44,8 +40,8 @@ function M.get_root()
           and vim.tbl_map(function(ws)
             return vim.uri_to_fname(ws.uri)
           end, workspace)
-        or client.config.root_dir and { client.config.root_dir }
-        or {}
+          or client.config.root_dir and { client.config.root_dir }
+          or {}
       for _, p in ipairs(paths) do
         local r = vim.loop.fs_realpath(p)
         if path:find(r, 1, true) then
@@ -80,16 +76,16 @@ end
 
 function M.create_fullscreen_terminal(command)
   require("toggleterm.terminal").Terminal
-    :new({
-      cmd = command,
-      hidden = true,
-      direction = "float",
-      float_opts = {
-        width = vim.o.columns,
-        height = vim.o.lines,
-      },
-    })
-    :toggle()
+      :new({
+        cmd = command,
+        hidden = true,
+        direction = "float",
+        float_opts = {
+          width = vim.o.columns,
+          height = vim.o.lines,
+        },
+      })
+      :toggle()
 end
 
 local change_directory = function(picker)
