@@ -8,7 +8,7 @@ return {
   -- syntax highlighting
   {
     "nvim-treesitter/nvim-treesitter",
-    opts = { ensure_installed = { "python" } },
+    opts = { ensure_installed = { "python", "robot" } },
   },
 
   -- formatter
@@ -27,6 +27,7 @@ return {
     opts = {
       servers = {
         pyright = {},
+        robotframework_ls = {},
       },
     },
   },
@@ -37,7 +38,7 @@ return {
     optional = true,
     dependencies = {
       "mfussenegger/nvim-dap-python",
-    -- stylua: ignore
+      -- stylua: ignore
       keys = {
         { "<leader>dPt", function() require('dap-python').test_method() end, desc = "Debug Method" },
         { "<leader>dPc", function() require('dap-python').test_class() end,  desc = "Debug Class" },
