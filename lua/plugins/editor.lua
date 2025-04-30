@@ -121,9 +121,9 @@ return {
     "MagicDuck/grug-far.nvim",
     -- stylua: ignore
     keys = {
-      { "<leader>rr", mode = "n", function() require('grug-far').grug_far({ prefills = { paths = require("util").get_root() } }) end,      desc = "Replace all" },
-      { "<leader>rw", mode = "n", function() require('grug-far').grug_far({ prefills = { search = vim.fn.expand("<cword>") } }) end,       desc = "Replace word under cursor" },
-      { "<leader>rf", mode = "n", function() require('grug-far').grug_far({ prefills = { paths = vim.fn.expand("%") } }) end,              desc = "Replace in file" },
+      { "<leader>rr", mode = "n", function() require('grug-far').open({ prefills = { paths = require("util").get_root() } }) end,          desc = "Replace all" },
+      { "<leader>rw", mode = "n", function() require('grug-far').open({ prefills = { search = vim.fn.expand("<cword>") } }) end,           desc = "Replace word under cursor" },
+      { "<leader>rf", mode = "n", function() require('grug-far').open({ prefills = { paths = vim.fn.expand("%") } }) end,                  desc = "Replace in file" },
       { "<leader>rf", mode = "v", function() require('grug-far').with_visual_selection({ prefills = { paths = vim.fn.expand("%") } }) end, desc = "Replace in file" },
     },
     config = function()
