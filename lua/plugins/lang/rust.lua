@@ -1,7 +1,7 @@
 return {
   -- external artefacts
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     opts = { ensure_installed = { "rust-analyzer" } },
   },
 
