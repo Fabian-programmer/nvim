@@ -9,6 +9,7 @@ opt.conceallevel = 3           -- Hide * markup for bold and italic
 opt.confirm = true             -- Confirm to save changes before exiting modified buffer
 opt.cursorline = true          -- Enable highlighting of the current line
 opt.expandtab = true           -- Use spaces instead of tabs
+opt.exrc = true
 opt.formatoptions = "jcroqlnt" -- tcqj
 opt.grepformat = "%f:%l:%c:%m"
 opt.grepprg = "rg --vimgrep"
