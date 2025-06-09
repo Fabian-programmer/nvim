@@ -34,7 +34,7 @@ function M.get_root()
   path = path ~= "" and vim.loop.fs_realpath(path) or nil
   local roots = {}
   if path then
-    for _, client in pairs(vim.lsp.get_active_clients({ bufnr = 0 })) do
+    for _, client in pairs(vim.lsp.get_clients({ bufnr = 0 })) do
       local workspace = client.config.workspace_folders
       local paths = workspace
           and vim.tbl_map(function(ws)

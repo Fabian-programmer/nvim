@@ -1,14 +1,15 @@
+vim.lsp.enable('pyrefly')
 return {
   -- external artefacts
   {
     "mason.nvim",
-    opts = { ensure_installed = { "autopep8", "pyright", "debugpy" } },
+    opts = { ensure_installed = { "autopep8", "pyrefly" } },
   },
 
   -- syntax highlighting
   {
     "nvim-treesitter/nvim-treesitter",
-    opts = { ensure_installed = { "python", "robot" } },
+    opts = { ensure_installed = { "python" } },
   },
 
   -- formatter
@@ -17,31 +18,6 @@ return {
     opts = {
       formatters_by_ft = {
         python = { "autopep8" },
-      },
-    },
-  },
-
-  -- lsp
-  {
-    "neovim/nvim-lspconfig",
-    opts = {
-      servers = {
-        pyright = {},
-        robotframework_ls = {},
-      },
-    },
-  },
-
-  -- debugger
-  {
-    "mfussenegger/nvim-dap",
-    optional = true,
-    dependencies = {
-      "mfussenegger/nvim-dap-python",
-      -- stylua: ignore
-      keys = {
-        { "<leader>dPt", function() require('dap-python').test_method() end, desc = "Debug Method" },
-        { "<leader>dPc", function() require('dap-python').test_class() end,  desc = "Debug Class" },
       },
     },
   },

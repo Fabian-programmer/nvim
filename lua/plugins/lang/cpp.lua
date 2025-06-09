@@ -1,3 +1,4 @@
+vim.lsp.enable('clangd')
 return {
   -- external artefacts
   {
@@ -9,30 +10,6 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     opts = { ensure_installed = { "c", "cpp" } },
-  },
-
-  -- lsp includes formatter
-  {
-    "neovim/nvim-lspconfig",
-    opts = {
-      servers = {
-        clangd = {
-          keys = {
-            { "<F4>", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Switch Source/Header (C/C++)" },
-          },
-          root_pattern = ".git",
-          cmd = {
-            "clangd",
-            "--background-index",
-            "--clang-tidy",
-            "--header-insertion=never",
-            "--completion-style=detailed",
-            "--function-arg-placeholders",
-            "--fallback-style=llvm",
-          },
-        },
-      },
-    },
   },
 
   -- debugger

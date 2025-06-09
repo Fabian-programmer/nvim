@@ -1,3 +1,4 @@
+vim.lsp.enable('lua_ls')
 return {
   -- external artefacts
   {
@@ -17,30 +18,6 @@ return {
     opts = {
       formatters_by_ft = {
         lua = { "stylua" },
-      },
-    },
-  },
-
-  -- lsp
-  {
-    "neovim/nvim-lspconfig",
-    opts = {
-      servers = {
-        lua_ls = {
-          settings = {
-            Lua = {
-              workspace = {
-                checkThirdParty = false,
-              },
-              completion = {
-                callSnippet = "Replace",
-              },
-              diagnostics = {
-                globals = { "vim" },
-              },
-            },
-          },
-        },
       },
     },
   },

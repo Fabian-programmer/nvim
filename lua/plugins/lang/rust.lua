@@ -1,3 +1,4 @@
+vim.lsp.enable('rust_analyzer')
 return {
   -- external artefacts
   {
@@ -9,17 +10,5 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     opts = { ensure_installed = { "ron", "rust", "toml" } },
-  },
-
-  -- lsp
-  {
-    "neovim/nvim-lspconfig",
-    opts = {
-      servers = {
-        rust_analyzer = {
-          enabled = true,
-        },
-      },
-    },
   },
 }

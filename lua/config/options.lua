@@ -50,3 +50,13 @@ opt.wrap = false                   -- Disable line wrap
 vim.g.markdown_recommended_style = 0
 vim.g.autoformat = true
 vim.lsp.set_log_level("error")
+vim.diagnostic.config({
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = require("config").icons.diagnostics.Error,
+      [vim.diagnostic.severity.WARN] = require("config").icons.diagnostics.Warn,
+      [vim.diagnostic.severity.INFO] = require("config").icons.diagnostics.Info,
+      [vim.diagnostic.severity.HINT] = require("config").icons.diagnostics.Hint,
+    },
+  },
+})
