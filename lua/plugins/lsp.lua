@@ -21,16 +21,6 @@ return {
       { "+w",         function() vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.WARN }) end,  desc = "Prev Warning" },
     },
     opts = {
-      diagnostics = {
-        underline = true,
-        update_in_insert = false,
-        virtual_text = {
-          spacing = 4,
-          source = "if_many",
-          prefix = "●",
-        },
-        severity_sort = true,
-      },
       inlay_hints = {
         enabled = false,
       },
