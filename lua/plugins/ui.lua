@@ -14,7 +14,7 @@ return {
 
     -- stylua: ignore
     keys = {
-      { "++", function() Snacks.words.jump(1) end, desc = "Next LSP Word" },
+      { "++", function() Snacks.words.jump(1) end,  desc = "Next LSP Word" },
       { "üü", function() Snacks.words.jump(-1) end, desc = "Previous LSP Word" },
     },
   },
@@ -56,8 +56,6 @@ return {
         return " " .. os.date("%H:%M")
       end
 
-      local icons = require("config").icons
-
       return {
         options = {
           theme = "auto",
@@ -71,10 +69,10 @@ return {
             {
               "diagnostics",
               symbols = {
-                error = icons.diagnostics.Error,
-                warn = icons.diagnostics.Warn,
-                info = icons.diagnostics.Info,
-                hint = icons.diagnostics.Hint,
+                error = vim.diagnostic.severity.ERROR,
+                warn = vim.diagnostic.severity.WARN,
+                info = vim.diagnostic.severity.INFO,
+                hint = vim.diagnostic.severity.HINT,
               },
             },
             {
@@ -97,9 +95,9 @@ return {
             {
               "diff",
               symbols = {
-                added = icons.git.added,
-                modified = icons.git.modified,
-                removed = icons.git.removed,
+                added = " ",
+                modified = " ",
+                removed = " "
               },
             },
           },

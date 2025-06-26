@@ -44,17 +44,17 @@ return {
 
     keys = {
       -- stylua: ignore start
-      { "<F5>", function() require("dap").continue() end, desc = "Continue" },
-      { "<F7>", function() require("dap").step_into() end, desc = "Step Into" },
-      { "<F8>", function() require("dap").step_over() end, desc = "Step Over" },
-      { "<F9>", function() require("dap").step_out() end, desc = "Step Out" },
-      { "<F10>", function() require("dap").run_to_cursor() end, desc = "Run to Cursor" },
+      { "<F5>",       function() require("dap").continue() end,                                             desc = "Continue" },
+      { "<F7>",       function() require("dap").step_into() end,                                            desc = "Step Into" },
+      { "<F8>",       function() require("dap").step_over() end,                                            desc = "Step Over" },
+      { "<F9>",       function() require("dap").step_out() end,                                             desc = "Step Out" },
+      { "<F10>",      function() require("dap").run_to_cursor() end,                                        desc = "Run to Cursor" },
       { "<leader>dB", function() require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: ")) end, desc = "Breakpoint Condition" },
-      { "<leader>db", function() require("dap").toggle_breakpoint() end, desc = "Toggle Breakpoint" },
-      { "<leader>dj", function() require("dap").down() end, desc = "Down" },
-      { "<leader>dk", function() require("dap").up() end, desc = "Up" },
-      { "<leader>de", function() require("dapui").float_element(nil, {enter = true}) end, desc = "Open Element" },
-      { "<leader>dw", function() require("dap.ui.widgets").hover() end, desc = "Widgets" },
+      { "<leader>db", function() require("dap").toggle_breakpoint() end,                                    desc = "Toggle Breakpoint" },
+      { "<leader>dj", function() require("dap").down() end,                                                 desc = "Down" },
+      { "<leader>dk", function() require("dap").up() end,                                                   desc = "Up" },
+      { "<leader>de", function() require("dapui").float_element(nil, { enter = true }) end,                 desc = "Open Element" },
+      { "<leader>dw", function() require("dap.ui.widgets").hover() end,                                     desc = "Widgets" },
       -- stylua: ignore end
       {
         "<leader>dt",
@@ -108,12 +108,12 @@ return {
 
       vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
 
-      local config = require("config")
-      for name, sign in pairs(config.icons.dap) do
-        sign = type(sign) == "table" and sign or { sign }
-        -- stylua: ignore
-      vim.fn.sign_define("Dap" .. name, { text = sign[1], texthl = sign[2] or "DiagnosticInfo", linehl = sign[3], numhl = sign[3] })
-      end
+      vim.fn.sign_define("DapStopped",
+        { text = " ", texthl = "DiagnosticWarn", linehl = "DapStoppedLine", numhl = "DapStoppedLine" })
+      vim.fn.sign_define("DapBreakpoint", { text = " ", texthl = "DiagnosticError" })
+      vim.fn.sign_define("DapBreakpointCondition", { text = " ", texthl = "DiagnosticError" })
+      vim.fn.sign_define("DapBreakpointRejected", { text = " ", texthl = "DiagnosticError" })
+      vim.fn.sign_define("DapLogPoint", { text = ".>", texthl = "DiagnosticInfo" })
     end,
   },
 }

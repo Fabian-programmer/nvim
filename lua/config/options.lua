@@ -61,10 +61,10 @@ vim.diagnostic.config({
   severity_sort = true,
   signs = {
     text = {
-      [vim.diagnostic.severity.ERROR] = require("config").icons.diagnostics.Error,
-      [vim.diagnostic.severity.WARN] = require("config").icons.diagnostics.Warn,
-      [vim.diagnostic.severity.INFO] = require("config").icons.diagnostics.Info,
-      [vim.diagnostic.severity.HINT] = require("config").icons.diagnostics.Hint,
+      [vim.diagnostic.severity.ERROR] = " ",
+      [vim.diagnostic.severity.WARN] = " ",
+      [vim.diagnostic.severity.INFO] = " ",
+      [vim.diagnostic.severity.HINT] = " "
     },
   },
 })
