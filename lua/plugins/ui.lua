@@ -111,9 +111,4 @@ return {
 
   -- icons
   { "nvim-tree/nvim-web-devicons", lazy = true },
-
-  {
-    "echasnovski/mini.trailspace",
-    event = "BufReadPre",
-  },
 }

@@ -3,7 +3,6 @@ return {
   -- change buffer focus with keystroke
   {
     "leath-dub/snipe.nvim",
-    -- stylua: ignore
     keys = {
       { "ft", function() require("snipe").open_buffer_menu() end, desc = "Open buffer menu" },
     },
@@ -13,7 +12,6 @@ return {
   -- finds everything
   {
     "folke/snacks.nvim",
-    -- stylua: ignore
     keys = {
       { "<leader>;",  function() Snacks.picker.resume() end,                      desc = "Resume" },
       -- find
@@ -198,12 +196,12 @@ return {
     end,
     opts = {
       mappings = {
-        add = "gsa",          -- Add surrounding in Normal and Visual modes
-        delete = "gsd",       -- Delete surrounding
-        find = "gsf",         -- Find surrounding (to the right)
-        find_left = "gsF",    -- Find surrounding (to the left)
-        highlight = "gsh",    -- Highlight surrounding
-        replace = "gsr",      -- Replace surrounding
+        add = "gsa",            -- Add surrounding in Normal and Visual modes
+        delete = "gsd",         -- Delete surrounding
+        find = "gsf",           -- Find surrounding (to the right)
+        find_left = "gsF",      -- Find surrounding (to the left)
+        highlight = "gsh",      -- Highlight surrounding
+        replace = "gsr",        -- Replace surrounding
         update_n_lines = "gsn", -- Update `n_lines`
       },
     },

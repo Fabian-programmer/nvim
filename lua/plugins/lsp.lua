@@ -24,11 +24,8 @@ return {
       inlay_hints = {
         enabled = false,
       },
-      -- add any global capabilities here
       capabilities = {},
-      -- format on save is handled by conform
       autoformat = false,
-      -- options for vim.lsp.buf.format
       format = {
         formatting_options = nil,
         timeout_ms = nil,
