@@ -67,13 +67,7 @@ return {
           lualine_b = { "branch" },
           lualine_c = {
             {
-              "diagnostics",
-              symbols = {
-                error = vim.diagnostic.severity.ERROR,
-                warn = vim.diagnostic.severity.WARN,
-                info = vim.diagnostic.severity.INFO,
-                hint = vim.diagnostic.severity.HINT,
-              },
+              "diagnostics"
             },
             {
               "filetype",
