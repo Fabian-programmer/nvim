@@ -12,7 +12,6 @@ return {
       words = { enabled = true },
     },
 
-    -- stylua: ignore
     keys = {
       { "++", function() Snacks.words.jump(1) end,  desc = "Next LSP Word" },
       { "üü", function() Snacks.words.jump(-1) end, desc = "Previous LSP Word" },

@@ -69,22 +69,6 @@ return {
         desc = "Terminate",
       },
       {
-        "<leader>do",
-        function()
-          local session = require("dap").session()
-          local command = "source /usr/local/OpenImageDebugger/oid.py"
-          session:evaluate(command, function(err)
-            if err then
-              require("dap.repl").append(err.message)
-              return
-            end
-          end)
-          require("dap.repl").append(command)
-        end,
-        desc = "OpenImageDebugger",
-      },
-
-      {
         "<leader>ds",
         function()
           local widgets = require("dap.ui.widgets")

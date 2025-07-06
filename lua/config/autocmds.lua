@@ -12,15 +12,6 @@ vim.api.nvim_create_autocmd("DirChanged", {
   end,
 })
 
--- resize splits if window got resized
-vim.api.nvim_create_autocmd({ "VimResized" }, {
-  callback = function()
-    local current_tab = vim.fn.tabpagenr()
-    vim.cmd("tabdo wincmd =")
-    vim.cmd("tabnext " .. current_tab)
-  end,
-})
-
 -- go to last loc when opening a buffer
 vim.api.nvim_create_autocmd("BufReadPost", {
   callback = function()
@@ -73,7 +64,8 @@ vim.api.nvim_create_autocmd("TermOpen", {
     vim.keymap.set("t", "<Esc>", "<C-\\><C-N>", { desc = "Normal mode", buffer = event.buf, silent = true })
     -- bang the terminal
     -- stylua: ignore
-    vim.keymap.set({ "n", "t" }, "<A-q>", function() require("mini.bufremove").delete(0, true) end, { buffer = event.buf, silent = true })
+    vim.keymap.set({ "n", "t" }, "<A-q>", function() require("mini.bufremove").delete(0, true) end,
+      { buffer = event.buf, silent = true })
   end,
 })
 
