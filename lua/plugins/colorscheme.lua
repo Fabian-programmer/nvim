@@ -4,9 +4,7 @@ return {
     lazy = false,
     priority = 1000,
     opts = { style = "moon" },
-    config = function()
-      require("tokyonight").load()
-    end,
+    config = function() require("tokyonight").load() end,
   },
-  { "catppuccin/nvim", name = "catppuccin", priority = 1000, lazy = false },
+  { "catppuccin/nvim", name = "catppuccin", lazy = false },
 }
