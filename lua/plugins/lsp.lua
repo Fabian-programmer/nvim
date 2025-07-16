@@ -13,12 +13,12 @@ return {
       { "<c-k>",      vim.lsp.buf.signature_help,                                                            mode = "i",               desc = "Signature Help" },
       { "<leader>cr", vim.lsp.buf.rename,                                                                    desc = "Rename" },
       -- diagnostics
-      { "üd",         vim.diagnostic.goto_next,                                                              desc = "Next Diagnostic" },
-      { "+d",         vim.diagnostic.goto_prev,                                                              desc = "Prev Diagnostic" },
-      { "üe",         function() vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR }) end, desc = "Next Error" },
-      { "+e",         function() vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR }) end, desc = "Prev Error" },
-      { "üw",         function() vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.WARN }) end,  desc = "Next Warning" },
-      { "+w",         function() vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.WARN }) end,  desc = "Prev Warning" },
+      { "üd",         vim.diagnostic.goto_prev,                                                              desc = "Prev Diagnostic" },
+      { "+d",         vim.diagnostic.goto_next,                                                              desc = "Next Diagnostic" },
+      { "üe",         function() vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR }) end, desc = "Prev Error" },
+      { "+e",         function() vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR }) end, desc = "Next Error" },
+      { "üw",         function() vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.WARN }) end,  desc = "Prev Warning" },
+      { "+w",         function() vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.WARN }) end,  desc = "Next Warning" },
     },
     opts = {
       inlay_hints = {

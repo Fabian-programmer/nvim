@@ -12,8 +12,8 @@ return {
       { "gp",         function() require("gitsigns").preview_hunk() end,             desc = "Git hunk preview" },
       { "gq",         function() require("gitsigns").reset_hunk() end,               desc = "Git hunk clear" },
       { "<leader>gd", function() require("gitsigns").toggle_deleted() end,           desc = "Git toggle deleted" },
-      { "gü",         function() require("gitsigns").nav_hunk('next') end,           desc = "Jump to next git hunk" },
-      { "g+",         function() require("gitsigns").nav_hunk('prev') end,           desc = "Jump to prev git hunk" },
+      { "üg",         function() require("gitsigns").nav_hunk('prev') end,           desc = "Jump to prev git hunk" },
+      { "+g",         function() require("gitsigns").nav_hunk('next') end,           desc = "Jump to next git hunk" },
     },
   },
 
