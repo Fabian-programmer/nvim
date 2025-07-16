@@ -11,10 +11,9 @@ return {
       scope = { enabled = true },
       words = { enabled = true },
     },
-
     keys = {
-      { "++", function() Snacks.words.jump(1) end,  desc = "Next LSP Word" },
       { "üü", function() Snacks.words.jump(-1) end, desc = "Previous LSP Word" },
+      { "++", function() Snacks.words.jump(1) end,  desc = "Next LSP Word" },
     },
   },
 
@@ -33,14 +32,6 @@ return {
         show_tab_indicators = true,
         indicator = {
           style = "none",
-        },
-        offsets = {
-          {
-            filetype = "neo-tree",
-            text = "File Explorer",
-            text_align = "center",
-            seperator = true,
-          },
         },
       },
     },
@@ -97,7 +88,6 @@ return {
           lualine_y = { "location" },
           lualine_z = { clock },
         },
-        extensions = { "nvim-tree" },
       }
     end,
   },

@@ -88,16 +88,6 @@ function M.create_fullscreen_terminal(command)
       :toggle()
 end
 
-local change_directory = function(picker)
-  picker:close()
-  local item = picker:current()
-  if not item then
-    return
-  end
-  local dir = item.text
-  vim.fn.chdir(dir)
-end
-
 function M.find_directory()
   local find_directory = function(opts, ctx)
     return require("snacks.picker.source.proc").proc({
@@ -119,6 +109,16 @@ function M.find_directory()
         },
       },
     }, ctx)
+  end
+
+  local change_directory = function(picker)
+    picker:close()
+    local item = picker:current()
+    if not item then
+      return
+    end
+    local dir = item.text
+    vim.fn.chdir(dir)
   end
 
   Snacks.picker.pick({
