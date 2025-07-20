@@ -30,7 +30,6 @@ return {
             enabled = false,
           },
         },
-        -- stylua: ignore
         config = function(_, opts)
           local dap = require("dap")
           local dapui = require("dapui")
@@ -43,7 +42,6 @@ return {
     },
 
     keys = {
-      -- stylua: ignore start
       { "<F5>",       function() require("dap").continue() end,                                             desc = "Continue" },
       { "<F7>",       function() require("dap").step_into() end,                                            desc = "Step Into" },
       { "<F8>",       function() require("dap").step_over() end,                                            desc = "Step Over" },
@@ -55,7 +53,6 @@ return {
       { "<leader>dk", function() require("dap").up() end,                                                   desc = "Up" },
       { "<leader>de", function() require("dapui").float_element(nil, { enter = true }) end,                 desc = "Open Element" },
       { "<leader>dw", function() require("dap.ui.widgets").hover() end,                                     desc = "Widgets" },
-      -- stylua: ignore end
       {
         "<leader>dt",
         function()

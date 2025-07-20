@@ -60,12 +60,9 @@ vim.api.nvim_create_autocmd("TermOpen", {
     "term://*bash",
   },
   callback = function(event)
-    -- go to normal mode
     vim.keymap.set("t", "<Esc>", "<C-\\><C-N>", { desc = "Normal mode", buffer = event.buf, silent = true })
-    -- bang the terminal
-    -- stylua: ignore
     vim.keymap.set({ "n", "t" }, "<A-q>", function() require("mini.bufremove").delete(0, true) end,
-      { buffer = event.buf, silent = true })
+      { desc = "Bang the terminal", buffer = event.buf, silent = true })
   end,
 })
 

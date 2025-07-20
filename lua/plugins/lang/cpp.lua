@@ -15,7 +15,6 @@ return {
   -- debugger
   {
     "mfussenegger/nvim-dap",
-    optional = true,
     opts = function()
       local dap = require("dap")
 
@@ -50,60 +49,6 @@ return {
         pid = require("dap.utils").pick_process,
       }
 
-      local function extract_exectuable_from_file()
-        local file = vim.fn.expand("%:t:r")
-        local handle = io.popen("cd " .. require("util").get_root() .. " && cmake --build build --target help")
-        if handle then
-          for line in handle:lines() do
-            -- Remove the dots from the beginning of the line
-            line = string.gsub(line, "^[%s%.]+", "")
-            if string.find(file, line) == 1 then
-              return line
-            end
-          end
-
-          handle:close()
-        end
-      end
-
-      local cpp_test_launch = {
-        name = "Launch Current Test File (Catch2)",
-        type = "gdb",
-        request = "launch",
-        program = function()
-          local test_executable = extract_exectuable_from_file()
-          return require("util").get_root() .. "/bin/" .. test_executable
-        end,
-        cwd = "${workspaceFolder}",
-      }
-
-      local function get_scenario_line()
-        local current_line = vim.api.nvim_win_get_cursor(0)[1]
-        local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
-        for i = current_line, 1, -1 do
-          if string.match(lines[i], "SCENARIO") then
-            local content = string.match(lines[i], "%((.-)%)")
-            local catch2_command = '"Scenario: ' .. content:sub(2)
-            return catch2_command
-          end
-        end
-        return ""
-      end
-
-      local cpp_test_tag_launch = {
-        name = "Launch Current Test File (Catch2, Tag)",
-        type = "gdb",
-        request = "launch",
-        program = function()
-          local test_executable = extract_exectuable_from_file()
-          return require("util").get_root() .. "/bin/" .. test_executable
-        end,
-        args = function()
-          return get_scenario_line()
-        end,
-        cwd = "${workspaceFolder}",
-      }
-
       local last_config = {}
 
       local cpp_last_config = setmetatable({
@@ -120,8 +65,6 @@ return {
         cpp_launch,
         cpp_attach,
         cpp_last_config,
-        cpp_test_launch,
-        cpp_test_tag_launch,
       }
 
       dap.listeners.after.event_initialized["last_config"] = function()

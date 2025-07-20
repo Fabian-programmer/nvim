@@ -94,7 +94,6 @@ return {
   {
     "folke/flash.nvim",
     event = { "BufReadPost", "BufNewFile" },
-    -- stylua: ignore
     keys = {
       { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
       { "S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
@@ -107,7 +106,6 @@ return {
   {
     "echasnovski/mini.bufremove",
     event = "BufReadPre",
-    -- stylua: ignore
     keys = {
       { "<A-q>", function() require("mini.bufremove").delete(0, false) end, desc = "Delete Buffer" },
       { "<A-Q>", function() require("mini.bufremove").delete(0, true) end,  desc = "Delete Buffer (Force)" },
@@ -117,7 +115,6 @@ return {
   -- search/replace in multiple files
   {
     "MagicDuck/grug-far.nvim",
-    -- stylua: ignore
     keys = {
       { "<leader>rr", mode = "n", function() require('grug-far').open({ prefills = { paths = require("util").get_root() } }) end,          desc = "Replace all" },
       { "<leader>rw", mode = "n", function() require('grug-far').open({ prefills = { search = vim.fn.expand("<cword>") } }) end,           desc = "Replace word under cursor" },
@@ -198,8 +195,6 @@ return {
 
   {
     "akinsho/toggleterm.nvim",
-    optional = true,
-    -- stylua: ignore
     keys = {
       { "<leader>hp", function() require("util").create_fullscreen_terminal("htop") end, desc = "Htop" },
     },
