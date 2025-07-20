@@ -17,12 +17,7 @@ return {
     "mfussenegger/nvim-dap",
     opts = function()
       local dap = require("dap")
-
-      dap.adapters.gdb = {
-        type = "executable",
-        command = "gdb",
-        args = { "-i", "dap" },
-      }
+      dap.adapters.gdb = { type = "executable", command = "gdb", args = { "-i", "dap" } }
 
       -- configuration --
       local cpp_launch = {
@@ -30,7 +25,12 @@ return {
         type = "gdb",
         request = "launch",
         program = function()
-          return vim.fn.input("Path to executable: ", require("util").get_root() .. "/", "file")
+          local path = vim.fn.input({
+            prompt = 'Path to executable: ',
+            default = require("util").get_root() .. '/',
+            completion = 'file'
+          })
+          return (path and path ~= "") and path or dap.ABORT
         end,
         args = function()
           local args_str = vim.fn.input({

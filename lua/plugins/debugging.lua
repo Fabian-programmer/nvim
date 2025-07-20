@@ -30,14 +30,6 @@ return {
             enabled = false,
           },
         },
-        config = function(_, opts)
-          local dap = require("dap")
-          local dapui = require("dapui")
-          dapui.setup(opts)
-          dap.listeners.after.event_initialized["dapui_config"] = function() dapui.open({}) end
-          dap.listeners.before.event_terminated["dapui_config"] = function() dapui.close({}) end
-          dap.listeners.before.event_exited["dapui_config"] = function() dapui.close({}) end
-        end,
       },
     },
 
@@ -51,20 +43,8 @@ return {
       { "<leader>db", function() require("dap").toggle_breakpoint() end,                                    desc = "Toggle Breakpoint" },
       { "<leader>dj", function() require("dap").down() end,                                                 desc = "Down" },
       { "<leader>dk", function() require("dap").up() end,                                                   desc = "Up" },
-      { "<leader>de", function() require("dapui").float_element(nil, { enter = true }) end,                 desc = "Open Element" },
       { "<leader>dw", function() require("dap.ui.widgets").hover() end,                                     desc = "Widgets" },
-      {
-        "<leader>dt",
-        function()
-          require("dapui").close()
-          require("dap").repl.close()
-          local session = require("dap").session()
-          if session then
-            require("dap").terminate()
-          end
-        end,
-        desc = "Terminate",
-      },
+      { "<leader>dt", function() require("dap").terminate() end,                                            desc = "Terminate" },
       {
         "<leader>ds",
         function()
@@ -75,6 +55,21 @@ return {
       },
     },
     config = function()
+      local dap, dapui = require("dap"), require("dapui")
+      dap.listeners.before.attach.dapui_config = function()
+        dapui.open()
+      end
+      dap.listeners.before.launch.dapui_config = function()
+        dapui.open()
+      end
+      dap.listeners.before.event_terminated.dapui_config = function()
+        dapui.close()
+      end
+      dap.listeners.before.event_exited.dapui_config = function()
+        dapui.close()
+      end
+
+
       vim.api.nvim_create_autocmd("FileType", {
         pattern = { "dap-float" },
         callback = function(event)
@@ -82,10 +77,6 @@ return {
           vim.keymap.set("n", "<S-Tab>", "", { buffer = event.buf, silent = true })
         end,
       })
-
-      require("dap").listeners.after.event_initialized["dapui_config"] = function()
-        require("dapui").open()
-      end
 
       vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
 
