@@ -69,15 +69,6 @@ return {
         dapui.close()
       end
 
-
-      vim.api.nvim_create_autocmd("FileType", {
-        pattern = { "dap-float" },
-        callback = function(event)
-          vim.keymap.set("n", "<Tab>", "", { buffer = event.buf, silent = true })
-          vim.keymap.set("n", "<S-Tab>", "", { buffer = event.buf, silent = true })
-        end,
-      })
-
       vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
 
       vim.fn.sign_define("DapStopped",
