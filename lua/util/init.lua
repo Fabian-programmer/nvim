@@ -36,34 +36,6 @@ function M.create_fullscreen_terminal(command)
       :toggle()
 end
 
-function M.pick_executable()
-  local picker = function()
-    local co = coroutine.running()
-    require("snacks").picker.pick(nil, {
-      title = "Executables",
-      live = true,
-      layout = "select",
-      format = "text",
-      finder = function(config, ctx)
-        return require("snacks.picker.source.proc").proc({
-          config,
-          {
-            cmd = "fd",
-            args = { "--type", "x", "--hidden" },
-          }
-        }, ctx)
-      end,
-      confirm = function(picker, item)
-        picker:close()
-        coroutine.resume(co, item.text)
-      end
-    })
-    return coroutine.yield()
-  end
-
-  return picker()
-end
-
 function M.find_directory(path)
   local find_directory = function(opts, ctx)
     return require("snacks.picker.source.proc").proc({

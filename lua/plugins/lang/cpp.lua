@@ -25,13 +25,10 @@ return {
         type = "gdb",
         request = "launch",
         program = function()
-          return require("util").pick_executable()
+          return require("util.dap").pick_executable()
         end,
         args = function()
-          local args_str = vim.fn.input({
-            prompt = "Arguments: ",
-          })
-          return vim.split(args_str, " +")
+          return require("util.dap").get_args({ prompt = "Arguments: " })
         end,
         cwd = "${workspaceFolder}",
         stopAtBeginningOfMainSubprogram = true,

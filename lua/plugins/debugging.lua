@@ -45,7 +45,6 @@ return {
       { "<leader>dk", function() require("dap").up() end,                                                        desc = "Up" },
       { "<leader>dw", function() require("dap.ui.widgets").hover() end,                                          desc = "Widgets" },
       { "<leader>dt", function() require("dap").terminate() end,                                                 desc = "Terminate" },
-      ---@format disable-next
       { "<leader>ds", function() require("dap.ui.widgets").centered_float(require("dap.ui.widgets").scopes) end, desc = "Scope" },
     },
     config = function()
