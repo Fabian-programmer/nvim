@@ -25,12 +25,7 @@ return {
         type = "gdb",
         request = "launch",
         program = function()
-          local path = vim.fn.input({
-            prompt = 'Path to executable: ',
-            default = require("util").get_root() .. '/',
-            completion = 'file'
-          })
-          return (path and path ~= "") and path or dap.ABORT
+          return require("util").pick_executable()
         end,
         args = function()
           local args_str = vim.fn.input({

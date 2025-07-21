@@ -65,9 +65,9 @@ vim.keymap.set("n", "<leader><Tab>q", "<cmd>tabclose<cr>", { desc = "Close Tab" 
 vim.keymap.set("n", "<leader><Tab><S-Tab>", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 
 -- directories (like fzf keybinding)
-vim.keymap.set("n", "<A-c>", function()
-  require("util").find_directory()
-end, { desc = "Directories" })
+---@format disable-next
+vim.keymap.set("n", "<A-c>", function() require("util").find_directory(os.getenv("HOME")) end, { desc = "Directories (Home)" })
+vim.keymap.set("n", "<A-C>", function() require("util").find_directory('/') end, { desc = "Directories (/)" })
 
 -- cmake targets
 vim.keymap.set("n", "<leader>cc", function()
