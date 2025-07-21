@@ -1,4 +1,5 @@
 vim.lsp.enable('clangd')
+
 return {
   -- external artefacts
   {
@@ -17,6 +18,7 @@ return {
     "mfussenegger/nvim-dap",
     opts = function()
       local dap = require("dap")
+      local util = require("util.dap")
       dap.adapters.gdb = { type = "executable", command = "gdb", args = { "-i", "dap" } }
 
       -- configuration --
@@ -25,10 +27,10 @@ return {
         type = "gdb",
         request = "launch",
         program = function()
-          return require("util.dap").pick_executable()
+          return util.pick_executable()
         end,
         args = function()
-          return require("util.dap").get_args({ prompt = "Arguments: " })
+          return util.get_args({ prompt = "Arguments: " })
         end,
         cwd = "${workspaceFolder}",
         stopAtBeginningOfMainSubprogram = true,
@@ -63,11 +65,5 @@ return {
         last_config = require("dap").session()["config"]
       end
     end,
-  },
-
-  -- compiler explorer
-  {
-    "Fabian-programmer/compiler-explorer.nvim",
-    cmd = { "CECompile" },
   },
 }
