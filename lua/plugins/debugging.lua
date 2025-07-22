@@ -60,6 +60,14 @@ return {
       vim.fn.sign_define("DapBreakpointCondition", { text = " ", texthl = "DiagnosticError" })
       vim.fn.sign_define("DapBreakpointRejected", { text = " ", texthl = "DiagnosticError" })
       vim.fn.sign_define("DapLogPoint", { text = ".>", texthl = "DiagnosticInfo" })
+
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = { "dap-float" },
+        callback = function(event)
+          vim.keymap.set("n", "<Tab>", "<Nop>", { buffer = event.buf, silent = true })
+          vim.keymap.set("n", "<S-Tab>", "<Nop>", { buffer = event.buf, silent = true })
+        end,
+      })
     end,
   },
 }

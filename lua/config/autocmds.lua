@@ -83,18 +83,3 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
   end,
 })
-
--- disable tabs on floating windows
-vim.api.nvim_create_autocmd("BufWinEnter", {
-  callback = function(event)
-    local function is_floating(win_id)
-      local config = vim.api.nvim_win_get_config(win_id)
-      return config.relative ~= ""
-    end
-
-    if is_floating(vim.api.nvim_get_current_win()) then
-      vim.keymap.set("n", "<Tab>", "<Nop>", { buffer = event.buf, silent = true })
-      vim.keymap.set("n", "<S-Tab>", "<Nop>", { buffer = event.buf, silent = true })
-    end
-  end
-})
