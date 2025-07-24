@@ -1,10 +1,14 @@
-vim.lsp.enable('pyrefly')
 return {
-  -- external artefacts
+  -- language server
   {
-    "mason.nvim",
-    opts = { ensure_installed = { "autopep8", "pyrefly" } },
+    "mason-org/mason-lspconfig.nvim",
+    opts = { ensure_installed = { "pyrefly" } },
   },
+
+  -- formatter
+  -- {
+  --   opts = { ensure_installed = { "autopep8" } },
+  -- },
 
   -- syntax highlighting
   {

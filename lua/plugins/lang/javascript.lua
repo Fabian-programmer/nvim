@@ -1,14 +1,13 @@
 return {
-  -- external artefacts
-  {
-    "mason.nvim",
-    opts = { ensure_installed = { "prettierd", "prettier" } },
-  },
+  -- formatter
+  -- {
+  --   opts = { ensure_installed = { "prettierd", "prettier" } },
+  -- },
 
   -- syntax highlighting
   {
     "nvim-treesitter/nvim-treesitter",
-    opts = { ensure_installed = { "javascript" } },
+    opts = { ensure_installed = { "javascript", "json", "html", "markdown", "yaml" } },
   },
 
   -- formatter
@@ -16,9 +15,11 @@ return {
     "stevearc/conform.nvim",
     opts = {
       formatters_by_ft = {
+        ["html"] = { "prettier" },
         ["javascript"] = { "prettierd", "prettier" },
         ["json"] = { "prettier" },
         ["markdown"] = { "prettier" },
+        ["yaml"] = { "prettier" },
       },
     },
   },

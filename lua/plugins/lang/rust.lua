@@ -1,9 +1,8 @@
-vim.lsp.enable('rust_analyzer')
 return {
-  -- external artefacts
+  -- language server
   {
-    "mason-org/mason.nvim",
-    opts = { ensure_installed = { "rust-analyzer" } },
+    "mason-org/mason-lspconfig.nvim",
+    opts = { ensure_installed = { "rust_analyzer" } },
   },
 
   -- syntax highlighting

@@ -1,25 +1,13 @@
-vim.lsp.enable('lua_ls')
-
 return {
-  -- external artefacts
+  -- language server
   {
-    "mason.nvim",
-    opts = { ensure_installed = { "stylua" } },
+    "mason-org/mason-lspconfig.nvim",
+    opts = { ensure_installed = { "lua_ls" } },
   },
 
   -- syntax highlighting
   {
     "nvim-treesitter/nvim-treesitter",
     opts = { ensure_installed = { "lua" } },
-  },
-
-  -- formatter
-  {
-    "stevearc/conform.nvim",
-    opts = {
-      formatters_by_ft = {
-        lua = { "stylua" },
-      },
-    },
   },
 }

@@ -3,8 +3,8 @@ return {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
-      "mason-org/mason.nvim",
-      "mason-org/mason-lspconfig.nvim",
+      { "mason-org/mason.nvim",           cmd = "Mason",                        opts = {} },
+      { "mason-org/mason-lspconfig.nvim", opts_extend = { "ensure_installed" }},
     },
     keys = {
       { "cd",         vim.diagnostic.open_float,                                                             desc = "Line Diagnostics" },
@@ -60,10 +60,5 @@ return {
         end
       })
     end,
-  },
-
-  {
-    "mason-org/mason.nvim",
-    cmd = "Mason",
   },
 }

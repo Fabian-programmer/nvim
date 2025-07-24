@@ -1,9 +1,7 @@
-vim.lsp.enable('clangd')
-
 return {
-  -- external artefacts
+  -- language server
   {
-    "mason.nvim",
+    "mason-org/mason-lspconfig.nvim",
     opts = { ensure_installed = { "clangd" } },
   },
 
