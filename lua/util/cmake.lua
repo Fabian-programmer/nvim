@@ -30,11 +30,11 @@ function M.pick_build_dir(callback)
   })
 end
 
-function M.find_cmake_targets()
+function M.find_cmake_targets(build_folder)
   local proc = require("snacks.picker.source.proc").proc
   local pick = Snacks.picker.pick
 
-  M.pick_build_dir(function(build_dir)
+  local function select_target(build_dir)
     pick({
       source = "CMake Targets",
       finder = function(opts, ctx)
@@ -76,7 +76,13 @@ function M.find_cmake_targets()
         vim.cmd("OverseerOpen")
       end,
     })
-  end)
+  end
+
+  if build_folder then
+    select_target(build_folder)
+  else
+    M.pick_build_dir(select_target)
+  end
 end
 
 return M
