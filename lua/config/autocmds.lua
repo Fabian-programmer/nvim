@@ -57,7 +57,7 @@ vim.api.nvim_create_autocmd({ "TermOpen", "TermEnter" }, {
 
 vim.api.nvim_create_autocmd("TermOpen", {
   pattern = {
-    "term://*bash",
+    "term://*",
   },
   callback = function(event)
     vim.keymap.set("t", "<Esc>", "<C-\\><C-N>", { desc = "Normal mode", buffer = event.buf, silent = true })
