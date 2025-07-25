@@ -5,15 +5,17 @@ function M.pick_executable()
     local co = coroutine.running()
     require("snacks").picker.pick(nil, {
       title = "Executables",
-      live = true,
-      layout = "select",
+      preview = "none",
+      layout = {
+        preset = "select",
+      },
       format = "text",
       finder = function(config, ctx)
         return require("snacks.picker.source.proc").proc({
           config,
           {
             cmd = "fd",
-            args = { "--type", "x", "--hidden", "--exclude", ".git" },
+            args = { "--type", "x", "-H", "-I", "--exclude", ".git" },
           }
         }, ctx)
       end,
