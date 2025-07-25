@@ -67,7 +67,7 @@ function M.find_cmake_targets(build_folder)
                 "shell",
                 name = "- Build this target → " .. target_item.text,
                 cwd = require("util").get_root(),
-                cmd = "cmake --build " .. build_dir .. " --target " .. target_item.text .. " -- -j8",
+                cmd = "cmake --build " .. build_dir .. " --target " .. target_item.text .. " -- -j$(($(nproc) - 2))",
               },
             },
           },
