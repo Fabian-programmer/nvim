@@ -36,16 +36,11 @@ vim.keymap.set("n", "U", "<C-r>")
 vim.keymap.set({ "i", "n" }, "<C-s>", "<cmd>:w<cr><esc>", { desc = "Save Buffer" })
 
 -- change cwd to current buffer
-vim.keymap.set("n", "<leader>C", function()
-  vim.cmd(":cd %:h")
-end, { desc = "cd to current file" })
+vim.keymap.set("n", "<leader>C", function() vim.cmd(":cd %:h") end, { desc = "cd to current file" })
 
 -- toggle inlay hints
-if vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint then
-  vim.keymap.set("n", "<leader>ci", function()
-    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-  end, { desc = "Toggle Inlay Hints" })
-end
+---@format disable-next
+vim.keymap.set("n", "<leader>ci", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end, { desc = "Toggle Inlay Hints" })
 
 -- better indenting
 vim.keymap.set("v", "<", "<gv", { desc = "Intend left" })
@@ -70,11 +65,8 @@ vim.keymap.set("n", "<A-c>", function() require("util").find_directory(os.getenv
 vim.keymap.set("n", "<A-C>", function() require("util").find_directory('/') end, { desc = "Directories (/)" })
 
 -- cmake targets
-vim.keymap.set("n", "<leader>cc", function()
-  require("util.cmake").find_cmake_targets()
-end, { desc = "CMake Targets" })
+vim.keymap.set("n", "<leader>cc", function() require("util.cmake").find_cmake_targets() end, { desc = "CMake Targets" })
 
 -- find and open corresponding assembly
-vim.keymap.set("n", "<leader>ba", function()
-  require("util.workflow").open_asm_file_in_split()
-end, { desc = "Find corresponding assembly file" })
+---@format disable-next
+vim.keymap.set("n", "<leader>ba", function() require("util.workflow").open_asm_file_in_split() end, { desc = "Find corresponding assembly file" })
