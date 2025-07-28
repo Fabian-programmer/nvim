@@ -60,6 +60,13 @@ vim.api.nvim_create_autocmd("TermOpen", {
     "term://*",
   },
   callback = function(event)
+    local bufname = vim.api.nvim_buf_get_name(event.buf)
+
+    -- ignore toggleterm
+    if string.find(bufname, "#toggleterm#", 1, true) then
+      return
+    end
+
     vim.keymap.set("t", "<Esc>", "<C-\\><C-N>", { desc = "Normal mode", buffer = event.buf, silent = true })
     vim.keymap.set({ "n", "t" }, "<A-q>", function() require("mini.bufremove").delete(0, true) end,
       { desc = "Bang the terminal", buffer = event.buf, silent = true })
