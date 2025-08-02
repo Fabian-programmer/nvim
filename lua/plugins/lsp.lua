@@ -3,8 +3,8 @@ return {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
-      { "mason-org/mason.nvim",           cmd = "Mason",                        opts = {} },
-      { "mason-org/mason-lspconfig.nvim", opts_extend = { "ensure_installed" }},
+      { "mason-org/mason.nvim",           cmd = "Mason",                       opts = {} },
+      { "mason-org/mason-lspconfig.nvim", opts_extend = { "ensure_installed" } },
     },
     keys = {
       { "cd",         vim.diagnostic.open_float,                                                             desc = "Line Diagnostics" },
@@ -19,19 +19,6 @@ return {
       { "+e",         function() vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR }) end, desc = "Next Error" },
       { "üw",         function() vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.WARN }) end,  desc = "Prev Warning" },
       { "+w",         function() vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.WARN }) end,  desc = "Next Warning" },
-    },
-    opts = {
-      inlay_hints = {
-        enabled = false,
-      },
-      capabilities = {},
-      autoformat = false,
-      format = {
-        formatting_options = nil,
-        timeout_ms = nil,
-      },
-      servers = {},
-      setup = {},
     },
     config = function()
       -- function to register keys for lsp.config
@@ -51,7 +38,7 @@ return {
               opts.silent = opts.silent ~= false
               opts.buffer = args.buf
 
-              local mode, lhs, rhs = unpack(keys)
+              local mode, lhs, rhs = table.unpack(keys)
               local desc = keys.desc
 
               vim.keymap.set(mode, lhs, rhs, vim.tbl_extend("force", { desc = desc }, opts))
