@@ -68,6 +68,22 @@ return {
           vim.keymap.set("n", "<S-Tab>", "<Nop>", { buffer = event.buf, silent = true })
         end,
       })
+
+      -- rerun last config
+      local last_config = {}
+      dap.listeners.after.event_initialized["last_config"] = function(session)
+        last_config = session.config
+      end
+
+      local function run_last()
+        if last_config then
+          dap.run(last_config)
+        else
+          dap.continue()
+        end
+      end
+
+      vim.keymap.set('n', '<Leader>dl', function() run_last() end, { desc = "Run last config" })
     end,
   },
 }

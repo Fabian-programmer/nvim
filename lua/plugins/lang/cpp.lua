@@ -41,27 +41,7 @@ return {
         pid = require("dap.utils").pick_process,
       }
 
-      local last_config = {}
-
-      local cpp_last_config = setmetatable({
-        name = "Last Config",
-        type = "gdb",
-        request = "launch",
-      }, {
-        __call = function()
-          return last_config
-        end,
-      })
-
-      dap.configurations["cpp"] = {
-        cpp_launch,
-        cpp_attach,
-        cpp_last_config,
-      }
-
-      dap.listeners.after.event_initialized["last_config"] = function()
-        last_config = require("dap").session()["config"]
-      end
+      dap.configurations["cpp"] = { cpp_launch, cpp_attach }
     end,
   },
 }
