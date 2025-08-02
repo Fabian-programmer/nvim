@@ -19,7 +19,7 @@ return {
   {
     "akinsho/toggleterm.nvim",
     keys = {
-      { "<leader>gg", function() require("util").create_fullscreen_terminal("lazygit") end, desc = "Lazy Git" },
+      { "<leader>gg", function() require("util").create_fullscreen_float_terminal("lazygit") end, desc = "Lazy Git" },
     },
   },
 }

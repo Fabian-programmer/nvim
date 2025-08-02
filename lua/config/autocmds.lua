@@ -45,34 +45,6 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- start in insert mode in terminal
-vim.api.nvim_create_autocmd({ "TermOpen", "TermEnter" }, {
-  pattern = {
-    "term://*bash",
-  },
-  callback = function()
-    vim.cmd("startinsert")
-  end,
-})
-
-vim.api.nvim_create_autocmd("TermOpen", {
-  pattern = {
-    "term://*",
-  },
-  callback = function(event)
-    local bufname = vim.api.nvim_buf_get_name(event.buf)
-
-    -- ignore toggleterm
-    if string.find(bufname, "#toggleterm#", 1, true) then
-      return
-    end
-
-    vim.keymap.set("t", "<Esc>", "<C-\\><C-N>", { desc = "Normal mode", buffer = event.buf, silent = true })
-    vim.keymap.set({ "n", "t" }, "<A-q>", function() require("mini.bufremove").delete(0, true) end,
-      { desc = "Bang the terminal", buffer = event.buf, silent = true })
-  end,
-})
-
 -- close buffer
 vim.api.nvim_create_autocmd("FileType", {
   pattern = {

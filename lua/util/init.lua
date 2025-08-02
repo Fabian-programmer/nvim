@@ -22,11 +22,11 @@ function M.get_root()
   return path and vim.fs.root(path, root_patterns) or vim.loop.cwd()
 end
 
-function M.create_fullscreen_terminal(command)
+function M.create_fullscreen_float_terminal(command)
   require("toggleterm.terminal").Terminal
       :new({
         cmd = command,
-        hidden = true,
+        close_on_exit = true,
         direction = "float",
         float_opts = {
           width = vim.o.columns,

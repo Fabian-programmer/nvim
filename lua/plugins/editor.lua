@@ -196,7 +196,7 @@ return {
   {
     "akinsho/toggleterm.nvim",
     keys = {
-      { "<leader>hp", function() require("util").create_fullscreen_terminal("htop") end, desc = "Htop" },
+      { "<leader>hp", function() require("util").create_fullscreen_float_terminal("htop") end, desc = "Htop" },
     },
   },
 }
