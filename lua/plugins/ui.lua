@@ -1,27 +1,12 @@
 return {
-  {
-    "folke/snacks.nvim",
-    lazy = false,
-    priority = 1000,
-    opts = {
-      indent = { enabled = true },
-      input = { enabled = true },
-      notifier = { enabled = true },
-      picker = { enabled = true },
-      scope = { enabled = true },
-      words = { enabled = true },
-    },
-    keys = {
-      { "üü", function() Snacks.words.jump(-1) end, desc = "Previous LSP Word" },
-      { "++", function() Snacks.words.jump(1) end,  desc = "Next LSP Word" },
-    },
-  },
+  -- icons
+  { "nvim-tree/nvim-web-devicons", lazy = true },
 
   -- bufferline
   {
     "akinsho/bufferline.nvim",
     event = "VeryLazy",
-    dependencies = { "tiagovla/scope.nvim", config = true },
+    dependencies = { "tiagovla/scope.nvim", opts = {} },
     opts = {
       options = {
         always_show_bufferline = true,
@@ -91,7 +76,4 @@ return {
       }
     end,
   },
-
-  -- icons
-  { "nvim-tree/nvim-web-devicons", lazy = true },
 }

@@ -6,6 +6,25 @@ return {
     priority = 1001,
   },
 
+  {
+    "folke/snacks.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {
+      bigfile = {},
+      indent = {},
+      input = {},
+      notifier = {},
+      picker = {},
+      scope = {},
+      words = {},
+    },
+    keys = {
+      { "üü", function() Snacks.words.jump(-1) end, desc = "Previous LSP Word" },
+      { "++", function() Snacks.words.jump(1) end,  desc = "Next LSP Word" },
+    },
+  },
+
   -- framework to run tasks
   {
     "stevearc/overseer.nvim",
@@ -23,14 +42,6 @@ return {
   {
     "akinsho/toggleterm.nvim",
     version = "*",
-  },
-
-  -- special handling for big files, like .asm
-  {
-    "folke/snacks.nvim",
-    opts = {
-      bigfile = {},
-    },
   },
 
   {
