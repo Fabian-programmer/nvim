@@ -38,7 +38,7 @@ return {
               opts.silent = opts.silent ~= false
               opts.buffer = args.buf
 
-              local mode, lhs, rhs = table.unpack(keys)
+              local mode, lhs, rhs = unpack(keys)
               local desc = keys.desc
 
               vim.keymap.set(mode, lhs, rhs, vim.tbl_extend("force", { desc = desc }, opts))
