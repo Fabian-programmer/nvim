@@ -1,4 +1,3 @@
--- auto completion
 return {
   {
     "saghen/blink.cmp",
