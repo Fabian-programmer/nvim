@@ -36,6 +36,20 @@ function M.create_fullscreen_float_terminal(command)
       :toggle()
 end
 
+function M.create_terminal(command)
+  if command then
+    command = "terminal " .. command
+  else
+    command = "terminal"
+  end
+  vim.cmd(command)
+  vim.cmd("startinsert")
+
+  -- Set ESC mapping for the current terminal buffer
+  local bufnr = vim.api.nvim_get_current_buf()
+  vim.api.nvim_buf_set_keymap(bufnr, 't', '<Esc>', [[<C-\><C-n>]], { noremap = true, silent = true })
+end
+
 function M.find_directory(path)
   local find_directory = function(opts, ctx)
     return require("snacks.picker.source.proc").proc({

@@ -51,14 +51,7 @@ vim.keymap.set("n", "<Tab>", "<cmd>:bnext<cr>", { desc = "Next buffer" })
 vim.keymap.set("n", "<S-Tab>", "<cmd>:bprev<cr>", { desc = "Previous buffer" })
 
 -- Open Terminal
-vim.keymap.set({ "i", "n" }, "<A-t>", function()
-  vim.cmd("terminal")
-  vim.cmd("startinsert")
-
-  -- Set ESC mapping for the current terminal buffer
-  local bufnr = vim.api.nvim_get_current_buf()
-  vim.api.nvim_buf_set_keymap(bufnr, 't', '<Esc>', [[<C-\><C-n>]], { noremap = true, silent = true })
-end, { desc = "Open Terminal" })
+vim.keymap.set({ "i", "n" }, "<A-t>", function() require("util").create_terminal() end, { desc = "Open Terminal" })
 
 -- tabs
 vim.keymap.set("n", "<leader><Tab>n", "<cmd>tabnew<cr>", { desc = "New Tab" })
