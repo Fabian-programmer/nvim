@@ -12,6 +12,7 @@ return {
     priority = 1000,
     opts = {
       bigfile = {},
+      bufdelete = {},
       indent = {},
       input = {},
       notifier = {},
@@ -20,8 +21,9 @@ return {
       words = {},
     },
     keys = {
-      { "üü", function() Snacks.words.jump(-1) end, desc = "Previous LSP Word" },
-      { "++", function() Snacks.words.jump(1) end,  desc = "Next LSP Word" },
+      { "üü",    function() Snacks.words.jump(-1) end, desc = "Previous LSP Word" },
+      { "++",    function() Snacks.words.jump(1) end,  desc = "Next LSP Word" },
+      { "<A-q>", function() Snacks.bufdelete() end,    desc = "Delete Buffer" },
     },
   },
 

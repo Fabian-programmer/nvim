@@ -102,16 +102,6 @@ return {
     },
   },
 
-  -- buffer remove
-  {
-    "echasnovski/mini.bufremove",
-    event = "BufReadPre",
-    keys = {
-      { "<A-q>", function() require("mini.bufremove").delete(0, false) end, desc = "Delete Buffer" },
-      { "<A-Q>", function() require("mini.bufremove").delete(0, true) end,  desc = "Delete Buffer (Force)" },
-    },
-  },
-
   -- search/replace in multiple files
   {
     "MagicDuck/grug-far.nvim",
