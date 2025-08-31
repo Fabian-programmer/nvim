@@ -2,11 +2,70 @@ return {
 
   -- change buffer focus with keystroke
   {
-    "leath-dub/snipe.nvim",
-    keys = {
-      { "ft", function() require("snipe").open_buffer_menu() end, desc = "Open buffer menu" },
+    "ThePrimeagen/harpoon",
+    branch = "harpoon2",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = {
+      menu = {
+        width = vim.api.nvim_win_get_width(0) - 4,
+      },
+      settings = {
+        save_on_toggle = true,
+      },
     },
-    opts = {},
+    keys = function()
+      local keys = {
+        {
+          "<leader>ba",
+          function()
+            require("harpoon"):list():add()
+            Snacks.notify.info("Add " .. vim.api.nvim_buf_get_name(0) .. " to list", { title = "Harpoon" })
+          end,
+          desc = "Add File",
+        },
+        {
+          "<leader>bb",
+          function()
+            local harpoon = require("harpoon")
+            harpoon.ui:toggle_quick_menu(harpoon:list())
+          end,
+          desc = "Quick Menu",
+        },
+        {
+          "<leader>bd",
+          function()
+            local harpoon_items = require("harpoon"):list().items
+
+            local keep = {}
+            for _, item in ipairs(harpoon_items) do
+              local path = vim.fn.fnamemodify(item.value, ":p")
+              keep[path] = true
+            end
+
+            for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+              if vim.api.nvim_buf_is_loaded(buf) then
+                local name = vim.api.nvim_buf_get_name(buf)
+                if name ~= "" and not keep[name] then
+                  vim.api.nvim_buf_delete(buf, { force = true })
+                end
+              end
+            end
+          end,
+          desc = "Remove all unharpooned buffers",
+        },
+      }
+
+      for i = 1, 5 do
+        table.insert(keys, {
+          "<leader>" .. i,
+          function()
+            require("harpoon"):list():select(i)
+          end,
+          desc = "Harpoon to File " .. i,
+        })
+      end
+      return keys
+    end,
   },
 
   -- finds everything
