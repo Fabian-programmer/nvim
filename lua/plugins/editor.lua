@@ -31,28 +31,6 @@ return {
           end,
           desc = "Quick Menu",
         },
-        {
-          "<leader>bd",
-          function()
-            local harpoon_items = require("harpoon"):list().items
-
-            local keep = {}
-            for _, item in ipairs(harpoon_items) do
-              local path = vim.fn.fnamemodify(item.value, ":p")
-              keep[path] = true
-            end
-
-            for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-              if vim.api.nvim_buf_is_loaded(buf) then
-                local name = vim.api.nvim_buf_get_name(buf)
-                if name ~= "" and not keep[name] then
-                  vim.api.nvim_buf_delete(buf, { force = true })
-                end
-              end
-            end
-          end,
-          desc = "Remove all unharpooned buffers",
-        },
       }
 
       for i = 1, 5 do
