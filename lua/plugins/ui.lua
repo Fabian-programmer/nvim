@@ -62,6 +62,11 @@ return {
           },
           lualine_x = {
             {
+              'copilot',
+              show_colors = true,
+              show_loading = true,
+            },
+            {
               "diff",
               symbols = {
                 added = " ",

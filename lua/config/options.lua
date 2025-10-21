@@ -49,7 +49,6 @@ opt.wrap = false                   -- Disable line wrap
 -- Fix markdown indentation settings
 vim.g.markdown_recommended_style = 0
 vim.g.autoformat = true
-vim.lsp.set_log_level("error")
 vim.diagnostic.config({
   underline = true,
   update_in_insert = false,
